@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="BarcodeList.Views.BarcodeReaderView"
+             Title="BarcodeReaderView">
+    
+    <Grid RowDefinitions="*, Auto">
+        <zxing:CameraBarcodeReaderView
+            Grid.Row="0"
+            IsDetecting="True"
+            BarcodesDetected="BarcodesDetected" />
+
+        <Label
+            Grid.Row="1"
+            Text="{Binding ScannedText}"
+            FontSize="20" />
+
+    </Grid>
+</ContentPage>
