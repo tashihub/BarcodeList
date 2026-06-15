@@ -1,16 +1,151 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BarcodeList.Views.ScannedDataView"
-             Title="ScannedDataView">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding BarcodeResult.Value}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label 
-            Text="{Binding BarcodeResult.Format}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="BarcodeList.Views.ScannedDataView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="スキャン結果"
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <!-- ヘッダー -->
+            <Label
+                Text="スキャン結果"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
+
+            <!-- メインカード -->
+            <Border
+                StrokeThickness="0"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                Padding="18">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="16">
+
+                    <!-- 種別バッジ -->
+                    <Border
+                        BackgroundColor="{Binding BarcodeKindColor}"
+                        Padding="10,5"
+                        HorizontalOptions="Start">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            Text="{Binding BarcodeKindText}"
+                            TextColor="White"
+                            FontSize="13"
+                            FontAttributes="Bold" />
+                    </Border>
+
+                    <!-- 生データ -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="生データ"
+                            FontSize="13"
+                            TextColor="Gray" />
+
+                        <Label
+                            Text="{Binding BarcodeResult.Value}"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            LineBreakMode="CharacterWrap"
+                            TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
+                    </VerticalStackLayout>
+
+                    <!-- BarcodeType -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="BarcodeType"
+                            FontSize="13"
+                            TextColor="Gray" />
+
+                        <Label
+                            Text="{Binding BarcodeResult.Format}"
+                            FontSize="18"
+                            TextColor="{AppThemeBinding Light=#333333, Dark=#EEEEEE}" />
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- GS1 AIコードカード -->
+            <Border
+                IsVisible="{Binding Gs1ParseResult.IsGs1}"
+                StrokeThickness="0"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                Padding="18">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="AIコード解析"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
+
+                    <Label
+                        Text="{Binding Gs1ReliabilityText}"
+                        FontSize="13"
+                        TextColor="Gray" />
+
+                    <CollectionView ItemsSource="{Binding Gs1ParseResult.Elements}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="0,0,0,10"
+                                    Padding="14"
+                                    BackgroundColor="{AppThemeBinding Light=#F7F8FC, Dark=#2A2A2A}"
+                                    StrokeThickness="0">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="14" />
+                                    </Border.StrokeShape>
+
+                                    <Grid ColumnDefinitions="70,*" RowDefinitions="Auto,Auto" RowSpacing="4">
+
+                                        <Label
+                                            Grid.RowSpan="2"
+                                            Text="{Binding Ai}"
+                                            FontSize="22"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="Center"
+                                            TextColor="#4F46E5" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding Name}"
+                                            FontSize="13"
+                                            TextColor="Gray" />
+
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Text="{Binding Value}"
+                                            FontSize="18"
+                                            FontAttributes="Bold"
+                                            LineBreakMode="CharacterWrap"
+                                            TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
+
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

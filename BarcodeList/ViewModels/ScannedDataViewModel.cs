@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using BarcodeList.Tool;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,13 @@ namespace BarcodeList.ViewModels
     public partial class ScannedDataViewModel : ObservableObject, IQueryAttributable
     {
         [ObservableProperty]
-        private BarcodeResult barcodeResult = new BarcodeResult();
+        private BarcodeResult barcodeResult;
+        [ObservableProperty]
+        private Gs1ParseResult gs1ParseResult = new Gs1ParseResult { IsGs1 = false };
+
+        public string BarcodeKindText => Gs1ParseResult?.IsGs1 == true ? "GS1バーコード" : "通常バーコード";
+        public Color BarcodeKindColor => Gs1ParseResult?.IsGs1 == true ? Colors.MediumPurple : Colors.DodgerBlue;
+        public string Gs1ReliabilityText => "簡易解析:正確な解析ではない場合があります。";
         /// <summary>
         /// スキャンしたデータが受け渡される
         /// </summary>
@@ -20,12 +27,10 @@ namespace BarcodeList.ViewModels
             {
                 BarcodeResult = (BarcodeResult)value;
             }
-        }
-
-        private void CreateBarcode()
-        {
-            // ここでBarcodeResultを使用してバーコードを作成するロジックを実装
-
+            if (query.TryGetValue("gs1ParseResult", out var gs1Value))
+            {
+                Gs1ParseResult = (Gs1ParseResult)gs1Value;
+            }
         }
     }
 }

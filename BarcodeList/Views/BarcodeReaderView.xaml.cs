@@ -1,4 +1,6 @@
 using BarcodeList.ViewModels;
+using ZXing.Net.Maui;
+using ZXing.Net.Maui.Controls;
 
 namespace BarcodeList.Views;
 
@@ -10,7 +12,23 @@ public partial class BarcodeReaderView : ContentPage
 		InitializeComponent();
 		this.viewModel = viewModel;
         BindingContext = viewModel;
-	}
+
+        //GS1の読み込みに対応できない。FNC1に対応できていないため
+        cameraBarcodeReaderView.Options = new BarcodeReaderOptions
+        {
+            Formats = BarcodeFormats.All,
+            AutoRotate = true,
+            Multiple = true,
+            DelayBetweenAnalyzingFrames = 150,
+            InitialDelayBeforeAnalyzingFrames = 300,
+            DelayBetweenContinuousScans = 1000,
+            CameraResolutionSelector = availableResolutions =>
+              availableResolutions
+                .OrderBy(resolution => Math.Abs((resolution.Width * resolution.Height) - (1280 * 720)))
+                .ThenBy(resolution => Math.Abs(resolution.Width - 1280) + Math.Abs(resolution.Height - 720))
+                .First()
+        };
+    }
 
     /// <summary>
     /// Event handler for when barcodes are detected by the ZXing.Net.Maui barcode reader.
