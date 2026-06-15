@@ -78,13 +78,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\BarcodeCreaterView.xaml">
+	  <Compile Update="Views\BarcodeCreateMenuView.xaml.cs">
+	    <DependentUpon>BarcodeCreateMenuView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Create\QrCreateMenuView.xaml.cs">
+	    <DependentUpon>QrCreateMenuView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\BarcodeCreateMenuView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BarcodeReaderView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ScannedDataView.xaml">
+	  <MauiXaml Update="Views\Create\QrCreateMenuView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FolderView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Result\QrResultView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SubView\ScannedDataView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

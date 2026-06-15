@@ -6,9 +6,18 @@
     xmlns:local="clr-namespace:BarcodeList.Views"
     Title="BarcodeList">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:BarcodeReaderView}"
-        Route="MainPage" />
-
+    <TabBar>
+        <ShellContent
+            Title="スキャン"
+            ContentTemplate="{DataTemplate local:BarcodeReaderView}"
+            Route="MainPage" />
+        <ShellContent
+            Title="作成"
+            ContentTemplate="{DataTemplate local:BarcodeCreateMenuView}"
+            Route="CreatePage" />
+        <ShellContent
+            Title="履歴フォルダ"
+            ContentTemplate="{DataTemplate local:FolderView}"
+            Route="FolderPage" />
+    </TabBar>
 </Shell>
