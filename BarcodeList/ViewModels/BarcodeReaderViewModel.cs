@@ -37,7 +37,8 @@ namespace BarcodeList.ViewModels
             if (IsWebUrl(result.Value))
             {
                 //webページだったらアクセスする
-                await Launcher.OpenAsync(result.Value);
+                //await Launcher.OpenAsync(result.Value);
+                await NormalBarcodeOperation(result, IsWebUrl(result.Value));
             }
             else
             {
@@ -49,10 +50,10 @@ namespace BarcodeList.ViewModels
                 }
                 else
                 {
-                    await NormalBarcodeOperation(result);
+                    await NormalBarcodeOperation(result, IsWebUrl(result.Value));
                 }
             }
-            await Task.Delay(1000);
+            await Task.Delay(3000);
             IsDetecting = true;
         }
 
@@ -68,7 +69,7 @@ namespace BarcodeList.ViewModels
                        || uri.Scheme == Uri.UriSchemeHttps);
         }
 
-        private async Task NormalBarcodeOperation(BarcodeResult result)
+        private async Task NormalBarcodeOperation(BarcodeResult result,bool isWebUrl)
         {
             //通常のバーコードの場合は、読み取ったテキストを表示する。
             await MainThread.InvokeOnMainThreadAsync(async () =>
@@ -77,7 +78,8 @@ namespace BarcodeList.ViewModels
                     nameof(ScannedDataView),
                     new Dictionary<string, object>
                     {
-                        ["barcodeResult"] = result
+                        ["barcodeResult"] = result,
+                        ["isWebUrl"] = isWebUrl
                     });
             });
         }

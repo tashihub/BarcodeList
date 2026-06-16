@@ -1,5 +1,6 @@
 ﻿using BarcodeList.Tool;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,8 @@ namespace BarcodeList.ViewModels
         private BarcodeResult barcodeResult;
         [ObservableProperty]
         private Gs1ParseResult gs1ParseResult = new Gs1ParseResult { IsGs1 = false };
+        [ObservableProperty]
+        private bool isWebUrl;
 
         public string BarcodeKindText => Gs1ParseResult?.IsGs1 == true ? "GS1バーコード" : "通常バーコード";
         public Color BarcodeKindColor => Gs1ParseResult?.IsGs1 == true ? Colors.MediumPurple : Colors.DodgerBlue;
@@ -31,6 +34,16 @@ namespace BarcodeList.ViewModels
             {
                 Gs1ParseResult = (Gs1ParseResult)gs1Value;
             }
+            if (query.TryGetValue("isWebUrl", out var isWebUrlValue) && isWebUrlValue is bool isWebUrl)
+            {
+                IsWebUrl = isWebUrl;
+            }
+        }
+        [RelayCommand]
+        private async Task OpenWebUrl()
+        {
+            if(!IsWebUrl) { return;}
+            await Launcher.OpenAsync(BarcodeResult.Value);
         }
     }
 }

@@ -55,8 +55,25 @@
                             Text="{Binding BarcodeResult.Value}"
                             FontSize="20"
                             FontAttributes="Bold"
-                            LineBreakMode="CharacterWrap"
-                            TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
+                            LineBreakMode="CharacterWrap">
+
+                            <Label.Triggers>
+                                <DataTrigger
+                                    TargetType="Label"
+                                    Binding="{Binding IsWebUrl}"
+                                    Value="True">
+
+                                    <Setter Property="TextColor" Value="Blue" />
+                                    <Setter Property="TextDecorations" Value="Underline" />
+
+                                </DataTrigger>
+                            </Label.Triggers>
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenWebUrlCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                     </VerticalStackLayout>
 
                     <!-- BarcodeType -->
