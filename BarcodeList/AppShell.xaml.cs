@@ -14,7 +14,8 @@ namespace BarcodeList
             Routing.RegisterRoute(nameof(QrResultView), typeof(QrResultView));
             Routing.RegisterRoute(nameof(Code39CreateView), typeof(Code39CreateView));
             Routing.RegisterRoute(nameof(Code39ResultView), typeof(Code39ResultView));
-
+            Routing.RegisterRoute(nameof(Code128CreateView), typeof(Code128CreateView));
+            Routing.RegisterRoute(nameof(Code128ResultView), typeof(Code128ResultView));
         }
     }
 }

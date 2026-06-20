@@ -31,7 +31,7 @@ namespace BarcodeList.ViewModels
         [RelayCommand]
         private async Task OpenCode128Create()
         {
-
+            await Shell.Current.GoToAsync(nameof(Code128CreateView));
         }
 
         [RelayCommand]
