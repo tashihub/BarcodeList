@@ -25,7 +25,7 @@ namespace BarcodeList.ViewModels
         [RelayCommand]
         private async Task OpenQrCreate()
         {
-            await Shell.Current.GoToAsync(nameof(QrCreateMenuView));
+            await Shell.Current.GoToAsync(nameof(QrCreateView));
         }
 
         [RelayCommand]
@@ -35,19 +35,19 @@ namespace BarcodeList.ViewModels
         }
 
         [RelayCommand]
-        private async Task OpenCode39CreateCommand()
+        private async Task OpenCode39Create()
+        {
+            await Shell.Current.GoToAsync(nameof(Code39CreateView));
+        }
+
+        [RelayCommand]
+        private async Task OpenEan13Create()
         {
 
         }
 
         [RelayCommand]
-        private async Task OpenEan13CreateCommand()
-        {
-
-        }
-
-        [RelayCommand]
-        private async Task OpenGs1128CreateCommand()
+        private async Task OpenGs1128Create()
         {
 
         }

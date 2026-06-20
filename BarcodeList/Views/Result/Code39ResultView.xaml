@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BarcodeList.Views.Result.Code39ResultView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
+    Title="Code39結果"
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label
+                Text="Code39結果"
+                FontSize="28"
+                FontAttributes="Bold" />
+
+            <Border Padding="22"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    StrokeThickness="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="16">
+                    <Label
+                        Text="プレビュー"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+
+                    <zxing:BarcodeGeneratorView
+                        Value="{Binding Code39Value}"
+                        Format="Code39"
+                        HeightRequest="140"
+                        HorizontalOptions="Fill" />
+
+                    <Label
+                        Text="{Binding DisplayValue}"
+                        FontSize="14"
+                        TextColor="Gray"
+                        HorizontalOptions="Center"
+                        LineBreakMode="CharacterWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="18"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    StrokeThickness="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="生データ" FontSize="13" TextColor="Gray" />
+
+                    <Label
+                        Text="{Binding Code39Value}"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        LineBreakMode="CharacterWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="18"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    StrokeThickness="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        Text="保存先フォルダ"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <Picker
+                        Title="フォルダを選択"
+                        ItemsSource="{Binding Folders}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedFolder}" />
+
+                    <Button
+                        Text="＋ 新しいフォルダを作成"
+                        Command="{Binding CreateFolderCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="#4F46E5" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="このCode39を保存"
+                Command="{Binding SaveCommand}"
+                HeightRequest="52"
+                CornerRadius="16" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

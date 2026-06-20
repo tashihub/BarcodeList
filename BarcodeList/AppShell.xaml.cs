@@ -10,8 +10,10 @@ namespace BarcodeList
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ScannedDataView), typeof(ScannedDataView));
-            Routing.RegisterRoute(nameof(QrCreateMenuView), typeof(QrCreateMenuView));
+            Routing.RegisterRoute(nameof(QrCreateView), typeof(QrCreateView));
             Routing.RegisterRoute(nameof(QrResultView), typeof(QrResultView));
+            Routing.RegisterRoute(nameof(Code39CreateView), typeof(Code39CreateView));
+            Routing.RegisterRoute(nameof(Code39ResultView), typeof(Code39ResultView));
 
         }
     }

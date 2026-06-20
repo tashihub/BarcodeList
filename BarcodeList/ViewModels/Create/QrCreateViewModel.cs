@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BarcodeList.ViewModels.Create
 {
-    public partial class QrCreateMenuViewModel : ObservableObject
+    public partial class QrCreateViewModel : ObservableObject
     {
         [ObservableProperty]
         private string qrValue;
