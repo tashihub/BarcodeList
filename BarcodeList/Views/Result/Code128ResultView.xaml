@@ -15,16 +15,8 @@
                 FontSize="28"
                 FontAttributes="Bold" />
 
-            <Border
-                Padding="22"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-
+            <Border Style="{StaticResource CardResultBorderStyle}">
                 <VerticalStackLayout Spacing="16">
-
                     <Label
                         Text="プレビュー"
                         FontSize="18"
@@ -43,17 +35,10 @@
                         TextColor="Gray"
                         HorizontalOptions="Center"
                         LineBreakMode="CharacterWrap" />
-
                 </VerticalStackLayout>
             </Border>
 
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
+            <Border Style="{StaticResource CardResultBorderStyle}">
 
                 <VerticalStackLayout Spacing="8">
                     <Label
@@ -69,13 +54,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
+            <Border Style="{StaticResource CardResultBorderStyle}">
 
                 <VerticalStackLayout Spacing="12">
                     <Label
@@ -100,8 +79,7 @@
             <Button
                 Text="このCode128を保存"
                 Command="{Binding SaveCommand}"
-                HeightRequest="52"
-                CornerRadius="16" />
+                Style="{StaticResource SaveButtonStyle}" />
 
         </VerticalStackLayout>
     </ScrollView>

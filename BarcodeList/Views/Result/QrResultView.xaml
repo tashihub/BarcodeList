@@ -16,13 +16,7 @@
                 FontAttributes="Bold" />
 
             <!-- QRプレビュー -->
-            <Border
-                Padding="22"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
+            <Border Style="{StaticResource CardResultBorderStyle}">
 
                 <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
                     <Label
@@ -40,14 +34,7 @@
             </Border>
 
             <!-- 生データ -->
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-
+            <Border Style="{StaticResource CardResultBorderStyle}">
                 <VerticalStackLayout Spacing="8">
                     <Label
                         Text="生データ"
@@ -63,13 +50,7 @@
             </Border>
 
             <!-- 保存先フォルダ -->
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
+            <Border Style="{StaticResource CardResultBorderStyle}">
 
                 <VerticalStackLayout Spacing="12">
                     <Label
@@ -94,8 +75,7 @@
             <Button
                 Text="このQRコードを保存"
                 Command="{Binding SaveCommand}"
-                HeightRequest="52"
-                CornerRadius="16" />
+                Style="{StaticResource SaveButtonStyle}" />
 
         </VerticalStackLayout>
     </ScrollView>

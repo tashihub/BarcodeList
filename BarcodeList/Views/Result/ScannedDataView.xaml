@@ -16,14 +16,7 @@
                 TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
 
             <!-- メインカード -->
-            <Border
-                StrokeThickness="0"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                Padding="18">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
+            <Border Style="{StaticResource CardResultBorderStyle}">
 
                 <VerticalStackLayout Spacing="16">
 
@@ -95,13 +88,7 @@
             <!-- GS1 AIコードカード -->
             <Border
                 IsVisible="{Binding Gs1ParseResult.IsGs1}"
-                StrokeThickness="0"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                Padding="18">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
+                Style="{StaticResource CardResultBorderStyle}">
 
                 <VerticalStackLayout Spacing="14">
 
@@ -162,6 +149,33 @@
 
                 </VerticalStackLayout>
             </Border>
+
+            <!-- 保存先フォルダ -->
+            <Border Style="{StaticResource CardResultBorderStyle}">
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                             Text="保存先フォルダ"
+                             FontSize="16"
+                             FontAttributes="Bold" />
+
+                    <Picker
+                            Title="フォルダを選択"
+                            ItemsSource="{Binding Folders}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedFolder}" />
+
+                    <Button
+                            Text="＋ 新しいフォルダを作成"
+                            Command="{Binding CreateFolderCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="#4F46E5" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                    Text="このスキャン結果を保存"
+                    Command="{Binding SaveCommand}"
+                    Style="{StaticResource SaveButtonStyle}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

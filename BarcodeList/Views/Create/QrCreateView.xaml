@@ -13,26 +13,9 @@
                 FontSize="28"
                 FontAttributes="Bold" />
 
-            <!--<Border Padding="18" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
 
-                <VerticalStackLayout Spacing="14">
-                    <Label Text="名称" FontSize="14" TextColor="Gray" />
-
-                    <Entry
-                        Placeholder="例：会社URL / テスト用QR"
-                        Text="{Binding Title}" />
-                </VerticalStackLayout>
-            </Border>-->
-
-            <Border Padding="18" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-
-                <VerticalStackLayout Spacing="14">
+            <Border Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="12">
                     <Label Text="QRコード内容" FontSize="14" TextColor="Gray" />
 
                     <Editor
@@ -43,36 +26,10 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!--<Border
-                IsVisible="{Binding HasQrValue}"
-                Padding="22"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-
-                <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
-                    <Label
-                        Text="プレビュー"
-                        FontSize="18"
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center" />
-
-                    <zxing:BarcodeGeneratorView
-                        Value="{Binding QrValue}"
-                        Format="QrCode"
-                        WidthRequest="260"
-                        HeightRequest="260" />
-                </VerticalStackLayout>
-            </Border>-->
 
             <Button
-                Text="作成"
-                Command="{Binding CreateCommand}"
-                HeightRequest="52"
-                CornerRadius="16" />
+                Style="{StaticResource CreateButtonStyle}"
+                Command="{Binding CreateCommand}" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -14,14 +14,8 @@
                 FontSize="28"
                 FontAttributes="Bold" />
 
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
+            <Border Style="{StaticResource CardBorderStyle}">
 
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
 
                 <VerticalStackLayout Spacing="12">
 
@@ -49,10 +43,8 @@
             </Border>
 
             <Button
-                Text="作成"
-                Command="{Binding CreateCommand}"
-                HeightRequest="52"
-                CornerRadius="16" />
+                Style="{StaticResource CreateButtonStyle}"
+                Command="{Binding CreateCommand}" />
 
         </VerticalStackLayout>
     </ScrollView>
