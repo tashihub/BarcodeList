@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BarcodeList.Views.Create.Ean13CreateView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="EAN13作成"
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label
+                Text="EAN13作成"
+                FontSize="28"
+                FontAttributes="Bold" />
+
+            <Border
+                Padding="18"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="バーコード値"
+                        FontSize="14"
+                        TextColor="Gray" />
+
+                    <Entry
+                        Placeholder="例：4901234567894"
+                        Keyboard="Numeric"
+                        MaxLength="13"
+                        Text="{Binding Ean13Value}" />
+
+                    <Label
+                        Text="数字13桁で入力してください。最後の1桁はチェックデジットです。"
+                        FontSize="12"
+                        TextColor="Gray" />
+
+                    <Label
+                        Text="{Binding ErrorMessage}"
+                        FontSize="13"
+                        TextColor="Red"
+                        IsVisible="{Binding HasError}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="作成"
+                Command="{Binding CreateCommand}"
+                HeightRequest="52"
+                CornerRadius="16" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

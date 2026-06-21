@@ -43,7 +43,7 @@ namespace BarcodeList.ViewModels
         [RelayCommand]
         private async Task OpenEan13Create()
         {
-
+            await Shell.Current.GoToAsync(nameof(Ean13CreateView));
         }
 
         [RelayCommand]
