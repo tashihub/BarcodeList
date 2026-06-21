@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BarcodeList.Views.Create.Gs1128CreateView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="GS1-128作成"
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label
+                Text="GS1-128作成"
+                FontSize="28"
+                FontAttributes="Bold" />
+
+            <Border
+                Padding="18"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="GTIN（AI: 01）"
+                        FontSize="14"
+                        TextColor="Gray" />
+
+                    <Entry
+                        Placeholder="例：14971032310685"
+                        Keyboard="Numeric"
+                        MaxLength="14"
+                        Text="{Binding Gtin}" />
+
+                    <Label
+                        Text="14桁の数字で入力してください。14桁未満の場合は先頭に0を追加してください。"
+                        FontSize="12"
+                        TextColor="Gray" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                Padding="18"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="有効期限（AI: 17）"
+                        FontSize="14"
+                        TextColor="Gray" />
+
+                    <DatePicker
+                        Date="{Binding ExpirationDate}"
+                        Format="yyyy/MM/dd" />
+
+                    <Label
+                        Text="GS1内部では YYMMDD 形式で生成されます。"
+                        FontSize="12"
+                        TextColor="Gray" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                Padding="18"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="ロット番号（AI: 10）"
+                        FontSize="14"
+                        TextColor="Gray" />
+
+                    <Entry
+                        Placeholder="例：51089C"
+                        Text="{Binding LotNo}" />
+
+                    <Label
+                        Text="可変長項目のため、今回は最後に配置します。"
+                        FontSize="12"
+                        TextColor="Gray" />
+
+                    <Label
+                        Text="{Binding ErrorMessage}"
+                        FontSize="13"
+                        TextColor="Red"
+                        IsVisible="{Binding HasError}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="作成"
+                Command="{Binding CreateCommand}"
+                HeightRequest="52"
+                CornerRadius="16" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

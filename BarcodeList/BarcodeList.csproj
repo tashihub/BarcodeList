@@ -81,6 +81,9 @@
 	  <Compile Update="Views\BarcodeCreateMenuView.xaml.cs">
 	    <DependentUpon>BarcodeCreateMenuView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Create\Gs1128CreateView.xaml.cs">
+	    <DependentUpon>Gs1128CreateView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Create\QrCreateView.xaml.cs">
 	    <DependentUpon>QrCreateView.xaml</DependentUpon>
 	  </Compile>
@@ -102,6 +105,9 @@
 	  <MauiXaml Update="Views\Create\Ean13CreateView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Create\Gs1128CreateView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Create\QrCreateView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -115,6 +121,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Result\Ean13ResultView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Result\Gs1128ResultView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Result\QrResultView.xaml">

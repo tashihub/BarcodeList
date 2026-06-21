@@ -49,7 +49,7 @@ namespace BarcodeList.ViewModels
         [RelayCommand]
         private async Task OpenGs1128Create()
         {
-
+            await Shell.Current.GoToAsync(nameof(Gs1128CreateView));
         }
 
     }
