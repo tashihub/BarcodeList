@@ -16,4 +16,19 @@ namespace BarcodeList.Tool
             return value.All(c => c <= 0x7F);
         }
     }
+
+    internal enum BarcodeType
+    {
+        Code128,
+        Code39,
+        QRCode,
+        EAN13,
+        EAN8,
+        UPC_A,
+        UPC_E,
+        ITF,
+        PDF417,
+        DataMatrix,
+        Aztec
+    }
 }

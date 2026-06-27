@@ -25,7 +25,7 @@
 
                     <zxing:BarcodeGeneratorView
                         Value="{Binding Code39Value}"
-                        Format="Code39"
+                        Format="{Binding BarcodeFormat}"
                         HeightRequest="140"
                         HorizontalOptions="Fill" />
 

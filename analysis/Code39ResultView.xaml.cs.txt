@@ -1,0 +1,1 @@
+Please open the files: BarcodeList\Views\Result\Code39ResultView.xaml and BarcodeList\Views\Result\Code39ResultView.xaml.cs and AppShell.xaml(.cs) to inspect routing and view implementation. I will check for issues like missing x:Class, incorrect namespace, constructor exceptions, or heavy code in XAML that fails on load.

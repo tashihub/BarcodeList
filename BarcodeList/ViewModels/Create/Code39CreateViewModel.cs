@@ -1,7 +1,9 @@
-﻿using BarcodeList.Views.Result;
+﻿using BarcodeList.Models;
+using BarcodeList.Services;
+using BarcodeList.Tool;
+using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ZXing.PDF417.Internal;
 
 public partial class Code39CreateViewModel : ObservableObject
 {
@@ -25,6 +27,13 @@ public partial class Code39CreateViewModel : ObservableObject
 
     public bool HasError => !string.IsNullOrWhiteSpace(ErrorMessage);
 
+
+    private readonly DatabaseService _databaseService;
+    public Code39CreateViewModel(DatabaseService databaseService)
+    {
+        _databaseService = databaseService;
+    }
+
     partial void OnBarcodeValueChanged(string value)
     {
         ErrorMessage = Validate(value);
@@ -46,6 +55,16 @@ public partial class Code39CreateViewModel : ObservableObject
         return "";
     }
 
+    private string NormalizeCode39(string value)
+    {
+        return value.Trim().ToUpperInvariant();
+    }
+    private static bool IsValidCode39(string value)
+    {
+        return !string.IsNullOrWhiteSpace(value)
+               && value.All(c => AllowedChars.Contains(c));
+    }
+
     [RelayCommand]
     private async Task Create()
     {
@@ -54,11 +73,42 @@ public partial class Code39CreateViewModel : ObservableObject
         if (HasError || string.IsNullOrWhiteSpace(BarcodeValue))
             return;
 
-        // TODO: 結果画面へ遷移
-        await Shell.Current.GoToAsync(nameof(Code39ResultView),
-                        new Dictionary<string, object>
-                        {
-                            ["code39Value"] = BarcodeValue
-                        });
+        var value = NormalizeCode39(BarcodeValue);
+        if (!IsValidCode39(value))
+        {
+            ErrorMessage = "Code39では大文字英数字と - . スペース $ / + % のみ使用できます。";
+            return;
+        }
+        try
+        {
+            //履歴DBに保存
+            await _databaseService.SaveBarcodeAsync(new SavedBarcode
+            {
+                BarcodeValue = value,
+                BarcodeType = BarcodeType.Code39.ToString(),
+                CreatedAt = DateTime.Now
+            });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving barcode: {ex.Message}");
+        }
+
+        try
+        {
+            // TODO: 結果画面へ遷移
+            await Shell.Current.GoToAsync(nameof(Code39ResultView),
+                            new Dictionary<string, object>
+                            {
+                                ["code39Value"] = value
+                            });
+        }
+        catch (Exception ex) 
+        {
+            Console.WriteLine($"Error navigating to result view: {ex.Message}"); Console.WriteLine(ex.ToString());
+        }
+
     }
+
+
 }
