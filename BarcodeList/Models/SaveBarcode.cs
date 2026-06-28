@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using ZXing;
@@ -36,5 +37,9 @@ namespace BarcodeList.Models
 
         public DateTime CreatedAt { get; set; }
 
+        [Ignore]
+        public string CreatedAtText => CreatedAt.ToString("yyyy/MM/dd HH:mm:ss");
+        [Ignore]
+        public ZXing.Net.Maui.BarcodeFormat BarcodeFormat => (ZXing.Net.Maui.BarcodeFormat)Enum.Parse(typeof(ZXing.Net.Maui.BarcodeFormat), BarcodeType);
     }
 }

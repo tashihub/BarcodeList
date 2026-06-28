@@ -16,8 +16,12 @@
             ContentTemplate="{DataTemplate local:BarcodeReaderView}"
             Route="MainPage" />
         <ShellContent
-            Title="履歴フォルダ"
+            Title="フォルダ"
             ContentTemplate="{DataTemplate local:FolderView}"
             Route="FolderPage" />
+        <ShellContent
+            Title="履歴"
+            ContentTemplate="{DataTemplate local:HistoryView}"
+            Route="HistoryPage" />
     </TabBar>
 </Shell>

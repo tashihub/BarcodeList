@@ -1,5 +1,6 @@
 ﻿using BarcodeList.Views;
 using BarcodeList.Views.Create;
+using BarcodeList.Views.Details;
 using BarcodeList.Views.Result;
 
 namespace BarcodeList
@@ -20,7 +21,7 @@ namespace BarcodeList
             Routing.RegisterRoute(nameof(Ean13CreateView), typeof(Ean13CreateView));
             Routing.RegisterRoute(nameof(Gs1128CreateView), typeof(Gs1128CreateView));
             Routing.RegisterRoute(nameof(Gs1128ResultView), typeof(Gs1128ResultView));
-
+            Routing.RegisterRoute(nameof(FolderDetailView), typeof(FolderDetailView));
         }
     }
 }

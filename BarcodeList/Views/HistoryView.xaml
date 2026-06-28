@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="BarcodeList.Views.FolderView"
+    x:Class="BarcodeList.Views.HistoryView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    Title="フォルダ"
+    Title="履歴"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
 
-
-    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="18">
+    <Grid RowDefinitions="Auto,*" Padding="20" RowSpacing="18">
 
         <VerticalStackLayout Spacing="4">
             <Label
-                Text="フォルダ"
+                Text="履歴"
                 FontSize="28"
                 FontAttributes="Bold" />
 
             <Label
-                Text="保存したバーコードをフォルダ別に表示します"
+                Text="作成・スキャンしたバーコード一覧"
                 FontSize="13"
                 TextColor="Gray" />
         </VerticalStackLayout>
 
-        <Button
-            Grid.Row="1"
-            Text="＋ 新しいフォルダを作成"
-            Command="{Binding CreateFolderCommand}"
-            Style="{StaticResource SaveButtonStyle}" />
-
         <CollectionView
-            Grid.Row="2"
-            ItemsSource="{Binding Folders}"
+            Grid.Row="1"
+            ItemsSource="{Binding Histories}"
             SelectionMode="None"
-            EmptyView="フォルダがありません">
+            EmptyView="履歴がありません">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -43,7 +35,7 @@
 
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenFolderCommand}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenHistoryCommand}"
                                 CommandParameter="{Binding .}" />
                         </Border.GestureRecognizers>
 
@@ -59,18 +51,24 @@
                                     <RoundRectangle CornerRadius="16" />
                                 </Border.StrokeShape>
 
-                                <Label
-                                    Text="📁"
+                                <!--<Label
+                                    Text="{Binding BarcodeTypeIcon}"
                                     FontSize="24"
                                     HorizontalOptions="Center"
-                                    VerticalOptions="Center" />
+                                    VerticalOptions="Center" />-->
                             </Border>
 
                             <VerticalStackLayout Grid.Column="1" Spacing="5">
                                 <Label
-                                    Text="{Binding Name}"
+                                    Text="{Binding BarcodeType}"
                                     FontSize="16"
                                     FontAttributes="Bold" />
+
+                                <Label
+                                    Text="{Binding BarcodeValue}"
+                                    FontSize="14"
+                                    TextColor="Gray"
+                                    LineBreakMode="TailTruncation" />
 
                                 <Label
                                     Text="{Binding CreatedAtText}"

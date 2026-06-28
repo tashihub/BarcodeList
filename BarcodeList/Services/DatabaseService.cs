@@ -48,6 +48,13 @@ public class DatabaseService
         return await _database.Table<SavedBarcode>().ToListAsync();
     }
 
+    public async Task<List<SavedBarcode>> GetBarcodesAsync(int folderId)
+    {
+        await InitAsync();
+        return await _database.Table<SavedBarcode>().Where(b => b.FolderId == folderId).ToListAsync();
+    }
+
+
     public async Task<int> SaveFolderAsync(BarcodeFolder folder)
     {
         await InitAsync();
@@ -68,4 +75,6 @@ public class DatabaseService
         }
         return new List<BarcodeFolder>();
     }
+
+
 }

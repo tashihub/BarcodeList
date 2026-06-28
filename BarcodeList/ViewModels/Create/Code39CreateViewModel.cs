@@ -86,7 +86,8 @@ public partial class Code39CreateViewModel : ObservableObject
             {
                 BarcodeValue = value,
                 BarcodeType = BarcodeType.Code39.ToString(),
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                FolderId = 0 // 通常の履歴はフォルダに保存しない
             });
         }
         catch (Exception ex)

@@ -110,7 +110,7 @@ namespace BarcodeList.ViewModels.Result
             {
                 BarcodeValue = Code39Value,
                 BarcodeType = BarcodeType.Code39.ToString(),
-                //FolderId = SelectedFolder?.Id ?? 0,
+                FolderId = SelectedFolder?.Id ?? 0,
                 CreatedAt = DateTime.Now,
             };
 

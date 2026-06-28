@@ -1,9 +1,26 @@
+using BarcodeList.Services;
+using BarcodeList.ViewModels;
+
 namespace BarcodeList.Views;
 
 public partial class FolderView : ContentPage
 {
-	public FolderView()
+	private readonly FolderViewModel _viewModel;
+    public FolderView(DatabaseService databaseService, FolderService folderService)
 	{
 		InitializeComponent();
-	}
+        _viewModel = new FolderViewModel(databaseService, folderService);
+        BindingContext = _viewModel;
+    }
+
+    bool _isInitialized = false;
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (!_isInitialized)
+        {
+            await _viewModel.InitializeAsync();
+            _isInitialized = true;
+        }
+    }
 }
