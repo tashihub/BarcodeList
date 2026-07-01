@@ -1,6 +1,7 @@
 ﻿using BarcodeList.Models;
 using BarcodeList.Tool;
 using System.Collections.ObjectModel;
+using ZXing.Net.Maui;
 
 namespace BarcodeList.Services;
 
@@ -26,7 +27,7 @@ public class BarcodeResultService
 
     public async Task<bool> SaveToFolderAsync(
         string barcodeValue,
-        BarcodeType barcodeType,
+        BarcodeFormat barcodeType,
         BarcodeFolder selectedFolder)
     {
         if(selectedFolder == null)

@@ -4,6 +4,7 @@ using BarcodeList.Tool;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ZXing.Net.Maui;
 
 public partial class Code39CreateViewModel : ObservableObject
 {
@@ -85,7 +86,7 @@ public partial class Code39CreateViewModel : ObservableObject
             await _databaseService.SaveBarcodeAsync(new SavedBarcode
             {
                 BarcodeValue = value,
-                BarcodeType = BarcodeType.Code39.ToString(),
+                BarcodeType = BarcodeFormat.Code39.ToString(),
                 CreatedAt = DateTime.Now,
                 FolderId = 0 // 通常の履歴はフォルダに保存しない
             });

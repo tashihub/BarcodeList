@@ -99,11 +99,11 @@ namespace BarcodeList.ViewModels.Result
             SavedBarcode = new SavedBarcode
             {
                 BarcodeValue = Code39Value,
-                BarcodeType = BarcodeType.Code39.ToString(),
+                BarcodeType = BarcodeFormat.Code39.ToString(),
                 FolderId = SelectedFolder?.Id ?? 0,
                 CreatedAt = DateTime.Now,
             };
-            bool success = await _barcodeResultService.SaveToFolderAsync(Code39Value, BarcodeType.Code39, SelectedFolder);
+            bool success = await _barcodeResultService.SaveToFolderAsync(Code39Value, BarcodeFormat.Code39, SelectedFolder);
             if (success)
             {
                 await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");
