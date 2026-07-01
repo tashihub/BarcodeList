@@ -21,8 +21,11 @@ namespace BarcodeList.Services
                 "フォルダ作成",
                 "フォルダ名を入力してください");
 
-            if (string.IsNullOrWhiteSpace(folderName))
+            if (string.IsNullOrWhiteSpace(folderName)) 
+            {
+                Console.WriteLine("キャンセルされました。");
                 return null;
+            }
 
             var folder = new BarcodeFolder
             {
@@ -31,7 +34,7 @@ namespace BarcodeList.Services
             };
 
             await _databaseService.SaveFolderAsync(folder);
-
+            Console.WriteLine($"フォルダが作成されました: {folder.Name}");
             return folder;
         }
     }
