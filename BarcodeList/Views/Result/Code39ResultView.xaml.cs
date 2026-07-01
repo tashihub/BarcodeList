@@ -6,10 +6,10 @@ namespace BarcodeList.Views.Result;
 public partial class Code39ResultView : ContentPage
 {
     private readonly Code39ResultViewModel _vm;
-    public Code39ResultView(DatabaseService databaseService, FolderService folderService)
+    public Code39ResultView(FolderService folderService, BarcodeResultService barcodeResultService)
 	{
 		InitializeComponent();
-        _vm = new Code39ResultViewModel(databaseService, folderService);
+        _vm = new Code39ResultViewModel(folderService, barcodeResultService);
         BindingContext = _vm;
     }
 

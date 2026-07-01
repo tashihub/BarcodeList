@@ -17,7 +17,7 @@ namespace BarcodeList.Tool
         }
     }
 
-    internal enum BarcodeType
+    public enum BarcodeType
     {
         Code128,
         Code39,

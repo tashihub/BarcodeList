@@ -32,15 +32,15 @@ namespace BarcodeList.ViewModels.Result
         private SavedBarcode? savedBarcode;
 
         [ObservableProperty]
-        private ObservableCollection<BarcodeFolder?> folders = new ObservableCollection<BarcodeFolder?>();
+        private ObservableCollection<BarcodeFolder> folders = new ObservableCollection<BarcodeFolder>();
 
-        private readonly DatabaseService _databaseService;
         private readonly FolderService _folderService;
+        private readonly BarcodeResultService _barcodeResultService;
 
-        public Code39ResultViewModel(DatabaseService databaseService, FolderService folderService)
+        public Code39ResultViewModel(FolderService folderService, BarcodeResultService barcodeResultService)
         {
-            _databaseService = databaseService;
             _folderService = folderService;
+            _barcodeResultService = barcodeResultService;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -60,18 +60,8 @@ namespace BarcodeList.ViewModels.Result
         {
             try
             {
-                // フォルダ一覧を取得してViewModelに設定
-                var folderList = await _databaseService.GetFoldersAsync();
-                if(folderList == null)
-                {
-                    Folders = new ObservableCollection<BarcodeFolder?>();
-                    return;
-                }
-                else 
-                {
-                    Folders = new ObservableCollection<BarcodeFolder?>(folderList);
-                }
-                Name = Folders.Count > 0 ? Folders[0].Name : "新しいフォルダ";
+                Folders = await _barcodeResultService.LoadFoldersAsync();
+                Name = Folders.Count > 0 ? Folders[0].Name : "";
             }
             catch (Exception ex)
             {
@@ -86,7 +76,7 @@ namespace BarcodeList.ViewModels.Result
             var newFolder = await _folderService.CreateFolderAsync();
             if(newFolder == null)
             {
-                await Shell.Current.DisplayAlertAsync("フォルダ作成失敗", "新しいフォルダの作成に失敗しました。", "OK");
+                Console.WriteLine("フォルダの作成がキャンセルされました。");
                 return;
             }
             Folders.Add(newFolder);
@@ -113,9 +103,16 @@ namespace BarcodeList.ViewModels.Result
                 FolderId = SelectedFolder?.Id ?? 0,
                 CreatedAt = DateTime.Now,
             };
-
-            await _databaseService.SaveBarcodeAsync(SavedBarcode);
-            await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");
+            bool success = await _barcodeResultService.SaveToFolderAsync(Code39Value, BarcodeType.Code39, SelectedFolder);
+            if (success)
+            {
+                await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlertAsync("保存失敗", "バーコードの保存に失敗しました。", "OK");
+                Console.WriteLine("Failed to save barcode.");
+            }
         }
     }
 }

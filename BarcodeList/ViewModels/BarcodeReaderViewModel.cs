@@ -37,7 +37,6 @@ namespace BarcodeList.ViewModels
             if (IsWebUrl(result.Value))
             {
                 //webページだったらアクセスする
-                //await Launcher.OpenAsync(result.Value);
                 await NormalBarcodeOperation(result, IsWebUrl(result.Value));
             }
             else
