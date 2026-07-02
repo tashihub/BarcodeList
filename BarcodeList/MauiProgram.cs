@@ -44,7 +44,7 @@ namespace BarcodeList
 
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<FolderService>();
-            builder.Services.AddSingleton<BarcodeResultService>();
+            builder.Services.AddSingleton<Code39BarcodeCreateService>();
             return builder.Build();
         }
     }

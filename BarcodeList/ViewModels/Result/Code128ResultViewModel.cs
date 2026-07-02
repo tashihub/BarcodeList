@@ -43,11 +43,9 @@ namespace BarcodeList.ViewModels.Result
         private ObservableCollection<BarcodeFolder> folders = new ObservableCollection<BarcodeFolder>();
         
         private readonly FolderService _folderService;
-        private readonly BarcodeResultService _barcodeResultService;
-        public Code128ResultViewModel(FolderService folderService, BarcodeResultService barcodeResultService)
+        public Code128ResultViewModel(FolderService folderService)
         {
             _folderService = folderService;
-            _barcodeResultService = barcodeResultService;
         }
 
         /// <summary>
@@ -58,7 +56,7 @@ namespace BarcodeList.ViewModels.Result
         {
             try
             {
-                Folders = await _barcodeResultService.LoadFoldersAsync();
+                Folders = await _folderService.LoadFoldersAsync();
                 Name = Folders.Count > 0 ? Folders[0].Name : "";
             }
             catch (Exception ex)
@@ -101,7 +99,7 @@ namespace BarcodeList.ViewModels.Result
                 FolderId = SelectedFolder?.Id ?? 0,
                 CreatedAt = DateTime.Now,
             };
-            bool success = await _barcodeResultService.SaveToFolderAsync(Code128Value, BarcodeFormat.Code128, SelectedFolder);
+            bool success = await _folderService.SaveToFolderAsync(Code128Value, BarcodeFormat.Code128, SelectedFolder);
             if (success)
             {
                 await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");

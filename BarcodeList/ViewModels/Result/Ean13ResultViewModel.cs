@@ -40,12 +40,10 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
     private ObservableCollection<BarcodeFolder> folders = new ObservableCollection<BarcodeFolder>();
 
     private readonly FolderService _folderService;
-    private readonly BarcodeResultService _barcodeResultService;
 
-    public Ean13ResultViewModel(FolderService folderService, BarcodeResultService barcodeResultService)
+    public Ean13ResultViewModel(FolderService folderService)
     {
         _folderService = folderService;
-        _barcodeResultService = barcodeResultService;
     }
 
     /// <summary>
@@ -56,7 +54,7 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
     {
         try
         {
-            Folders = await _barcodeResultService.LoadFoldersAsync();
+            Folders = await _folderService.LoadFoldersAsync();
             Name = Folders.Count > 0 ? Folders[0].Name : "";
         }
         catch (Exception ex)
@@ -99,7 +97,7 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
             FolderId = SelectedFolder?.Id ?? 0,
             CreatedAt = DateTime.Now,
         };
-        bool success = await _barcodeResultService.SaveToFolderAsync(Ean13Value, BarcodeFormat.Ean13, SelectedFolder);
+        bool success = await _folderService.SaveToFolderAsync(Ean13Value, BarcodeFormat.Ean13, SelectedFolder);
         if (success)
         {
             await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");

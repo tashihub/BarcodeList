@@ -8,8 +8,6 @@ using ZXing.Net.Maui;
 
 public partial class Code39CreateViewModel : ObservableObject
 {
-    private const string AllowedChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ -. $/+%";
-
     [ObservableProperty]
     private string title = "";
 
@@ -29,81 +27,45 @@ public partial class Code39CreateViewModel : ObservableObject
     public bool HasError => !string.IsNullOrWhiteSpace(ErrorMessage);
 
 
-    private readonly DatabaseService _databaseService;
-    public Code39CreateViewModel(DatabaseService databaseService)
+    private readonly Code39BarcodeCreateService _code39Service;
+    public Code39CreateViewModel(Code39BarcodeCreateService code39Service)
     {
-        _databaseService = databaseService;
+        _code39Service = code39Service;
     }
 
     partial void OnBarcodeValueChanged(string value)
     {
-        ErrorMessage = Validate(value);
-    }
-
-    private static string Validate(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-            return "";
-
-        var upper = value.ToUpperInvariant();
-
-        foreach (var c in upper)
-        {
-            if (!AllowedChars.Contains(c))
-                return $"Code39で使用できない文字があります: {c}";
-        }
-
-        return "";
-    }
-
-    private string NormalizeCode39(string value)
-    {
-        return value.Trim().ToUpperInvariant();
-    }
-    private static bool IsValidCode39(string value)
-    {
-        return !string.IsNullOrWhiteSpace(value)
-               && value.All(c => AllowedChars.Contains(c));
+        ErrorMessage = _code39Service.Validate(value);
     }
 
     [RelayCommand]
     private async Task Create()
     {
-        ErrorMessage = Validate(BarcodeValue);
+        ErrorMessage = _code39Service.Validate(BarcodeValue);
 
         if (HasError || string.IsNullOrWhiteSpace(BarcodeValue))
             return;
 
-        var value = NormalizeCode39(BarcodeValue);
-        if (!IsValidCode39(value))
+        var value = _code39Service.Normalize(BarcodeValue);
+
+        var(isValid, validationError) = _code39Service.IsValid(value);
+        if (!isValid)
         {
-            ErrorMessage = "Code39では大文字英数字と - . スペース $ / + % のみ使用できます。";
+            ErrorMessage = validationError;
             return;
-        }
-        try
-        {
-            //履歴DBに保存
-            await _databaseService.SaveBarcodeAsync(new SavedBarcode
-            {
-                BarcodeValue = value,
-                BarcodeType = BarcodeFormat.Code39.ToString(),
-                CreatedAt = DateTime.Now,
-                FolderId = 0 // 通常の履歴はフォルダに保存しない
-            });
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error saving barcode: {ex.Message}");
         }
 
         try
         {
+            //履歴DBに保存
+            await _code39Service.SaveBarcodeToHistory(value, folderId: 0);
+
             // TODO: 結果画面へ遷移
             await Shell.Current.GoToAsync(nameof(Code39ResultView),
-                            new Dictionary<string, object>
-                            {
-                                ["code39Value"] = value
-                            });
+            new Dictionary<string, object>
+            {
+                ["code39Value"] = value
+            });
         }
         catch (Exception ex) 
         {

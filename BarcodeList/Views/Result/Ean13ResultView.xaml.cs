@@ -6,10 +6,10 @@ namespace BarcodeList.Views.Result;
 public partial class Ean13ResultView : ContentPage
 {
 	private readonly Ean13ResultViewModel _viewModel;
-    public Ean13ResultView(FolderService folderService, BarcodeResultService barcodeResultService)
+    public Ean13ResultView(FolderService folderService)
 	{
 		InitializeComponent();
-        _viewModel = new Ean13ResultViewModel(folderService, barcodeResultService);
+        _viewModel = new Ean13ResultViewModel(folderService);
         BindingContext = _viewModel;
 	}
 
