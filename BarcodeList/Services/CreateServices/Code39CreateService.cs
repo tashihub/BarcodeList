@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Text;
 using ZXing.Net.Maui;
 
-namespace BarcodeList.Services
+namespace BarcodeList.Services.CreateServices
 {
-    public class Code39BarcodeCreateService : IBarcodeCreateService
+    public class Code39CreateService : IBarcodeCreateService
     {
         private const string Code39AllowedChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ -. $/+%";
 
         private readonly DatabaseService _databaseService;
-        public Code39BarcodeCreateService(DatabaseService databaseService)
+        public Code39CreateService(DatabaseService databaseService)
         {
             _databaseService = databaseService;
         }

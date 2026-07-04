@@ -1,5 +1,5 @@
 ﻿using BarcodeList.Models;
-using BarcodeList.Services;
+using BarcodeList.Services.CreateServices;
 using BarcodeList.Tool;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -27,8 +27,8 @@ public partial class Code39CreateViewModel : ObservableObject
     public bool HasError => !string.IsNullOrWhiteSpace(ErrorMessage);
 
 
-    private readonly Code39BarcodeCreateService _code39Service;
-    public Code39CreateViewModel(Code39BarcodeCreateService code39Service)
+    private readonly Code39CreateService _code39Service;
+    public Code39CreateViewModel(Code39CreateService code39Service)
     {
         _code39Service = code39Service;
     }

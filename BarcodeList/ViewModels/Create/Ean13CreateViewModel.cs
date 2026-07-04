@@ -1,8 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using BarcodeList.Models;
+using BarcodeList.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ZXing.Net.Maui;
 
 namespace BarcodeList.ViewModels.Create
 {
@@ -12,6 +15,16 @@ namespace BarcodeList.ViewModels.Create
         [ObservableProperty]
         private string ean13Value;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasError))]
+        private string errorMessage = "";
+        public bool HasError => !string.IsNullOrWhiteSpace(ErrorMessage);
+
+        private readonly DatabaseService _databaseService;
+        public Ean13CreateViewModel(DatabaseService databaseService)
+        {
+            _databaseService = databaseService;
+        }
 
         private static string Validate(string value)
         {
@@ -63,6 +76,16 @@ namespace BarcodeList.ViewModels.Create
                     "OK");
                 return;
             }
+
+            var saveBarcode = new SavedBarcode
+            {
+                BarcodeValue = Ean13Value,
+                BarcodeType = BarcodeFormat.Ean13.ToString(),
+                CreatedAt = DateTime.UtcNow,
+                FolderId = 0
+            };
+            await _databaseService.SaveBarcodeAsync(saveBarcode);
+
             await Shell.Current.GoToAsync(
                 nameof(Views.Result.Ean13ResultView),
                 new Dictionary<string, object>

@@ -15,7 +15,7 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
     private string ean13Value = "";
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.TryGetValue("ean13Value", out var value)) //なぜか大文字だと反応しない　→　小文字にする
+        if (query.TryGetValue("Ean13Value", out var value)) //なぜか大文字だと反応しない　→　小文字にする
         {
             Ean13Value = value?.ToString() ?? "";
         }

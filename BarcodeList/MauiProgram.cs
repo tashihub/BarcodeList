@@ -1,4 +1,5 @@
 ﻿using BarcodeList.Services;
+using BarcodeList.Services.CreateServices;
 using BarcodeList.ViewModels;
 using BarcodeList.Views;
 using BarcodeList.Views.Create;
@@ -44,7 +45,7 @@ namespace BarcodeList
 
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<FolderService>();
-            builder.Services.AddSingleton<Code39BarcodeCreateService>();
+            builder.Services.AddSingleton<Code39CreateService>();
             return builder.Build();
         }
     }

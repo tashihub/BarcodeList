@@ -76,7 +76,7 @@ namespace BarcodeList.ViewModels
                 await Shell.Current.GoToAsync(nameof(Ean13ResultView),
                 new Dictionary<string, object>
                 {
-                    ["ean13Value"] = barcode.BarcodeValue
+                    ["Ean13Value"] = barcode.BarcodeValue
                 });
             }
         }

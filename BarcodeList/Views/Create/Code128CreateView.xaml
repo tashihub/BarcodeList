@@ -31,6 +31,11 @@
                         Text="英数字・記号が使用できます。日本語を使う場合はQRコードを選択してください。"
                         FontSize="12"
                         TextColor="Gray" />
+                    <Label
+                        Text="{Binding ErrorMessage}"
+                        FontSize="13"
+                        TextColor="Red"
+                        IsVisible="{Binding HasError}" />
                 </VerticalStackLayout>
             </Border>
 
