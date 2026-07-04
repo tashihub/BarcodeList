@@ -1,6 +1,5 @@
 ﻿using BarcodeList.Models;
 using BarcodeList.Services;
-using BarcodeList.Views;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -25,8 +24,26 @@ namespace BarcodeList.ViewModels
 
         public async Task LoadHistoriesAsync()
         {
-            var histories = await _databaseService.GetBarcodesAsync(0);/// 0は履歴のフォルダIDを意味する。履歴はフォルダに属さないため、0を指定している
+            var histories = await _databaseService.GetBarcodesForHistoryAsync();
             Histories = new ObservableCollection<SavedBarcode>(histories);
+        }
+
+        [RelayCommand]
+        private async Task Delete(SavedBarcode barcode) 
+        {
+            if(barcode == null)
+            {
+                return;
+            }
+            var result = await _databaseService.DeleteHistoryAsync(barcode);
+            Histories.Remove(barcode);
+        }
+
+        [RelayCommand]
+        private async Task DeleteAll()
+        {
+            var result = await _databaseService.DeleteAllHistoryAsync();
+            Histories.Clear();
         }
 
         /// <summary>

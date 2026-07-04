@@ -92,5 +92,19 @@ namespace BarcodeList.ViewModels.Details
                 });
             }
         }
+
+        [RelayCommand]
+        private async Task DeleteBarcode(SavedBarcode barcode)
+        {
+            if (barcode == null)
+            {
+                return;
+            }
+            var result = await _databaseService.DeleteHistoryAsync(barcode);
+            if (result > 0)
+            {
+                Barcodes.Remove(barcode);
+            }
+        }
     }
 }

@@ -6,21 +6,31 @@
     Title="履歴"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
-
     <Grid RowDefinitions="Auto,*" Padding="20" RowSpacing="18">
 
-        <VerticalStackLayout Spacing="4">
-            <Label
-                Text="履歴"
-                FontSize="28"
-                FontAttributes="Bold" />
+        <!-- ヘッダー -->
+        <Grid ColumnDefinitions="*,Auto">
+            <VerticalStackLayout Spacing="4">
+                <Label
+                    Text="履歴"
+                    FontSize="28"
+                    FontAttributes="Bold" />
 
-            <Label
-                Text="作成・スキャンしたバーコード一覧"
-                FontSize="13"
-                TextColor="Gray" />
-        </VerticalStackLayout>
+                <Label
+                    Text="作成・スキャンしたバーコード一覧"
+                    FontSize="13"
+                    TextColor="Gray" />
+            </VerticalStackLayout>
 
+            <Button
+                Grid.Column="1"
+                Text="全削除"
+                Command="{Binding DeleteAllCommand}"
+                BackgroundColor="Transparent"
+                TextColor="Red" />
+        </Grid>
+
+        <!-- 履歴一覧 -->
         <CollectionView
             Grid.Row="1"
             ItemsSource="{Binding Histories}"
@@ -29,61 +39,75 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border
-                        Style="{StaticResource CardResultBorderStyle}"
-                        Margin="0,0,0,12">
 
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenHistoryCommand}"
-                                CommandParameter="{Binding .}" />
-                        </Border.GestureRecognizers>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Reveal">
+                                <SwipeItem
+                                    Text="削除"
+                                    BackgroundColor="#E53935"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
 
-                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                        <Border
+                            Style="{StaticResource CardResultBorderStyle}"
+                            Margin="0,0,0,12">
 
-                            <Border
-                                WidthRequest="52"
-                                HeightRequest="52"
-                                StrokeThickness="0"
-                                BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#25253A}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenHistoryCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
 
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="16" />
-                                </Border.StrokeShape>
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
 
-                                <!--<Label
-                                    Text="{Binding BarcodeTypeIcon}"
-                                    FontSize="24"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center" />-->
-                            </Border>
+                                <Border
+                                    WidthRequest="52"
+                                    HeightRequest="52"
+                                    StrokeThickness="0"
+                                    BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#25253A}">
 
-                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="16" />
+                                    </Border.StrokeShape>
+
+                                    <Label
+                                        Text="{Binding BarcodeTypeIcon}"
+                                        FontSize="22"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" />
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                    <Label
+                                        Text="{Binding BarcodeType}"
+                                        FontSize="16"
+                                        FontAttributes="Bold" />
+
+                                    <Label
+                                        Text="{Binding BarcodeValue}"
+                                        FontSize="14"
+                                        TextColor="Gray"
+                                        LineBreakMode="TailTruncation" />
+
+                                    <Label
+                                        Text="{Binding CreatedAtText}"
+                                        FontSize="12"
+                                        TextColor="Gray" />
+                                </VerticalStackLayout>
+
                                 <Label
-                                    Text="{Binding BarcodeType}"
-                                    FontSize="16"
-                                    FontAttributes="Bold" />
-
-                                <Label
-                                    Text="{Binding BarcodeValue}"
-                                    FontSize="14"
+                                    Grid.Column="2"
+                                    Text="›"
+                                    FontSize="28"
                                     TextColor="Gray"
-                                    LineBreakMode="TailTruncation" />
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </SwipeView>
 
-                                <Label
-                                    Text="{Binding CreatedAtText}"
-                                    FontSize="12"
-                                    TextColor="Gray" />
-                            </VerticalStackLayout>
-
-                            <Label
-                                Grid.Column="2"
-                                Text="›"
-                                FontSize="28"
-                                TextColor="Gray"
-                                VerticalOptions="Center" />
-                        </Grid>
-                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

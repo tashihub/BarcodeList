@@ -24,6 +24,26 @@ namespace BarcodeList.ViewModels
         }
 
         [RelayCommand]
+        private async Task CreateFolder() 
+        {
+           var result =  await _folderService.CreateFolderAsync();
+            if(result != null) 
+            {
+                await InitializeAsync();
+            }
+        }
+
+        [RelayCommand]
+        private async Task DeleteFolder(BarcodeFolder folder)
+        {
+            var result = await _databaseService.DeleteFolderAsync(folder);
+            if(result > 0)
+            {
+                Folders.Remove(folder);
+            }
+        }
+
+        [RelayCommand]
         private async Task OpenFolder(BarcodeFolder folder)
         {
             // フォルダ一覧を取得する処理を実装する

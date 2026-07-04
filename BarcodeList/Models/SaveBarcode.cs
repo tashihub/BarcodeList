@@ -14,6 +14,7 @@ namespace BarcodeList.Models
     /// </summary>
     public class SavedBarcode
     {
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         /// <summary>
