@@ -1,15 +1,14 @@
-using BarcodeList.Services;
 using BarcodeList.ViewModels.Result;
 
 namespace BarcodeList.Views.Result;
 
 public partial class Code128ResultView : ContentPage
 {
-	private Code128ResultViewModel ViewModel;
-    public Code128ResultView(FolderService folderService)
+	private readonly Code128ResultViewModel ViewModel;
+    public Code128ResultView(Code128ResultViewModel viewModel)
 	{
 		InitializeComponent();
-        ViewModel = new Code128ResultViewModel(folderService);
+        ViewModel = viewModel;
         BindingContext = ViewModel;
     }
 

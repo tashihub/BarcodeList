@@ -1,10 +1,7 @@
-﻿using BarcodeList.Models;
-using BarcodeList.Services;
-using BarcodeList.Tool;
+﻿using BarcodeList.Services.CreateServices;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ZXing.Net.Maui;
 
 namespace BarcodeList.ViewModels.Create
 {
@@ -12,7 +9,7 @@ namespace BarcodeList.ViewModels.Create
     {
         [ObservableProperty]
         private string title = "";
-        
+
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasError))]
         private string errorMessage = "";
@@ -20,29 +17,21 @@ namespace BarcodeList.ViewModels.Create
         [ObservableProperty]
         private string code128Value = "";
 
-        private readonly DatabaseService _databaseService;
-        public Code128CreateViewModel(DatabaseService databaseService)
+        private readonly Code128CreateService _code128Service;
+        public Code128CreateViewModel(Code128CreateService code128Service)
         {
-            _databaseService = databaseService;
+            _code128Service = code128Service;
         }
 
         partial void OnCode128ValueChanged(string? oldValue, string newValue)
         {
-            Code128Value = newValue;
-            if (Common.IsAsciiOnly(newValue) == false)
-            {
-                ErrorMessage = "Code128では日本語を生成できません。QRコードを使用してください。";
-            }
-            else
-            {
-                ErrorMessage = "";
-            }
+            ErrorMessage = _code128Service.Validate(newValue);
         }
 
         [RelayCommand]
         private async Task CreateAsync()
         {
-            try 
+            try
             {
                 if (string.IsNullOrWhiteSpace(Code128Value))
                 {
@@ -53,24 +42,18 @@ namespace BarcodeList.ViewModels.Create
                     return;
                 }
 
-                if (Common.IsAsciiOnly(Code128Value) == false)
+                ErrorMessage = _code128Service.Validate(Code128Value);
+
+                if (HasError)
                 {
                     await Shell.Current.DisplayAlertAsync(
                         "エラー",
-                        "Code128では日本語を生成できません。QRコードを使用してください。",
+                        ErrorMessage,
                         "OK");
                     return;
                 }
 
-                var saveBarcode = new SavedBarcode
-                {
-                    BarcodeValue = Code128Value,
-                    BarcodeType = BarcodeFormat.Code128.ToString(),
-                    FolderId = 0,
-                    CreatedAt = DateTime.Now,
-                };
-                await _databaseService.SaveBarcodeAsync(saveBarcode);
-
+                await _code128Service.SaveBarcodeToHistory(Code128Value, folderId: 0);
 
                 await Shell.Current.GoToAsync(
                     nameof(Code128ResultView),
@@ -79,7 +62,7 @@ namespace BarcodeList.ViewModels.Create
                         ["Code128Value"] = Code128Value
                     });
             }
-            catch(Exception ex) 
+            catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }

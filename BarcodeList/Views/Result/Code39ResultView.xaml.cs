@@ -1,4 +1,3 @@
-using BarcodeList.Services;
 using BarcodeList.ViewModels.Result;
 
 namespace BarcodeList.Views.Result;
@@ -6,10 +5,10 @@ namespace BarcodeList.Views.Result;
 public partial class Code39ResultView : ContentPage
 {
     private readonly Code39ResultViewModel _vm;
-    public Code39ResultView(FolderService folderService)
+    public Code39ResultView(Code39ResultViewModel viewModel)
 	{
 		InitializeComponent();
-        _vm = new Code39ResultViewModel(folderService);
+        _vm = viewModel;
         BindingContext = _vm;
     }
 

@@ -1,14 +1,12 @@
-using BarcodeList.Services.CreateServices;
-
 namespace BarcodeList.Views.Create;
 
 public partial class Code39CreateView : ContentPage
 {
     private readonly Code39CreateViewModel _viewModel;
-    public Code39CreateView(Code39CreateService code39Service)
+    public Code39CreateView(Code39CreateViewModel viewModel)
 	{
 		InitializeComponent();
-        _viewModel = new Code39CreateViewModel(code39Service);
+        _viewModel = viewModel;
         BindingContext = _viewModel;
     }
 }

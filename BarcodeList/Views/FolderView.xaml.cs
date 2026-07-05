@@ -1,4 +1,3 @@
-using BarcodeList.Services;
 using BarcodeList.ViewModels;
 
 namespace BarcodeList.Views;
@@ -6,10 +5,10 @@ namespace BarcodeList.Views;
 public partial class FolderView : ContentPage
 {
 	private readonly FolderViewModel _viewModel;
-    public FolderView(DatabaseService databaseService, FolderService folderService)
+    public FolderView(FolderViewModel viewModel)
 	{
 		InitializeComponent();
-        _viewModel = new FolderViewModel(databaseService, folderService);
+        _viewModel = viewModel;
         BindingContext = _viewModel;
     }
 

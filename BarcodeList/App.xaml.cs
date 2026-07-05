@@ -1,15 +1,10 @@
-﻿using BarcodeList.Views;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace BarcodeList
+﻿namespace BarcodeList
 {
     public partial class App : Application
     {
-        private readonly BarcodeReaderView _readerView;
-        public App(BarcodeReaderView readerView)
+        public App()
         {
             InitializeComponent();
-            _readerView = readerView;
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

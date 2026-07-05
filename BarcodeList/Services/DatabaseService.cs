@@ -9,7 +9,6 @@ public class DatabaseService
 
     private const string AllHistoryFolderName = "全履歴";
 
-    private bool _isInitialized = false;
     public async Task InitAsync()
     {
         if (_database != null)
@@ -18,13 +17,6 @@ public class DatabaseService
         var dbPath = Path.Combine(
             FileSystem.AppDataDirectory,
             "barcode.db");
-
-        //// デバッグ時にDBを削除して初期化する
-        //if (File.Exists(dbPath) && _isInitialized)
-        //{
-        //    _isInitialized = true;
-        //    File.Delete(dbPath);
-        //}
 
         _database = new SQLiteAsyncConnection(dbPath);
 

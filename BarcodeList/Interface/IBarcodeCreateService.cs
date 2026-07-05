@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BarcodeList.Services
+namespace BarcodeList.Interface
 {
     internal interface IBarcodeCreateService
     {

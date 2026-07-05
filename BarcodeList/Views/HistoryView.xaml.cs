@@ -1,4 +1,3 @@
-using BarcodeList.Services;
 using BarcodeList.ViewModels;
 
 namespace BarcodeList.Views;
@@ -6,10 +5,10 @@ namespace BarcodeList.Views;
 public partial class HistoryView : ContentPage
 {
 	private readonly HistoryViewModel _viewModel;
-    public HistoryView(DatabaseService databaseService,FolderService folderService)
+    public HistoryView(HistoryViewModel viewModel)
 	{
 		InitializeComponent();
-		_viewModel = new HistoryViewModel(databaseService, folderService);
+		_viewModel = viewModel;
 		BindingContext = _viewModel;
 	}
 

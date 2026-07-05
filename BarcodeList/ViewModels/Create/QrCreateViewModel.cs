@@ -1,9 +1,7 @@
-﻿using BarcodeList.Models;
-using BarcodeList.Services;
+﻿using BarcodeList.Services.CreateServices;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ZXing.Net.Maui;
 
 namespace BarcodeList.ViewModels.Create
 {
@@ -12,23 +10,16 @@ namespace BarcodeList.ViewModels.Create
         [ObservableProperty]
         private string qrValue;
 
-        private readonly DatabaseService _databaseService;
-        public QrCreateViewModel(DatabaseService databaseService)
+        private readonly QrCreateService _qrService;
+        public QrCreateViewModel(QrCreateService qrService)
         {
-            _databaseService = databaseService;
+            _qrService = qrService;
         }
 
         [RelayCommand]
-        private async Task Create() 
+        private async Task Create()
         {
-            var savedBarcode = new SavedBarcode
-            {
-                BarcodeValue = QrValue,
-                BarcodeType = BarcodeFormat.QrCode.ToString(),
-                CreatedAt = DateTime.Now,
-                FolderId = 0
-            };
-            await _databaseService.SaveBarcodeAsync(savedBarcode);
+            await _qrService.SaveBarcodeToHistory(QrValue, folderId: 0);
 
             await Shell.Current.GoToAsync(nameof(QrResultView),
             new Dictionary<string, object>

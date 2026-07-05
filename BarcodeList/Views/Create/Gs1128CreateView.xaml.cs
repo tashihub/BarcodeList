@@ -6,10 +6,10 @@ public partial class Gs1128CreateView : ContentPage
 {
 
 	private readonly Gs1128CreateViewModel _viewModel;
-    public Gs1128CreateView()
+    public Gs1128CreateView(Gs1128CreateViewModel viewModel)
 	{
 		InitializeComponent();
-        _viewModel = new Gs1128CreateViewModel();
+        _viewModel = viewModel;
         BindingContext = _viewModel;
     }
 }

@@ -1,4 +1,3 @@
-using BarcodeList.Services;
 using BarcodeList.ViewModels.Result;
 
 namespace BarcodeList.Views.Result;
@@ -6,10 +5,10 @@ namespace BarcodeList.Views.Result;
 public partial class QrResultView : ContentPage
 {
     private readonly QrResultViewModel _viewModel;
-    public QrResultView(FolderService folderService)
+    public QrResultView(QrResultViewModel viewModel)
 	{
 		InitializeComponent();
-        _viewModel = new QrResultViewModel(folderService);
+        _viewModel = viewModel;
         BindingContext = _viewModel;
     }
 

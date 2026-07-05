@@ -4,10 +4,11 @@ namespace BarcodeList.Views;
 
 public partial class BarcodeCreateMenuView : ContentPage
 {
-	private readonly BarcodeCreateMenuViewModel _viewModel = new();
-    public BarcodeCreateMenuView()
+	private readonly BarcodeCreateMenuViewModel _viewModel;
+    public BarcodeCreateMenuView(BarcodeCreateMenuViewModel viewModel)
 	{
 		InitializeComponent();
+        _viewModel = viewModel;
         BindingContext = _viewModel;
     }
 }

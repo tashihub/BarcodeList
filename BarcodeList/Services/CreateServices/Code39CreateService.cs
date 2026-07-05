@@ -1,4 +1,5 @@
-﻿using BarcodeList.Models;
+﻿using BarcodeList.Interface;
+using BarcodeList.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
