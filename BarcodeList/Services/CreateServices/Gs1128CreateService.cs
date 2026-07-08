@@ -1,53 +1,64 @@
 using BarcodeList.Models;
+using BarcodeList.Tool;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ZXing.Net.Maui;
 
 namespace BarcodeList.Services.CreateServices
 {
     /// <summary>
-    /// GS1-128はGTINとロット番号の2値で検証するため、単一値のIBarcodeCreateServiceは実装しない。
+    /// GS1-128は複数のAI要素(AIコード+値)の組み合わせで作成するため、単一値のIBarcodeCreateServiceは実装しない。
     /// </summary>
     public class Gs1128CreateService
     {
+        private const char GroupSeparator = (char)29;
+
         private readonly DatabaseService _databaseService;
         public Gs1128CreateService(DatabaseService databaseService)
         {
             _databaseService = databaseService;
         }
 
-        public string Validate(string gtin, string lotNo)
+        public string ValidateAiCode(string aiCode)
         {
-            if (string.IsNullOrWhiteSpace(gtin))
-                return "GTINを入力してください";
+            if (string.IsNullOrWhiteSpace(aiCode))
+                return "AIコードを入力してください";
 
-            if (!gtin.All(char.IsDigit))
-                return "GTINは数字のみ入力可能です";
-
-            if (gtin.Length != 13 && gtin.Length != 14)
-                return "GTINは13桁(JAN)または14桁(GTIN)で入力してください";
-
-            if (string.IsNullOrWhiteSpace(lotNo))
-                return "ロット番号を入力してください";
+            if (aiCode.Length < 2 || aiCode.Length > 4 || !aiCode.All(char.IsDigit))
+                return "AIコードは2〜4桁の数字で入力してください";
 
             return "";
         }
 
-        public static string NormalizeGtin(string gtin)
+        public string ValidateValue(string aiCode, string value)
         {
-            // JAN(EAN13) → GTIN14
-            if (gtin.Length == 13)
-            {
-                return gtin.PadLeft(14, '0');
-            }
-
-            return gtin;
+            return Gs1AiTable.ValidateValue(aiCode, value);
         }
 
-        public static string GenerateGs1Value(string gtin, DateTime expirationDate, string lotNo)
+        /// <summary>
+        /// AI要素のリストから、GS1-128としてエンコードすべき生データ文字列を組み立てる。
+        /// 可変長AIが末尾以外に来る場合のみ、後ろにGS(区切り文字)を挿入する。
+        /// </summary>
+        public static string BuildGs1Value(IReadOnlyList<Gs1Element> elements)
         {
-            return $"01{gtin}17{expirationDate:yyMMdd}10{lotNo}";
+            var sb = new StringBuilder();
+
+            for (var i = 0; i < elements.Count; i++)
+            {
+                var element = elements[i];
+                sb.Append(element.Ai).Append(element.Value);
+
+                var isLast = i == elements.Count - 1;
+                if (!Gs1AiTable.IsFixedLength(element.Ai) && !isLast)
+                {
+                    sb.Append(GroupSeparator);
+                }
+            }
+
+            return sb.ToString();
         }
 
         public async Task SaveBarcodeToHistory(string barcodeValue, int folderId)

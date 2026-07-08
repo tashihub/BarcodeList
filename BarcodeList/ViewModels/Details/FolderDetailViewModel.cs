@@ -52,7 +52,17 @@ namespace BarcodeList.ViewModels.Details
             {
                 return;
             }
-            //一旦GS1のことは無視して、通常のバーコードとして扱う
+
+            if (barcode.IsGs1)
+            {
+                // GS1バーコードの場合は、AI内訳を表示できるGS1専用の結果画面に遷移する
+                await Shell.Current.GoToAsync(nameof(Gs1128ResultView),
+                new Dictionary<string, object>
+                {
+                    ["Gs1Value"] = barcode.BarcodeValue
+                });
+                return;
+            }
 
             var barcodeFormat = barcode.BarcodeFormat;
             if (barcodeFormat == BarcodeFormat.QrCode)

@@ -49,7 +49,8 @@ namespace BarcodeList.Services
         public async Task<bool> SaveToFolderAsync(
             string barcodeValue,
             BarcodeFormat barcodeType,
-            BarcodeFolder selectedFolder)
+            BarcodeFolder selectedFolder,
+            bool isGs1 = false)
         {
             if (selectedFolder == null)
             {
@@ -60,6 +61,7 @@ namespace BarcodeList.Services
             {
                 BarcodeValue = barcodeValue,
                 BarcodeType = barcodeType.ToString(),
+                IsGs1 = isGs1,
                 FolderId = selectedFolder.Id,
                 CreatedAt = DateTime.Now,
             };

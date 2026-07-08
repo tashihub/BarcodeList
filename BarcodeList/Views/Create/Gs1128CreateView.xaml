@@ -3,6 +3,7 @@
     x:Class="BarcodeList.Views.Create.Gs1128CreateView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:BarcodeList.Tool"
     Title="GS1-128作成"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
@@ -14,70 +15,102 @@
                 FontSize="28"
                 FontAttributes="Bold" />
 
+            <Label
+                Text="AIコード(2〜4桁)と値を1つずつ追加してください。どのAIコードでも追加できます。"
+                FontSize="13"
+                TextColor="Gray" />
+
             <Border Style="{StaticResource CardBorderStyle}">
                 <VerticalStackLayout Spacing="12">
 
                     <Label
-                        Text="GTIN（AI: 01）"
-                        FontSize="14"
+                        Text="AI要素を追加"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <Label
+                        Text="AIコード"
+                        FontSize="13"
+                        TextColor="Gray" />
+
+                    <Entry
+                        Placeholder="例：01"
+                        Keyboard="Numeric"
+                        MaxLength="4"
+                        Text="{Binding NewAiCode}" />
+
+                    <Label
+                        Text="{Binding NewAiNameHint}"
+                        FontSize="12"
+                        TextColor="#4F46E5" />
+
+                    <Label
+                        Text="値"
+                        FontSize="13"
                         TextColor="Gray" />
 
                     <Entry
                         Placeholder="例：14971032310685"
-                        Keyboard="Numeric"
-                        MaxLength="14"
-                        Text="{Binding Gtin}" />
-
-                    <Label
-                        Text="14桁の数字で入力してください。14桁未満の場合は先頭に0を追加してください。"
-                        FontSize="12"
-                        TextColor="Gray" />
-
-                </VerticalStackLayout>
-            </Border>
-
-            <Border Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="12">
-
-                    <Label
-                        Text="有効期限（AI: 17）"
-                        FontSize="14"
-                        TextColor="Gray" />
-
-                    <DatePicker
-                        Date="{Binding ExpirationDate}"
-                        Format="yyyy/MM/dd" />
-
-                    <Label
-                        Text="GS1内部では YYMMDD 形式で生成されます。"
-                        FontSize="12"
-                        TextColor="Gray" />
-
-                </VerticalStackLayout>
-            </Border>
-
-            <Border Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="12">
-
-                    <Label
-                        Text="ロット番号（AI: 10）"
-                        FontSize="14"
-                        TextColor="Gray" />
-
-                    <Entry
-                        Placeholder="例：51089C"
-                        Text="{Binding LotNo}" />
-
-                    <Label
-                        Text="可変長項目のため、今回は最後に配置します。"
-                        FontSize="12"
-                        TextColor="Gray" />
+                        Keyboard="{Binding NewAiValueKeyboard}"
+                        MaxLength="{Binding NewAiValueMaxLength}"
+                        Text="{Binding NewAiValue}" />
 
                     <Label
                         Text="{Binding ErrorMessage}"
                         FontSize="13"
                         TextColor="Red"
                         IsVisible="{Binding HasError}" />
+
+                    <Button
+                        Text="＋ リストに追加"
+                        Command="{Binding AddElementCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="#4F46E5" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource CardBorderStyle}" IsVisible="{Binding HasElements}">
+                <VerticalStackLayout Spacing="10">
+
+                    <Label
+                        Text="追加したAI要素"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <CollectionView ItemsSource="{Binding Elements}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="tool:Gs1Element">
+                                <Grid
+                                    Padding="0,6"
+                                    ColumnDefinitions="60,*,Auto"
+                                    ColumnSpacing="8">
+
+                                    <Label
+                                        Text="{Binding Ai}"
+                                        FontAttributes="Bold"
+                                        TextColor="#4F46E5"
+                                        VerticalOptions="Center" />
+
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label Text="{Binding Name}" FontSize="12" TextColor="Gray" />
+                                        <Label Text="{Binding Value}" FontSize="16" LineBreakMode="CharacterWrap" />
+                                    </VerticalStackLayout>
+
+                                    <Button
+                                        Grid.Column="2"
+                                        Text="削除"
+                                        FontSize="12"
+                                        Padding="10,4"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RemoveElementCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
                 </VerticalStackLayout>
             </Border>

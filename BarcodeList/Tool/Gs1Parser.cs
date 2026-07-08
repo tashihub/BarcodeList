@@ -27,18 +27,6 @@ namespace BarcodeList.Tool
     {
         private const char GroupSeparator = (char)29;
 
-        private static readonly string[] SupportedAis =
-        {
-        "01",
-        "10",
-        "11",
-        "15",
-        "17",
-        "21",
-        "30",
-        "3100", "3101", "3102", "3103"
-    };
-
         public static Gs1ParseResult Parse(BarcodeResult barcodeResult)
         {
             var raw = barcodeResult.Value ?? "";
@@ -82,7 +70,7 @@ namespace BarcodeList.Tool
 
             while (index < raw.Length)
             {
-                var ai = DetectAi(raw, index);
+                var ai = Gs1AiTable.DetectAi(raw, index);
 
                 if (ai == null)
                 {
@@ -94,7 +82,7 @@ namespace BarcodeList.Tool
 
                 string value;
 
-                if (IsFixedLength(ai))
+                if (Gs1AiTable.IsFixedLength(ai))
                 {
                     value = ReadFixedValue(raw, ref index, ai);
                 }
@@ -111,7 +99,7 @@ namespace BarcodeList.Tool
                 result.Elements.Add(new Gs1Element
                 {
                     Ai = ai,
-                    Name = GetAiName(ai),
+                    Name = Gs1AiTable.GetAiName(ai),
                     Value = value
                 });
             }
@@ -140,40 +128,9 @@ namespace BarcodeList.Tool
             return value is "]C1" or "]Q3" or "]d2";
         }
 
-        private static string? DetectAi(string raw, int index)
-        {
-            return SupportedAis
-                .OrderByDescending(x => x.Length)
-                .FirstOrDefault(ai =>
-                    raw.Length >= index + ai.Length &&
-                    raw.Substring(index, ai.Length) == ai);
-        }
-
-        private static bool IsFixedLength(string ai)
-        {
-            return GetFixedLength(ai) > 0;
-        }
-
-        private static int GetFixedLength(string ai)
-        {
-            return ai switch
-            {
-                "01" => 14,
-                "11" => 6,
-                "15" => 6,
-                "17" => 6,
-                "30" => 8,
-                "3100" => 6,
-                "3101" => 6,
-                "3102" => 6,
-                "3103" => 6,
-                _ => -1
-            };
-        }
-
         private static string ReadFixedValue(string raw, ref int index, string ai)
         {
-            var length = GetFixedLength(ai);
+            var length = Gs1AiTable.GetFixedLength(ai);
 
             if (raw.Length < index + length)
             {
@@ -214,7 +171,7 @@ namespace BarcodeList.Tool
 
             while (index < raw.Length)
             {
-                var nextAi = DetectAi(raw, index);
+                var nextAi = Gs1AiTable.DetectAi(raw, index);
 
                 if (index > start && nextAi != null)
                 {
@@ -232,7 +189,7 @@ namespace BarcodeList.Tool
         private static bool CanReadAiValue(string raw, int aiIndex, string ai)
         {
             var valueStart = aiIndex + ai.Length;
-            var fixedLength = GetFixedLength(ai);
+            var fixedLength = Gs1AiTable.GetFixedLength(ai);
 
             if (fixedLength > 0)
             {
@@ -242,25 +199,6 @@ namespace BarcodeList.Tool
             // 可変長AIを次AIとして推定するのは危険なので、
             // FNC1なしの場合は次AI候補にしない
             return false;
-        }
-
-        private static string GetAiName(string ai)
-        {
-            return ai switch
-            {
-                "01" => "GTIN",
-                "10" => "ロット番号",
-                "11" => "製造日",
-                "15" => "賞味期限",
-                "17" => "有効期限",
-                "21" => "シリアル番号",
-                "30" => "数量",
-                "3100" => "重量kg 小数0桁",
-                "3101" => "重量kg 小数1桁",
-                "3102" => "重量kg 小数2桁",
-                "3103" => "重量kg 小数3桁",
-                _ => "不明"
-            };
         }
     }
 }

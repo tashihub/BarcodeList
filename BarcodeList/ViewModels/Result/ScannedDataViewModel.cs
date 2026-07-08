@@ -20,6 +20,25 @@ namespace BarcodeList.ViewModels
         public string BarcodeKindText => Gs1ParseResult?.IsGs1 == true ? "GS1バーコード" : "通常バーコード";
         public Color BarcodeKindColor => Gs1ParseResult?.IsGs1 == true ? Colors.MediumPurple : Colors.DodgerBlue;
         public string Gs1ReliabilityText => "簡易解析:正確な解析ではない場合があります。";
+
+        // --- GS1読み取り検証用の一時的なデバッグ表示。確認後に削除する ---
+        public string RawValueDebugText => (Gs1ParseResult?.RawValue ?? "").Replace((char)29, '␟');
+
+        public string MetadataDebugText => BarcodeResult?.Metadata == null || BarcodeResult.Metadata.Count == 0
+            ? "(メタデータなし)"
+            : string.Join("\n", BarcodeResult.Metadata.Select(kv => $"{kv.Key}: {kv.Value}"));
+
+        partial void OnBarcodeResultChanged(BarcodeResult value)
+        {
+            OnPropertyChanged(nameof(MetadataDebugText));
+        }
+
+        partial void OnGs1ParseResultChanged(Gs1ParseResult value)
+        {
+            OnPropertyChanged(nameof(RawValueDebugText));
+        }
+        // --- ここまで ---
+
         /// <summary>
         /// スキャンしたデータが受け渡される
         /// </summary>
