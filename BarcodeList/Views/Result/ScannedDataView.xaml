@@ -85,6 +85,7 @@
                 </VerticalStackLayout>
             </Border>
 
+                                <Span Text="{Binding Gs1ParseResult.SymbologyIdentifier}" />
             <!-- GS1 AIコードカード -->
             <Border
                 IsVisible="{Binding Gs1ParseResult.IsGs1}"
