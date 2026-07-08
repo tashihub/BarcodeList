@@ -27,6 +27,12 @@ public partial class Gs1128CreateViewModel : ObservableObject
     public bool HasElements => Elements.Count > 0;
 
     /// <summary>
+    /// 対応AIコード一覧(参考表示用)。ここにないAIコードも作成はできるが、
+    /// このアプリでの再読み込み時の内訳表示は保証されない。
+    /// </summary>
+    public IReadOnlyList<Gs1AiReferenceItem> KnownAiReference { get; } = Gs1AiTable.GetReferenceList();
+
+    /// <summary>
     /// 入力中のAIコードが既知AIかどうかをリアルタイムで表示するためのヒント文言(名前+入力形式)。
     /// </summary>
     public string NewAiNameHint

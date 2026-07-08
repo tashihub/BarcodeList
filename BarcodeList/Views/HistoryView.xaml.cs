@@ -12,14 +12,9 @@ public partial class HistoryView : ContentPage
 		BindingContext = _viewModel;
 	}
 
-    bool isFirstLoad = true;
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (isFirstLoad)
-        {
-            await _viewModel.LoadHistoriesAsync();
-            isFirstLoad = false;
-        }   
+        await _viewModel.LoadHistoriesAsync();
     }
 }

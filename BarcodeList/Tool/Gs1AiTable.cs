@@ -4,8 +4,19 @@ using System.Linq;
 namespace BarcodeList.Tool
 {
     /// <summary>
+    /// 対応AIコード一覧の1件を表す(UI表示・ドキュメント化用)。
+    /// </summary>
+    public class Gs1AiReferenceItem
+    {
+        public string Ai { get; init; } = "";
+        public string Name { get; init; } = "";
+        public string FormatHint { get; init; } = "";
+    }
+
+    /// <summary>
     /// GS1のAI(Application Identifier)に関する既知情報。読み取り(Gs1Parser)・作成(Gs1128CreateService)の両方から参照する単一の情報源。
-    /// テーブルにないAIコードは「不明なAI」「可変長」として扱えばよく、対応AIを都度増やす必要はない。
+    /// テーブルにないAIコードも作成はできるが、このアプリ自身での読み取り(内訳表示)は保証されない。
+    /// 対応AIコードは docs/spec-gs1-and-barcode-expansion.md にも一覧を記載している。
     /// </summary>
     public static class Gs1AiTable
     {
@@ -24,6 +35,21 @@ namespace BarcodeList.Tool
         public static IReadOnlyList<string> SupportedAis => KnownAis;
 
         public static bool IsKnown(string ai) => KnownAis.Contains(ai);
+
+        /// <summary>
+        /// 対応AIコードの一覧(コード・名前・入力形式)。UI表示やドキュメント確認用。
+        /// </summary>
+        public static IReadOnlyList<Gs1AiReferenceItem> GetReferenceList()
+        {
+            return KnownAis
+                .Select(ai => new Gs1AiReferenceItem
+                {
+                    Ai = ai,
+                    Name = GetAiName(ai),
+                    FormatHint = GetFormatHint(ai)
+                })
+                .ToList();
+        }
 
         /// <summary>
         /// 生データ中の指定位置から、既知AIのうち最長一致するものを検出する。見つからなければnull。

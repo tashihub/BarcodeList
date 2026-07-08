@@ -12,14 +12,9 @@ public partial class FolderView : ContentPage
         BindingContext = _viewModel;
     }
 
-    bool _isInitialized = false;
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (!_isInitialized)
-        {
-            await _viewModel.InitializeAsync();
-            _isInitialized = true;
-        }
+        await _viewModel.InitializeAsync();
     }
 }
