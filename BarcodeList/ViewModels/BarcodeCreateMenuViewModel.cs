@@ -1,49 +1,30 @@
-﻿using BarcodeList.Views.Create;
+using BarcodeList.Services.CreateServices;
+using BarcodeList.Views.Create;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using ZXing.Net.Maui;
+using System.Collections.Generic;
+
 namespace BarcodeList.ViewModels
 {
     public partial class BarcodeCreateMenuViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private string barcodeValue = "";
-
-        [ObservableProperty]
-        private BarcodeFormat selectedBarcodeFormat = BarcodeFormat.Code128;
-
-        [ObservableProperty]
-        public ObservableCollection<BarcodeFormat> barcodeFormats;
-
-        public BarcodeCreateMenuViewModel()
-        {
-            BarcodeFormats = new(Enum.GetValues<BarcodeFormat>());
-        }
-
+        /// <summary>
+        /// フォーマットごとのメニュー項目一覧。BarcodeFormatCatalogにエントリを足すだけで
+        /// このメニューにも自動的に反映される。
+        /// </summary>
+        public IReadOnlyList<BarcodeFormatDefinition> Formats { get; } = BarcodeFormatCatalog.All;
 
         [RelayCommand]
-        private async Task OpenQrCreate()
+        private async Task OpenFormatCreate(BarcodeFormatDefinition format)
         {
-            await Shell.Current.GoToAsync(nameof(QrCreateView));
-        }
+            if (format == null)
+                return;
 
-        [RelayCommand]
-        private async Task OpenCode128Create()
-        {
-            await Shell.Current.GoToAsync(nameof(Code128CreateView));
-        }
-
-        [RelayCommand]
-        private async Task OpenCode39Create()
-        {
-            await Shell.Current.GoToAsync(nameof(Code39CreateView));
-        }
-
-        [RelayCommand]
-        private async Task OpenEan13Create()
-        {
-            await Shell.Current.GoToAsync(nameof(Ean13CreateView));
+            await Shell.Current.GoToAsync(nameof(BarcodeCreateView),
+                new Dictionary<string, object>
+                {
+                    ["Format"] = format.Format
+                });
         }
 
         [RelayCommand]
@@ -51,6 +32,5 @@ namespace BarcodeList.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(Gs1128CreateView));
         }
-
     }
 }

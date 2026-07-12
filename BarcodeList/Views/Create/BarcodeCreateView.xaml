@@ -1,37 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="BarcodeList.Views.Create.Ean13CreateView"
+    x:Class="BarcodeList.Views.Create.BarcodeCreateView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="EAN13作成"
+    Title="{Binding Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">
 
             <Label
-                Text="EAN13作成"
+                Text="{Binding Title}"
                 FontSize="28"
                 FontAttributes="Bold" />
+
+            <Border Style="{StaticResource CardBorderStyle}" IsVisible="{Binding ShowFormatPicker}">
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="種類"
+                        FontSize="13"
+                        TextColor="Gray" />
+
+                    <Picker
+                        ItemsSource="{Binding Formats}"
+                        ItemDisplayBinding="{Binding DisplayName}"
+                        SelectedItem="{Binding SelectedFormat}" />
+
+                </VerticalStackLayout>
+            </Border>
 
             <Border Style="{StaticResource CardBorderStyle}">
                 <VerticalStackLayout Spacing="12">
 
                     <Label
-                        Text="バーコード値"
-                        FontSize="14"
+                        Text="値"
+                        FontSize="13"
                         TextColor="Gray" />
 
                     <Entry
-                        Placeholder="例：4901234567894"
-                        Keyboard="Numeric"
-                        MaxLength="13"
-                        Text="{Binding Ean13Value}" />
+                        Placeholder="{Binding Placeholder}"
+                        Keyboard="{Binding Keyboard}"
+                        MaxLength="{Binding EntryMaxLength}"
+                        Text="{Binding InputValue}" />
 
                     <Label
-                        Text="数字13桁で入力してください。最後の1桁はチェックデジットです。"
+                        Text="{Binding FormatHint}"
                         FontSize="12"
-                        TextColor="Gray" />
+                        TextColor="#4F46E5" />
 
                     <Label
                         Text="{Binding ErrorMessage}"

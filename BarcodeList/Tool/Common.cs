@@ -15,6 +15,22 @@ namespace BarcodeList.Tool
         {
             return value.All(c => c <= 0x7F);
         }
+
+        /// <summary>
+        /// EAN-13/EAN-8/UPC-Aで共通のモジュラス10チェックデジットを計算する。
+        /// 右端のデータ桁から重み3,1を交互に掛けて合計し、10の補数を返す。
+        /// </summary>
+        public static int CalculateMod10CheckDigit(string dataDigits)
+        {
+            var sum = 0;
+            for (var i = 0; i < dataDigits.Length; i++)
+            {
+                var digit = dataDigits[dataDigits.Length - 1 - i] - '0';
+                var weight = i % 2 == 0 ? 3 : 1;
+                sum += digit * weight;
+            }
+            return (10 - (sum % 10)) % 10;
+        }
     }
 
     public enum BarcodeType

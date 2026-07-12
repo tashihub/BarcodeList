@@ -1,31 +1,24 @@
-﻿using BarcodeList.Models;
+using BarcodeList.Models;
 using BarcodeList.Services;
-using BarcodeList.Tool;
+using BarcodeList.Services.CreateServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using ZXing.Net.Maui;
-using ZXing.PDF417.Internal;
 
 namespace BarcodeList.ViewModels.Result;
 
-public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
+/// <summary>
+/// QR/Code39/Code128/EAN13/EAN8/UPC-A/ITF/Codabar/Code93/DataMatrix/PDF417/Aztec共通の結果画面。
+/// GS1-128はAI内訳表示が必要なため、Gs1128ResultViewModelを別途使う。
+/// </summary>
+public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributable
 {
     [ObservableProperty]
-    private string ean13Value = "";
-    public void ApplyQueryAttributes(IDictionary<string, object> query)
-    {
-        if (query.TryGetValue("Ean13Value", out var value)) //なぜか大文字だと反応しない　→　小文字にする
-        {
-            Ean13Value = value?.ToString() ?? "";
-        }
-    }
+    private string barcodeValue = "";
 
     [ObservableProperty]
-    private BarcodeFormat barcodeFormat = BarcodeFormat.Ean13;
-
-    [ObservableProperty]
-    public string displayValue = "";
+    private BarcodeFormat format;
 
     [ObservableProperty]
     private BarcodeFolder? selectedFolder;
@@ -34,22 +27,34 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
     private string name = "";
 
     [ObservableProperty]
-    private SavedBarcode? savedBarcode;
+    private ObservableCollection<BarcodeFolder> folders = new();
 
-    [ObservableProperty]
-    private ObservableCollection<BarcodeFolder> folders = new ObservableCollection<BarcodeFolder>();
+    public string DisplayName => BarcodeFormatCatalog.Find(Format)?.DisplayName ?? Format.ToString();
 
     private readonly FolderService _folderService;
 
-    public Ean13ResultViewModel(FolderService folderService)
+    public BarcodeResultViewModel(FolderService folderService)
     {
         _folderService = folderService;
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.TryGetValue("Value", out var valueObj))
+        {
+            BarcodeValue = valueObj?.ToString() ?? "";
+        }
+
+        if (query.TryGetValue("Format", out var formatObj) && formatObj is BarcodeFormat formatValue)
+        {
+            Format = formatValue;
+            OnPropertyChanged(nameof(DisplayName));
+        }
     }
 
     /// <summary>
     /// 初期化処理。フォルダ一覧を取得してViewModelに設定する
     /// </summary>
-    /// <returns></returns>
     internal async Task InitializeAsync()
     {
         try
@@ -61,7 +66,6 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
         {
             Console.WriteLine($"Error occurred while initializing: {ex.Message}");
         }
-
     }
 
     [RelayCommand]
@@ -77,10 +81,6 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
         SelectedFolder = newFolder;
     }
 
-    /// <summary>
-    /// フォルダ込みの履歴に保存する。★通常履歴にはCrearteで登録する
-    /// </summary>
-    /// <returns></returns>
     [RelayCommand]
     private async Task Save()
     {
@@ -90,14 +90,7 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
             return;
         }
 
-        SavedBarcode = new SavedBarcode
-        {
-            BarcodeValue = Ean13Value,
-            BarcodeType = BarcodeFormat.Ean13.ToString(),
-            FolderId = SelectedFolder?.Id ?? 0,
-            CreatedAt = DateTime.Now,
-        };
-        bool success = await _folderService.SaveToFolderAsync(Ean13Value, BarcodeFormat.Ean13, SelectedFolder);
+        bool success = await _folderService.SaveToFolderAsync(BarcodeValue, Format, SelectedFolder);
         if (success)
         {
             await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");
@@ -108,6 +101,4 @@ public partial class Ean13ResultViewModel : ObservableObject, IQueryAttributable
             Console.WriteLine("Failed to save barcode.");
         }
     }
-
-
 }

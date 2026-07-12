@@ -11,14 +11,8 @@ namespace BarcodeList
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ScannedDataView), typeof(ScannedDataView));
-            Routing.RegisterRoute(nameof(QrCreateView), typeof(QrCreateView));
-            Routing.RegisterRoute(nameof(QrResultView), typeof(QrResultView));
-            Routing.RegisterRoute(nameof(Code39CreateView), typeof(Code39CreateView));
-            Routing.RegisterRoute(nameof(Code39ResultView), typeof(Code39ResultView));
-            Routing.RegisterRoute(nameof(Code128CreateView), typeof(Code128CreateView));
-            Routing.RegisterRoute(nameof(Code128ResultView), typeof(Code128ResultView));
-            Routing.RegisterRoute(nameof(Ean13ResultView), typeof(Ean13ResultView));
-            Routing.RegisterRoute(nameof(Ean13CreateView), typeof(Ean13CreateView));
+            Routing.RegisterRoute(nameof(BarcodeCreateView), typeof(BarcodeCreateView));
+            Routing.RegisterRoute(nameof(BarcodeResultView), typeof(BarcodeResultView));
             Routing.RegisterRoute(nameof(Gs1128CreateView), typeof(Gs1128CreateView));
             Routing.RegisterRoute(nameof(Gs1128ResultView), typeof(Gs1128ResultView));
             Routing.RegisterRoute(nameof(FolderDetailView), typeof(FolderDetailView));

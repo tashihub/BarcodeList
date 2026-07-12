@@ -14,9 +14,10 @@ public partial class BarcodeReaderView : ContentPage
         BindingContext = viewModel;
 
         //GS1の読み込みに対応できない。FNC1に対応できていないため
+        // UPC-E/MSI/Plesseyはチェックデジット等のライブラリ挙動が未確認のため対象外(docs/barcode-format-specs.md参照)
         cameraBarcodeReaderView.Options = new BarcodeReaderOptions
         {
-            Formats = BarcodeFormats.All,
+            Formats = BarcodeFormats.All & ~(BarcodeFormat.UpcE | BarcodeFormat.Msi | BarcodeFormat.Plessey),
             AutoRotate = true,
             Multiple = true,
             DelayBetweenAnalyzingFrames = 150,

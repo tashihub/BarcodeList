@@ -4,7 +4,6 @@ using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using ZXing.Net.Maui;
 
 namespace BarcodeList.ViewModels
 {
@@ -69,43 +68,13 @@ namespace BarcodeList.ViewModels
                 return;
             }
 
-            var barcodeFormat = barcode.BarcodeFormat;
-            if (barcodeFormat == BarcodeFormat.QrCode)
+            // それ以外は共通の結果画面に遷移する
+            await Shell.Current.GoToAsync(nameof(BarcodeResultView),
+            new Dictionary<string, object>
             {
-                // QRコードの場合は、QRコードの内容を表示するページに遷移する
-                await Shell.Current.GoToAsync(nameof(QrResultView),
-                new Dictionary<string, object>
-                {
-                    ["qrValue"] = barcode.BarcodeValue
-                });
-            }
-            else if (barcodeFormat == BarcodeFormat.Code39)
-            {
-                // Code39コードの場合は、Code39コードの内容を表示するページに遷移する
-                await Shell.Current.GoToAsync(nameof(Code39ResultView),
-                new Dictionary<string, object>
-                {
-                    ["code39Value"] = barcode.BarcodeValue,
-                });
-            }
-            else if(barcodeFormat == BarcodeFormat.Code128)
-            {
-                // Code128コードの場合は、Code128コードの内容を表示するページに遷移する
-                await Shell.Current.GoToAsync(nameof(Code128ResultView),
-                new Dictionary<string, object>
-                {
-                    ["code128Value"] = barcode.BarcodeValue
-                });
-            }
-            else if (barcodeFormat == BarcodeFormat.Ean13)
-            {
-                // EAN-13コードの場合は、EAN-13コードの内容を表示するページに遷移する
-                await Shell.Current.GoToAsync(nameof(Ean13ResultView),
-                new Dictionary<string, object>
-                {
-                    ["Ean13Value"] = barcode.BarcodeValue
-                });
-            }
+                ["Value"] = barcode.BarcodeValue,
+                ["Format"] = barcode.BarcodeFormat
+            });
         }
     }
 }

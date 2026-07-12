@@ -81,9 +81,6 @@
 	  <Compile Update="Views\Create\Gs1128CreateView.xaml.cs">
 	    <DependentUpon>Gs1128CreateView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Create\QrCreateView.xaml.cs">
-	    <DependentUpon>QrCreateView.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -93,19 +90,10 @@
 	  <MauiXaml Update="Views\BarcodeReaderView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Create\Code128CreateView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Create\Code39CreateView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Create\Ean13CreateView.xaml">
+	  <MauiXaml Update="Views\Create\BarcodeCreateView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Create\Gs1128CreateView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Create\QrCreateView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Details\FolderDetailView.xaml">
@@ -117,19 +105,10 @@
 	  <MauiXaml Update="Views\HistoryView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Result\Code128ResultView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Result\Code39ResultView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Result\Ean13ResultView.xaml">
+	  <MauiXaml Update="Views\Result\BarcodeResultView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Result\Gs1128ResultView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Result\QrResultView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Result\ScannedDataView.xaml">

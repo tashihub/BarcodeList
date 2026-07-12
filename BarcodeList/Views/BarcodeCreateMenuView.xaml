@@ -2,8 +2,9 @@
     x:Class="BarcodeList.Views.BarcodeCreateMenuView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cs="clr-namespace:BarcodeList.Services.CreateServices"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
-    
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">
             <Label
@@ -11,154 +12,64 @@
                 FontSize="14"
                 TextColor="Gray" />
 
-            <!-- QRコード -->
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OpenQrCreateCommand}" />
-                </Border.GestureRecognizers>
+            <VerticalStackLayout Spacing="10">
 
-                <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="14">
-                    <Border
-                        WidthRequest="56"
-                        HeightRequest="56"
-                        BackgroundColor="#EEF2FF"
-                        StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="16" />
-                        </Border.StrokeShape>
-                        <Label Text="▦" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
+                <!-- GS1-128(AI要素の入力が必要なため専用画面。他と同じ見た目で並べる) -->
+                <Border
+                    Padding="16,14"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                    StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenGs1128CreateCommand}" />
+                    </Border.GestureRecognizers>
 
-                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                        <Label Text="QRコード" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="URL・テキスト・連絡先などに使用" FontSize="13" TextColor="Gray" />
-                    </VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="GS1-128" FontSize="16" FontAttributes="Bold" />
+                            <Label Text="GTIN・ロット番号・期限などのAIコード用" FontSize="12" TextColor="Gray" />
+                        </VerticalStackLayout>
 
-                    <Label Grid.Column="2" Text="›" FontSize="30" TextColor="Gray" VerticalOptions="Center" />
-                </Grid>
-            </Border>
+                        <Label Grid.Column="1" Text="›" FontSize="26" TextColor="Gray" VerticalOptions="Center" />
+                    </Grid>
+                </Border>
 
-            <!-- Code128 -->
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OpenCode128CreateCommand}" />
-                </Border.GestureRecognizers>
+                <!-- フォーマットごとのメニュー項目(BarcodeFormatCatalogから自動生成) -->
+                <CollectionView ItemsSource="{Binding Formats}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="cs:BarcodeFormatDefinition">
+                            <Border
+                                Padding="16,14"
+                                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+                                StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16" />
+                                </Border.StrokeShape>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenFormatCreateCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
 
-                <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="14">
-                    <Border WidthRequest="56" HeightRequest="56" BackgroundColor="#ECFDF5" StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="16" />
-                        </Border.StrokeShape>
-                        <Label Text="▥" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="{Binding DisplayName}" FontSize="16" FontAttributes="Bold" />
+                                        <Label Text="{Binding FormatHint}" FontSize="12" TextColor="Gray" />
+                                    </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                        <Label Text="Code128" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="業務・物流・テスト用バーコードに使用" FontSize="13" TextColor="Gray" />
-                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" Text="›" FontSize="26" TextColor="Gray" VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                    <Label Grid.Column="2" Text="›" FontSize="30" TextColor="Gray" VerticalOptions="Center" />
-                </Grid>
-            </Border>
-
-            <!-- Code39 -->
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OpenCode39CreateCommand}" />
-                </Border.GestureRecognizers>
-
-                <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="14">
-                    <Border WidthRequest="56" HeightRequest="56" BackgroundColor="#FFF7ED" StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="16" />
-                        </Border.StrokeShape>
-                        <Label Text="▤" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
-
-                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                        <Label Text="Code39" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="製造業・古い業務システム向け" FontSize="13" TextColor="Gray" />
-                    </VerticalStackLayout>
-
-                    <Label Grid.Column="2" Text="›" FontSize="30" TextColor="Gray" VerticalOptions="Center" />
-                </Grid>
-            </Border>
-
-            <!-- JAN / EAN13 -->
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OpenEan13CreateCommand}" />
-                </Border.GestureRecognizers>
-
-                <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="14">
-                    <Border WidthRequest="56" HeightRequest="56" BackgroundColor="#FDF2F8" StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="16" />
-                        </Border.StrokeShape>
-                        <Label Text="▥" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
-
-                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                        <Label Text="JAN / EAN13" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="商品コード・JANコード用" FontSize="13" TextColor="Gray" />
-                    </VerticalStackLayout>
-
-                    <Label Grid.Column="2" Text="›" FontSize="30" TextColor="Gray" VerticalOptions="Center" />
-                </Grid>
-            </Border>
-
-            <!-- GS1-128 -->
-            <Border
-                Padding="18"
-                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
-                </Border.StrokeShape>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OpenGs1128CreateCommand}" />
-                </Border.GestureRecognizers>
-
-                <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="14">
-                    <Border WidthRequest="56" HeightRequest="56" BackgroundColor="#F0F9FF" StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="16" />
-                        </Border.StrokeShape>
-                        <Label Text="AI" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
-
-                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                        <Label Text="GS1-128" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="GTIN・ロット番号・期限などのAIコード用" FontSize="13" TextColor="Gray" />
-                    </VerticalStackLayout>
-
-                    <Label Grid.Column="2" Text="›" FontSize="30" TextColor="Gray" VerticalOptions="Center" />
-                </Grid>
-            </Border>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

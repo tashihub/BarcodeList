@@ -133,20 +133,13 @@
    - この一覧・注意書きは `Gs1AiTable.SupportedAis` を増やすたびに自動で追従する。
 8. ⬜ 6・7は未実機確認。次回、(a) 既知AI(特に `01`/日付系)で意図的に桁数違反・不正日付を入力してエラーメッセージが正しく出るか、(b) GS1作成画面に「対応AIコード一覧」が正しく表示されるか、を確認する。あわせて `ScannedDataView` の一時的デバッグ表示(黄色いカード)は確認完了後に削除して良い。
 
-### ②8フォーマット追加(①の実機確認の後)
+### ②8フォーマット追加 — 実装済み(2026-07-06、実機確認は未実施)
 
-1. `BarcodeFormatDefinition` / `BarcodeFormatCatalog` を新設し、4.2のグルーピングに沿って12フォーマット(既存4+新規8)分の検証ロジックを実装する。
-2. 汎用 `BarcodeCreateViewModel` / `BarcodeResultViewModel` とそれに対応するView(汎用Create画面・汎用Result画面)を新設する。
-3. `MauiProgram.cs`・`AppShell.xaml.cs` のルーティングを新しい汎用画面に向ける。
-4. 既存の `Code39/Code128/Ean13/Qr` 用の重複した View/ViewModel/CreateService/ResultView 一式を削除する。
-5. `BarcodeReaderView` の `BarcodeReaderOptions.Formats` から UPC-E/MSI/Plessey を除外する(`barcode-format-specs.md` 参照)。
-6. 追加した8フォーマットそれぞれについて、実機で作成→スキャンの往復確認を行う。
-
-### ②8フォーマット追加(①の後)
-
-1. `BarcodeFormatDefinition` / `BarcodeFormatCatalog` を新設し、4.2のグルーピングに沿って12フォーマット(既存4+新規8)分の検証ロジックを実装する。
-2. 汎用 `BarcodeCreateViewModel` / `BarcodeResultViewModel` とそれに対応するView(汎用Create画面・汎用Result画面)を新設する。
-3. `MauiProgram.cs`・`AppShell.xaml.cs` のルーティングを新しい汎用画面に向ける。
-4. 既存の `Code39/Code128/Ean13/Qr` 用の重複した View/ViewModel/CreateService/ResultView 一式を削除する。
-5. `BarcodeReaderView` の `BarcodeReaderOptions.Formats` から UPC-E/MSI/Plessey を除外する(`barcode-format-specs.md` 参照)。
-6. 追加した8フォーマットそれぞれについて、実機で作成→スキャンの往復確認を行う。
+1. ✅ `Services/CreateServices/BarcodeFormatDefinition.cs`(record)/`BarcodeFormatCatalog.cs` を新設。4.2のグルーピングに沿って12フォーマット(既存4: QR/Code39/Code128/EAN-13 + 新規8: EAN-8/UPC-A/ITF/Codabar/Code93/DataMatrix/PDF417/Aztec)分の `Normalize`/`Validate`/`AppendCheckDigit`(EAN-8・EAN-13・UPC-Aのみ)を実装。チェックデジット計算は `Tool/Common.CalculateMod10CheckDigit` に共通化(右端データ桁から重み3,1を交互)。EAN系はデータ桁のみ入力させ、チェックデジットは自動付加する方式にした(既存Ean13の「13桁全部入力必須」から仕様変更)。
+2. ✅ `ViewModels/Create/BarcodeCreateViewModel.cs` + `Views/Create/BarcodeCreateView.xaml(.cs)`(汎用Create画面: フォーマットPicker+値Entry、選択フォーマットに応じてKeyboard/MaxLength/ヒントが切り替わる)、`ViewModels/Result/BarcodeResultViewModel.cs` + `Views/Result/BarcodeResultView.xaml(.cs)`(汎用Result画面: `zxing:BarcodeGeneratorView`+フォルダ保存)を新設。
+3. ✅ `MauiProgram.cs`・`AppShell.xaml.cs` を新しい汎用画面(`BarcodeCreateView`/`BarcodeResultView`)に向けて更新。
+4. ✅ 旧 `Code39/Code128/Ean13/Qr` の View/ViewModel/CreateService/ResultView 一式(16ファイル)と、使われなくなった `Interface/IBarcodeCreateService.cs` を削除。`.csproj` の該当 `MauiXaml`/`Compile` Update エントリも整理。`HistoryViewModel`/`FolderDetailViewModel` の遷移分岐(4形式ぶんのif/else)も、共通の `BarcodeResultView` へ1本化して大幅に簡素化した。
+5. ✅ `BarcodeReaderView` の `BarcodeReaderOptions.Formats` から `BarcodeFormats.All & ~(UpcE | Msi | Plessey)` で除外。
+6. ✅ **UX修正(2026-07-06、ユーザー指摘)**: 「コード上ではまとめてよいが、作成画面ではまとめないでほしい」との指摘を受け、`BarcodeCreateMenuView` を1つの汎用入口ではなく**フォーマットごとに個別のメニュー項目**(`BarcodeFormatCatalog.All`から自動生成、GS1-128は別枠)に戻した。各項目をタップすると `BarcodeCreateView` に `Format` を渡して遷移し、その画面ではフォーマット選択欄(Picker)を隠して**そのフォーマット専用の画面に見える**ようにした(`BarcodeCreateViewModel.IsFormatFixed`/`ShowFormatPicker`)。裏側の検証ロジック(`BarcodeFormatCatalog`)自体は1つのテーブルのまま共有しており、UIの入口だけをフォーマットごとに分けている。
+7. ✅ **さらなるUX統一(2026-07-06)**: GS1-128のメニュー項目だけ大きいアイコン枠付きの見た目で浮いていたため、他フォーマットと同じ「タイトル+ヒント+シェブロン」のシンプルなカードに統一(`BarcodeCreateMenuView.xaml`)。「その他のバーコード」の見出しも不要になったため削除し、GS1-128を先頭にした1本のリストにした。
+8. ⬜ **実機での確認が未実施**。次回、(a) メニューから各フォーマット(GS1-128含む)を個別に開けるか・遷移後にPickerが隠れて専用画面に見えるか、(b) 追加した8フォーマット(特にチェックデジット自動付加のEAN-8/EAN-13/UPC-A、偶数桁必須のITF、スタート/ストップ文字を含むCodabar)それぞれで作成→スキャンの往復確認を行うこと。

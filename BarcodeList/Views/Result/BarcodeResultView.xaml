@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="BarcodeList.Views.Result.Code128ResultView"
+    x:Class="BarcodeList.Views.Result.BarcodeResultView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
-    Title="Code128結果"
+    Title="バーコード結果"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">
 
             <Label
-                Text="Code128結果"
+                Text="{Binding DisplayName, StringFormat='{0}結果'}"
                 FontSize="28"
                 FontAttributes="Bold" />
 
+            <!-- プレビュー -->
             <Border Style="{StaticResource CardResultBorderStyle}">
                 <VerticalStackLayout Spacing="16">
                     <Label
@@ -24,22 +25,15 @@
                         HorizontalOptions="Center" />
 
                     <zxing:BarcodeGeneratorView
-                        Value="{Binding Code128Value}"
-                        Format="Code128"
+                        Value="{Binding BarcodeValue}"
+                        Format="{Binding Format}"
                         HeightRequest="140"
                         HorizontalOptions="Fill" />
-
-                    <Label
-                        Text="{Binding Code128Value }"
-                        FontSize="14"
-                        TextColor="Gray"
-                        HorizontalOptions="Center"
-                        LineBreakMode="CharacterWrap" />
                 </VerticalStackLayout>
             </Border>
 
+            <!-- 生データ -->
             <Border Style="{StaticResource CardResultBorderStyle}">
-
                 <VerticalStackLayout Spacing="8">
                     <Label
                         Text="生データ"
@@ -47,13 +41,19 @@
                         TextColor="Gray" />
 
                     <Label
-                        Text="{Binding Code128Value }"
+                        Text="{Binding BarcodeValue}"
                         FontSize="18"
                         FontAttributes="Bold"
                         LineBreakMode="CharacterWrap" />
+
+                    <Label
+                        Text="{Binding DisplayName, StringFormat='形式：{0}'}"
+                        FontSize="12"
+                        TextColor="Gray" />
                 </VerticalStackLayout>
             </Border>
 
+            <!-- 保存先フォルダ -->
             <Border Style="{StaticResource CardResultBorderStyle}">
 
                 <VerticalStackLayout Spacing="12">
@@ -77,7 +77,7 @@
             </Border>
 
             <Button
-                Text="このCode128を保存"
+                Text="このバーコードを保存"
                 Command="{Binding SaveCommand}"
                 Style="{StaticResource SaveButtonStyle}" />
 
