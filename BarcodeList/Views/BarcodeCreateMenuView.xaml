@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cs="clr-namespace:BarcodeList.Services.CreateServices"
-    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}"
+    Shell.NavBarIsVisible="False">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">

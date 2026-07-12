@@ -34,6 +34,8 @@ namespace BarcodeList.ViewModels
             {
                 return;
             }
+
+
             var result = await _databaseService.DeleteHistoryAsync(barcode);
             Histories.Remove(barcode);
         }

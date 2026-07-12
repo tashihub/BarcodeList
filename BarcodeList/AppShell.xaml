@@ -10,18 +10,22 @@
         <ShellContent
             Title="作成"
             ContentTemplate="{DataTemplate local:BarcodeCreateMenuView}"
+            Icon="create.png"
             Route="CreatePage" />
         <ShellContent
             Title="スキャン"
             ContentTemplate="{DataTemplate local:BarcodeReaderView}"
+            Icon="scan.png"
             Route="MainPage" />
         <ShellContent
             Title="フォルダ"
             ContentTemplate="{DataTemplate local:FolderView}"
+            Icon="folder.png"
             Route="FolderPage" />
         <ShellContent
             Title="履歴"
             ContentTemplate="{DataTemplate local:HistoryView}"
+            Icon="history.png"
             Route="HistoryPage" />
     </TabBar>
 </Shell>

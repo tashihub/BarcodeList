@@ -3,7 +3,7 @@
     x:Class="BarcodeList.Views.HistoryView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="履歴"
+    Shell.NavBarIsVisible="False"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <Grid RowDefinitions="Auto,*" Padding="20" RowSpacing="18">
