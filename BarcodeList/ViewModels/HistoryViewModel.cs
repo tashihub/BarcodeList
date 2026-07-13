@@ -11,7 +11,7 @@ namespace BarcodeList.ViewModels
     {
 
         [ObservableProperty]
-        public ObservableCollection<SavedBarcode> histories;
+        public ObservableCollection<SavedBarcode> histories = new();
 
         private readonly DatabaseService _databaseService;
         private readonly FolderService _folderService;

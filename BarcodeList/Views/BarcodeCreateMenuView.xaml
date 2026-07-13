@@ -3,14 +3,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cs="clr-namespace:BarcodeList.Services.CreateServices"
-    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}"
-    Shell.NavBarIsVisible="False">
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">
             <Label
                 Text="作成したいバーコードの種類を選択してください"
-                FontSize="14"
+                FontSize="Medium"
                 TextColor="Gray" />
 
             <VerticalStackLayout Spacing="10">

@@ -13,7 +13,7 @@ namespace BarcodeList.ViewModels
     public partial class FolderViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<BarcodeFolder> folders;
+        private ObservableCollection<BarcodeFolder> folders = new();
 
         private readonly DatabaseService _databaseService;
         private readonly FolderService _folderService;
