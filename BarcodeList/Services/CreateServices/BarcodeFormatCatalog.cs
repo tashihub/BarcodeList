@@ -139,6 +139,14 @@ namespace BarcodeList.Services.CreateServices
                 Validate: v => ""),
         };
 
+        /// <summary>
+        /// 作成対応している全フォーマットをOR結合したもの。読み取り側(BarcodeReaderView)で
+        /// 「作成もできる形式だけ読み取る」ように絞り込むのに使う。
+        /// GS1-128は物理的にはCode128として検出されるため、別途足す必要はない。
+        /// </summary>
+        public static BarcodeFormat SupportedFormats { get; } =
+            All.Select(f => f.Format).Aggregate((BarcodeFormat)0, (acc, f) => acc | f);
+
         public static BarcodeFormatDefinition? Find(BarcodeFormat format)
         {
             return All.FirstOrDefault(f => f.Format == format);

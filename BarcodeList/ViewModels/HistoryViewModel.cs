@@ -43,6 +43,17 @@ namespace BarcodeList.ViewModels
         [RelayCommand]
         private async Task DeleteAll()
         {
+            bool confirmed = await Shell.Current.DisplayAlertAsync(
+                "履歴を全削除",
+                "履歴をすべて削除します。よろしいですか?(フォルダに保存したバーコードは削除されません)",
+                "削除",
+                "キャンセル");
+
+            if (!confirmed)
+            {
+                return;
+            }
+
             var result = await _databaseService.DeleteAllHistoryAsync();
             Histories.Clear();
         }

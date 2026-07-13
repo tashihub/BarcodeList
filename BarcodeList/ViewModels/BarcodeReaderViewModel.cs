@@ -12,8 +12,6 @@ namespace BarcodeList.ViewModels
     public partial class BarcodeReaderViewModel : ObservableObject
     {
 
-        [ObservableProperty]
-        private string scannedText = "読み取り待ち";
 
 
         [ObservableProperty]

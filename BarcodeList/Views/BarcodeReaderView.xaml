@@ -4,18 +4,19 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="BarcodeList.Views.BarcodeReaderView"
              Shell.NavBarIsVisible="False">
-    
-    <Grid RowDefinitions="*, Auto">
-        <zxing:CameraBarcodeReaderView
-            x:Name="cameraBarcodeReaderView"
-            Grid.Row="0"
-            IsDetecting="True"
-            BarcodesDetected="BarcodesDetected" />
 
+    <Grid RowDefinitions="Auto,0.5*">
         <Label
-            Grid.Row="1"
-            Text="{Binding ScannedText}"
-            FontSize="20" />
+            Grid.Row="0"
+            Text="バーコードスキャン"
+            FontSize="20"
+            TextColor="White"/>
+
+        <zxing:CameraBarcodeReaderView
+                    x:Name="cameraBarcodeReaderView"
+                    IsDetecting="True"
+                    BarcodesDetected="BarcodesDetected" 
+                    Grid.Row="1"/>
 
     </Grid>
 </ContentPage>

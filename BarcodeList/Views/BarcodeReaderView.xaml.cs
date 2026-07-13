@@ -1,3 +1,4 @@
+using BarcodeList.Services.CreateServices;
 using BarcodeList.ViewModels;
 using ZXing.Net.Maui;
 using ZXing.Net.Maui.Controls;
@@ -7,17 +8,19 @@ namespace BarcodeList.Views;
 public partial class BarcodeReaderView : ContentPage
 {
     private readonly BarcodeReaderViewModel viewModel;
+
 	public BarcodeReaderView(BarcodeReaderViewModel viewModel)
 	{
 		InitializeComponent();
 		this.viewModel = viewModel;
         BindingContext = viewModel;
 
+
         //GS1の読み込みに対応できない。FNC1に対応できていないため
-        // UPC-E/MSI/Plesseyはチェックデジット等のライブラリ挙動が未確認のため対象外(docs/barcode-format-specs.md参照)
+        // 読み取り対象は、このアプリで作成対応しているフォーマットのみに絞る(BarcodeFormatCatalog参照)
         cameraBarcodeReaderView.Options = new BarcodeReaderOptions
         {
-            Formats = BarcodeFormats.All & ~(BarcodeFormat.UpcE | BarcodeFormat.Msi | BarcodeFormat.Plessey),
+            Formats = BarcodeFormatCatalog.SupportedFormats,
             AutoRotate = true,
             Multiple = true,
             DelayBetweenAnalyzingFrames = 150,
@@ -44,5 +47,22 @@ public partial class BarcodeReaderView : ContentPage
         {
             vm.BarcodeDetectedCommand.Execute(e);
         }
+    }
+
+    /// <summary>
+    /// Shellのタブ切り替えではページが破棄されず裏で生き続けるため、
+    /// このページが非表示の間はカメラの検出を止めないと他のタブを見ている間に
+    /// 誤ってスキャン結果画面へ遷移してしまう。表示/非表示に合わせてIsDetectingを切り替える。
+    /// </summary>
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        cameraBarcodeReaderView.IsDetecting = true;
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        cameraBarcodeReaderView.IsDetecting = false;
     }
 }
