@@ -11,4 +11,15 @@ public partial class ScannedDataView : ContentPage
 		InitializeComponent();
         BindingContext = _viewModel;
     }
+
+    private bool _isInitialized = false;
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (!_isInitialized)
+        {
+            await _viewModel.InitializeAsync();
+            _isInitialized = true;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 using BarcodeList.Models;
 using BarcodeList.Services;
 using BarcodeList.Services.CreateServices;
+using BarcodeList.Tool;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -31,11 +32,18 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
 
     public string DisplayName => BarcodeFormatCatalog.Find(Format)?.DisplayName ?? Format.ToString();
 
+    public bool IsWebUrl => Common.IsWebUrl(BarcodeValue);
+
     private readonly FolderService _folderService;
 
     public BarcodeResultViewModel(FolderService folderService)
     {
         _folderService = folderService;
+    }
+
+    partial void OnBarcodeValueChanged(string value)
+    {
+        OnPropertyChanged(nameof(IsWebUrl));
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -50,6 +58,15 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
             Format = formatValue;
             OnPropertyChanged(nameof(DisplayName));
         }
+    }
+
+    [RelayCommand]
+    private async Task OpenWebUrl()
+    {
+        if (!IsWebUrl)
+            return;
+
+        await Launcher.OpenAsync(BarcodeValue);
     }
 
     /// <summary>

@@ -1,4 +1,6 @@
-﻿using BarcodeList.Tool;
+﻿using BarcodeList.Models;
+using BarcodeList.Services;
+using BarcodeList.Tool;
 using BarcodeList.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -12,10 +14,15 @@ namespace BarcodeList.ViewModels
     public partial class BarcodeReaderViewModel : ObservableObject
     {
 
-
-
         [ObservableProperty]
         private bool isDetecting = true;
+
+        private readonly DatabaseService _databaseService;
+        public BarcodeReaderViewModel(DatabaseService databaseService)
+        {
+            _databaseService = databaseService;
+        }
+
         [RelayCommand]
         private async Task BarcodeDetected(BarcodeDetectionEventArgs e)
         {
@@ -31,11 +38,12 @@ namespace BarcodeList.ViewModels
 
             //MetaData内で"]C1"となっているのでGS1-128と判定はできているのでAIコードの認識ができる。
             //var metaData = result.Metadata;
-            
-            if (IsWebUrl(result.Value))
+
+            if (Common.IsWebUrl(result.Value))
             {
                 //webページだったらアクセスする
-                await NormalBarcodeOperation(result, IsWebUrl(result.Value));
+                await SaveToHistoryAsync(result, isGs1: false);
+                await NormalBarcodeOperation(result, Common.IsWebUrl(result.Value));
             }
             else
             {
@@ -43,11 +51,13 @@ namespace BarcodeList.ViewModels
                 var gs1 = Gs1Parser.Parse(result);
                 if (gs1 != null && gs1.IsGs1)
                 {
+                    await SaveToHistoryAsync(result, isGs1: true);
                     await Gs1BarcodeOperation(gs1, result);
                 }
                 else
                 {
-                    await NormalBarcodeOperation(result, IsWebUrl(result.Value));
+                    await SaveToHistoryAsync(result, isGs1: false);
+                    await NormalBarcodeOperation(result, Common.IsWebUrl(result.Value));
                 }
             }
             await Task.Delay(3000);
@@ -55,15 +65,20 @@ namespace BarcodeList.ViewModels
         }
 
         /// <summary>
-        /// 読み込んだテキストがURLかどうかを判定するヘルパーメソッド。
+        /// スキャンした結果を履歴(フォルダ未指定)に保存する。
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private static bool IsWebUrl(string value)
+        private async Task SaveToHistoryAsync(BarcodeResult result, bool isGs1)
         {
-            return Uri.TryCreate(value, UriKind.Absolute, out var uri)
-                   && (uri.Scheme == Uri.UriSchemeHttp
-                       || uri.Scheme == Uri.UriSchemeHttps);
+            var savedBarcode = new SavedBarcode
+            {
+                BarcodeValue = result.Value,
+                BarcodeType = result.Format.ToString(),
+                FolderId = 0,
+                IsScanned = true,
+                IsGs1 = isGs1,
+                CreatedAt = DateTime.Now,
+            };
+            await _databaseService.SaveBarcodeAsync(savedBarcode);
         }
 
         private async Task NormalBarcodeOperation(BarcodeResult result,bool isWebUrl)

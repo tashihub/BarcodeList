@@ -1,8 +1,11 @@
-﻿using BarcodeList.Tool;
+﻿using BarcodeList.Models;
+using BarcodeList.Services;
+using BarcodeList.Tool;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using ZXing.Net.Maui;
 
@@ -17,9 +20,24 @@ namespace BarcodeList.ViewModels
         [ObservableProperty]
         private bool isWebUrl;
 
+        [ObservableProperty]
+        private BarcodeFolder? selectedFolder;
+
+        [ObservableProperty]
+        private string name = "";
+
+        [ObservableProperty]
+        private ObservableCollection<BarcodeFolder> folders = new();
+
         public string BarcodeKindText => Gs1ParseResult?.IsGs1 == true ? "GS1バーコード" : "通常バーコード";
         public Color BarcodeKindColor => Gs1ParseResult?.IsGs1 == true ? Colors.MediumPurple : Colors.DodgerBlue;
         public string Gs1ReliabilityText => "簡易解析:正確な解析ではない場合があります。";
+
+        private readonly FolderService _folderService;
+        public ScannedDataViewModel(FolderService folderService)
+        {
+            _folderService = folderService;
+        }
 
         // --- GS1読み取り検証用の一時的なデバッグ表示。確認後に削除する ---
         public string RawValueDebugText => (Gs1ParseResult?.RawValue ?? "").Replace((char)29, '␟');
@@ -63,6 +81,61 @@ namespace BarcodeList.ViewModels
         {
             if(!IsWebUrl) { return;}
             await Launcher.OpenAsync(BarcodeResult.Value);
+        }
+
+        /// <summary>
+        /// 初期化処理。フォルダ一覧を取得してViewModelに設定する
+        /// </summary>
+        internal async Task InitializeAsync()
+        {
+            try
+            {
+                Folders = await _folderService.LoadFoldersAsync();
+                Name = Folders.Count > 0 ? Folders[0].Name : "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error occurred while initializing: {ex.Message}");
+            }
+        }
+
+        [RelayCommand]
+        private async Task CreateFolder()
+        {
+            var newFolder = await _folderService.CreateFolderAsync();
+            if (newFolder == null)
+            {
+                Console.WriteLine("フォルダの作成がキャンセルされました。");
+                return;
+            }
+            Folders.Add(newFolder);
+            SelectedFolder = newFolder;
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            if (SelectedFolder == null)
+            {
+                await Shell.Current.DisplayAlertAsync("フォルダ未選択", "保存するフォルダを選択してください。", "OK");
+                return;
+            }
+
+            bool success = await _folderService.SaveToFolderAsync(
+                BarcodeResult.Value,
+                BarcodeResult.Format,
+                SelectedFolder,
+                isGs1: Gs1ParseResult?.IsGs1 ?? false);
+
+            if (success)
+            {
+                await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlertAsync("保存失敗", "バーコードの保存に失敗しました。", "OK");
+                Console.WriteLine("Failed to save barcode.");
+            }
         }
     }
 }

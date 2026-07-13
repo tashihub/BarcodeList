@@ -31,6 +31,15 @@ namespace BarcodeList.Tool
             }
             return (10 - (sum % 10)) % 10;
         }
+
+        /// <summary>
+        /// 値がhttp(s)のURLかどうかを判定する。
+        /// </summary>
+        public static bool IsWebUrl(string value)
+        {
+            return Uri.TryCreate(value, UriKind.Absolute, out var uri)
+                   && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+        }
     }
 
     public enum BarcodeType
