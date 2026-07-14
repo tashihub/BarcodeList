@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary 
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings">
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
@@ -471,7 +472,7 @@
         TargetType="Button"
         x:Key="CreateButtonStyle">
 
-        <Setter Property="Text" Value="作成" />
+        <Setter Property="Text" Value="{x:Static strings:AppResources.Common_CreateButton}" />
         <Setter Property="HeightRequest" Value="52" />
         <Setter Property="CornerRadius" Value="16" />
         <Setter Property="FontAttributes" Value="Bold" />

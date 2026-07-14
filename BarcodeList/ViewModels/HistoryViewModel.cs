@@ -1,4 +1,5 @@
 ﻿using BarcodeList.Models;
+using BarcodeList.Resources.Strings;
 using BarcodeList.Services;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -44,10 +45,10 @@ namespace BarcodeList.ViewModels
         private async Task DeleteAll()
         {
             bool confirmed = await Shell.Current.DisplayAlertAsync(
-                "履歴を全削除",
-                "履歴をすべて削除します。よろしいですか?(フォルダに保存したバーコードは削除されません)",
-                "削除",
-                "キャンセル");
+                AppResources.History_DeleteAllConfirmTitle,
+                AppResources.History_DeleteAllConfirmMessage,
+                AppResources.Common_Delete,
+                AppResources.Common_Cancel);
 
             if (!confirmed)
             {

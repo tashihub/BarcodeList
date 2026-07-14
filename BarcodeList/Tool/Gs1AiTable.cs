@@ -1,3 +1,4 @@
+using BarcodeList.Resources.Strings;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -87,18 +88,18 @@ namespace BarcodeList.Tool
         {
             return ai switch
             {
-                "01" => "GTIN",
-                "10" => "ロット番号",
-                "11" => "製造日",
-                "15" => "賞味期限",
-                "17" => "有効期限",
-                "21" => "シリアル番号",
-                "30" => "数量",
-                "3100" => "重量kg 小数0桁",
-                "3101" => "重量kg 小数1桁",
-                "3102" => "重量kg 小数2桁",
-                "3103" => "重量kg 小数3桁",
-                _ => "不明なAI"
+                "01" => AppResources.AiName_01,
+                "10" => AppResources.AiName_10,
+                "11" => AppResources.AiName_11,
+                "15" => AppResources.AiName_15,
+                "17" => AppResources.AiName_17,
+                "21" => AppResources.AiName_21,
+                "30" => AppResources.AiName_30,
+                "3100" => AppResources.AiName_3100,
+                "3101" => AppResources.AiName_3101,
+                "3102" => AppResources.AiName_3102,
+                "3103" => AppResources.AiName_3103,
+                _ => AppResources.AiName_Unknown
             };
         }
 
@@ -131,12 +132,12 @@ namespace BarcodeList.Tool
         {
             return ai switch
             {
-                "01" => "14桁の数字(GTIN)",
-                "10" => "20文字以内",
-                "11" or "15" or "17" => "YYMMDD形式の6桁の数字",
-                "21" => "20文字以内",
-                "30" => "8桁の数字",
-                "3100" or "3101" or "3102" or "3103" => "6桁の数字",
+                "01" => AppResources.AiHint_01,
+                "10" => AppResources.AiHint_TextMax20,
+                "11" or "15" or "17" => AppResources.AiHint_Date,
+                "21" => AppResources.AiHint_TextMax20,
+                "30" => AppResources.AiHint_30,
+                "3100" or "3101" or "3102" or "3103" => AppResources.AiHint_Weight,
                 _ => ""
             };
         }
@@ -147,25 +148,25 @@ namespace BarcodeList.Tool
         public static string ValidateValue(string ai, string value)
         {
             if (string.IsNullOrWhiteSpace(value))
-                return "値を入力してください";
+                return AppResources.AiValidate_EnterValue;
 
             switch (ai)
             {
                 case "01":
                     if (value.Length != 14 || !value.All(char.IsDigit))
-                        return "GTIN(AI:01)は14桁の数字で入力してください";
+                        return AppResources.AiValidate_01;
                     break;
 
                 case "11":
                 case "15":
                 case "17":
                     if (value.Length != 6 || !value.All(char.IsDigit) || !IsValidYyMmDd(value))
-                        return $"{GetAiName(ai)}(AI:{ai})はYYMMDD形式の6桁の数字で入力してください";
+                        return string.Format(AppResources.AiValidate_DateFormat, GetAiName(ai), ai);
                     break;
 
                 case "30":
                     if (value.Length != 8 || !value.All(char.IsDigit))
-                        return "数量(AI:30)は8桁の数字で入力してください";
+                        return AppResources.AiValidate_30;
                     break;
 
                 case "3100":
@@ -173,13 +174,13 @@ namespace BarcodeList.Tool
                 case "3102":
                 case "3103":
                     if (value.Length != 6 || !value.All(char.IsDigit))
-                        return $"{GetAiName(ai)}(AI:{ai})は6桁の数字で入力してください";
+                        return string.Format(AppResources.AiValidate_Weight, GetAiName(ai), ai);
                     break;
 
                 case "10":
                 case "21":
                     if (value.Length > 20)
-                        return $"{GetAiName(ai)}(AI:{ai})は20文字以内で入力してください";
+                        return string.Format(AppResources.AiValidate_MaxLength20, GetAiName(ai), ai);
                     break;
             }
 

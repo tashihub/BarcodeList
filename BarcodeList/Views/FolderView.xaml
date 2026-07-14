@@ -4,17 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
     Padding="20"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="新規フォルダ" IconImageSource="folder_add.png" Command="{Binding CreateFolderCommand}" />
+        <ToolbarItem Text="{x:Static strings:AppResources.Folder_NewFolderToolbar}" IconImageSource="folder_add.png" Command="{Binding CreateFolderCommand}" />
     </ContentPage.ToolbarItems>
 
     <CollectionView
         ItemsSource="{Binding Folders}"
         SelectionMode="None"
-        EmptyView="フォルダがありません">
+        EmptyView="{x:Static strings:AppResources.Folder_EmptyView}">
 
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
@@ -22,7 +23,7 @@
 
         <CollectionView.Header>
             <Label
-                Text="保存したバーコードをフォルダ別に表示します"
+                Text="{x:Static strings:AppResources.Folder_Description}"
                 FontAttributes="Bold"
                 FontSize="Medium"
                 TextColor="Gray"
@@ -36,7 +37,7 @@
                     <SwipeView.RightItems>
                         <SwipeItems Mode="Reveal">
                             <SwipeItem
-                    Text="削除"
+                    Text="{x:Static strings:AppResources.Common_Delete}"
                     BackgroundColor="#E53935"
                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteFolderCommand}"
                     CommandParameter="{Binding .}" />

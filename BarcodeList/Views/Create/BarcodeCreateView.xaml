@@ -3,6 +3,7 @@
     x:Class="BarcodeList.Views.Create.BarcodeCreateView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
     Title="{Binding Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
@@ -18,7 +19,7 @@
                 <VerticalStackLayout Spacing="12">
 
                     <Label
-                        Text="種類"
+                        Text="{x:Static strings:AppResources.Create_TypeLabel}"
                         FontSize="13"
                         TextColor="Gray" />
 
@@ -34,7 +35,7 @@
                 <VerticalStackLayout Spacing="12">
 
                     <Label
-                        Text="値"
+                        Text="{x:Static strings:AppResources.Create_ValueLabel}"
                         FontSize="13"
                         TextColor="Gray" />
 

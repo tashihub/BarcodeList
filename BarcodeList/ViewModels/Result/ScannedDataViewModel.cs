@@ -1,4 +1,5 @@
 ﻿using BarcodeList.Models;
+using BarcodeList.Resources.Strings;
 using BarcodeList.Services;
 using BarcodeList.Tool;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -29,9 +30,9 @@ namespace BarcodeList.ViewModels
         [ObservableProperty]
         private ObservableCollection<BarcodeFolder> folders = new();
 
-        public string BarcodeKindText => Gs1ParseResult?.IsGs1 == true ? "GS1バーコード" : "通常バーコード";
+        public string BarcodeKindText => Gs1ParseResult?.IsGs1 == true ? AppResources.Scan_KindGs1 : AppResources.Scan_KindNormal;
         public Color BarcodeKindColor => Gs1ParseResult?.IsGs1 == true ? Colors.MediumPurple : Colors.DodgerBlue;
-        public string Gs1ReliabilityText => "簡易解析:正確な解析ではない場合があります。";
+        public string Gs1ReliabilityText => AppResources.Scan_Gs1ReliabilityText;
 
         private readonly FolderService _folderService;
         public ScannedDataViewModel(FolderService folderService)
@@ -117,7 +118,7 @@ namespace BarcodeList.ViewModels
         {
             if (SelectedFolder == null)
             {
-                await Shell.Current.DisplayAlertAsync("フォルダ未選択", "保存するフォルダを選択してください。", "OK");
+                await Shell.Current.DisplayAlertAsync(AppResources.Common_FolderNotSelectedTitle, AppResources.Common_FolderNotSelectedMessage, AppResources.Common_OK);
                 return;
             }
 
@@ -129,11 +130,11 @@ namespace BarcodeList.ViewModels
 
             if (success)
             {
-                await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");
+                await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveSuccessTitle, string.Format(AppResources.Common_SaveSuccessMessage, SelectedFolder.Name), AppResources.Common_OK);
             }
             else
             {
-                await Shell.Current.DisplayAlertAsync("保存失敗", "バーコードの保存に失敗しました。", "OK");
+                await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveFailureTitle, AppResources.Common_SaveFailureMessage, AppResources.Common_OK);
                 Console.WriteLine("Failed to save barcode.");
             }
         }

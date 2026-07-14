@@ -1,3 +1,4 @@
+using BarcodeList.Resources.Strings;
 using BarcodeList.Tool;
 using ZXing.Net.Maui;
 
@@ -17,9 +18,9 @@ namespace BarcodeList.Services.CreateServices
         {
             new(
                 Format: BarcodeFormat.QrCode,
-                DisplayName: "QRコード",
-                Placeholder: "例：https://example.com",
-                FormatHint: "任意の文字列",
+                DisplayName: AppResources.Format_QrCode_Name,
+                Placeholder: AppResources.Format_QrCode_Placeholder,
+                FormatHint: AppResources.Format_FreeText_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
@@ -27,9 +28,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Code128,
-                DisplayName: "Code128",
-                Placeholder: "例：ABC123",
-                FormatHint: "ASCII文字(日本語不可)",
+                DisplayName: AppResources.Format_Code128_Name,
+                Placeholder: AppResources.Format_AlphaNumPlaceholder,
+                FormatHint: AppResources.Format_AsciiOnly_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
@@ -37,9 +38,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Code39,
-                DisplayName: "Code39",
-                Placeholder: "例：ABC-123",
-                FormatHint: "英数字(大文字)と - . スペース $ / + %",
+                DisplayName: AppResources.Format_Code39_Name,
+                Placeholder: AppResources.Format_Code39_Placeholder,
+                FormatHint: AppResources.Format_Code39_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v.ToUpperInvariant(),
@@ -47,9 +48,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Ean13,
-                DisplayName: "EAN-13(JAN)",
-                Placeholder: "例：490123456789",
-                FormatHint: "12桁の数字(チェックデジットは自動計算)",
+                DisplayName: AppResources.Format_Ean13_Name,
+                Placeholder: AppResources.Format_Ean13_Placeholder,
+                FormatHint: AppResources.Format_Ean13_Hint,
                 NumericKeyboard: true,
                 MaxLength: 12,
                 Normalize: v => v,
@@ -58,9 +59,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Ean8,
-                DisplayName: "EAN-8",
-                Placeholder: "例：4901234",
-                FormatHint: "7桁の数字(チェックデジットは自動計算)",
+                DisplayName: AppResources.Format_Ean8_Name,
+                Placeholder: AppResources.Format_Ean8_Placeholder,
+                FormatHint: AppResources.Format_Ean8_Hint,
                 NumericKeyboard: true,
                 MaxLength: 7,
                 Normalize: v => v,
@@ -69,9 +70,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.UpcA,
-                DisplayName: "UPC-A",
-                Placeholder: "例：03600029145",
-                FormatHint: "11桁の数字(チェックデジットは自動計算)",
+                DisplayName: AppResources.Format_UpcA_Name,
+                Placeholder: AppResources.Format_UpcA_Placeholder,
+                FormatHint: AppResources.Format_UpcA_Hint,
                 NumericKeyboard: true,
                 MaxLength: 11,
                 Normalize: v => v,
@@ -80,9 +81,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Itf,
-                DisplayName: "ITF",
-                Placeholder: "例：12345678",
-                FormatHint: "偶数桁の数字",
+                DisplayName: AppResources.Format_Itf_Name,
+                Placeholder: AppResources.Format_Itf_Placeholder,
+                FormatHint: AppResources.Format_Itf_Hint,
                 NumericKeyboard: true,
                 MaxLength: 0,
                 Normalize: v => v,
@@ -90,9 +91,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Codabar,
-                DisplayName: "Codabar",
-                Placeholder: "例：A123456A",
-                FormatHint: "数字と - $ : / . + 、前後にA〜Dのスタート/ストップ文字(省略可)",
+                DisplayName: AppResources.Format_Codabar_Name,
+                Placeholder: AppResources.Format_Codabar_Placeholder,
+                FormatHint: AppResources.Format_Codabar_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v.ToUpperInvariant(),
@@ -100,9 +101,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Code93,
-                DisplayName: "Code93",
-                Placeholder: "例：ABC123",
-                FormatHint: "ASCII文字(日本語不可)",
+                DisplayName: AppResources.Format_Code93_Name,
+                Placeholder: AppResources.Format_AlphaNumPlaceholder,
+                FormatHint: AppResources.Format_AsciiOnly_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
@@ -110,9 +111,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.DataMatrix,
-                DisplayName: "Data Matrix",
-                Placeholder: "例：任意のテキスト",
-                FormatHint: "任意の文字列",
+                DisplayName: AppResources.Format_DataMatrix_Name,
+                Placeholder: AppResources.Format_DataMatrix_Placeholder,
+                FormatHint: AppResources.Format_FreeText_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
@@ -120,9 +121,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Pdf417,
-                DisplayName: "PDF417",
-                Placeholder: "例：任意のテキスト",
-                FormatHint: "任意の文字列",
+                DisplayName: AppResources.Format_Pdf417_Name,
+                Placeholder: AppResources.Format_DataMatrix_Placeholder,
+                FormatHint: AppResources.Format_FreeText_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
@@ -130,9 +131,9 @@ namespace BarcodeList.Services.CreateServices
 
             new(
                 Format: BarcodeFormat.Aztec,
-                DisplayName: "Aztec",
-                Placeholder: "例：任意のテキスト",
-                FormatHint: "任意の文字列",
+                DisplayName: AppResources.Format_Aztec_Name,
+                Placeholder: AppResources.Format_DataMatrix_Placeholder,
+                FormatHint: AppResources.Format_FreeText_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
@@ -154,37 +155,37 @@ namespace BarcodeList.Services.CreateServices
 
         private static string ValidateAsciiOnly(string value)
         {
-            return Common.IsAsciiOnly(value) ? "" : "日本語は使用できません。QRコードを使用してください。";
+            return Common.IsAsciiOnly(value) ? "" : AppResources.FormatValidate_NonAscii;
         }
 
         private static string ValidateCode39(string value)
         {
             return value.All(c => Code39AllowedChars.Contains(c))
                 ? ""
-                : "Code39では大文字英数字と - . スペース $ / + % のみ使用できます。";
+                : AppResources.FormatValidate_Code39;
         }
 
         private static string ValidateCodabar(string value)
         {
             return value.All(c => CodabarAllowedChars.Contains(c))
                 ? ""
-                : "Codabarでは数字と - $ : / . + 、A〜Dのみ使用できます。";
+                : AppResources.FormatValidate_Codabar;
         }
 
         private static string ValidateItf(string value)
         {
             if (!value.All(char.IsDigit))
-                return "ITFでは数字のみ使用できます。";
+                return AppResources.FormatValidate_ItfDigitsOnly;
 
-            return value.Length % 2 == 0 ? "" : "ITFは偶数桁で入力してください。";
+            return value.Length % 2 == 0 ? "" : AppResources.FormatValidate_ItfEvenLength;
         }
 
         private static string ValidateNumericLength(string value, int length, string formatName)
         {
             if (!value.All(char.IsDigit))
-                return $"{formatName}は数字のみ使用できます。";
+                return string.Format(AppResources.FormatValidate_NumericOnly, formatName);
 
-            return value.Length == length ? "" : $"{formatName}は{length}桁(チェックデジットを除く)で入力してください。";
+            return value.Length == length ? "" : string.Format(AppResources.FormatValidate_LengthMismatch, formatName, length);
         }
     }
 }

@@ -4,14 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:tool="clr-namespace:BarcodeList.Tool"
-    Title="GS1-128結果"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    Title="{x:Static strings:AppResources.Gs1Result_Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">
 
             <Label
-                Text="GS1-128結果"
+                Text="{x:Static strings:AppResources.Gs1Result_Title}"
                 FontSize="28"
                 FontAttributes="Bold" />
 
@@ -19,7 +20,7 @@
             <Border Style="{StaticResource CardResultBorderStyle}">
                 <VerticalStackLayout Spacing="16">
                     <Label
-                        Text="プレビュー"
+                        Text="{x:Static strings:AppResources.Result_Preview}"
                         FontSize="18"
                         FontAttributes="Bold"
                         HorizontalOptions="Center" />
@@ -39,7 +40,7 @@
                 <VerticalStackLayout Spacing="14">
 
                     <Label
-                        Text="AIコード"
+                        Text="{x:Static strings:AppResources.Gs1Result_AiCodeTitle}"
                         FontSize="22"
                         FontAttributes="Bold" />
 
@@ -79,7 +80,7 @@
             <Border Style="{StaticResource CardResultBorderStyle}">
                 <VerticalStackLayout Spacing="8">
                     <Label
-                        Text="生データ"
+                        Text="{x:Static strings:AppResources.Result_RawData}"
                         FontSize="13"
                         TextColor="Gray" />
 
@@ -90,7 +91,7 @@
                         LineBreakMode="CharacterWrap" />
 
                     <Label
-                        Text="形式：GS1-128 / Code128"
+                        Text="{x:Static strings:AppResources.Gs1Result_FormatLabel}"
                         FontSize="12"
                         TextColor="Gray" />
                 </VerticalStackLayout>
@@ -101,18 +102,18 @@
 
                 <VerticalStackLayout Spacing="12">
                     <Label
-                        Text="保存先フォルダ"
+                        Text="{x:Static strings:AppResources.Result_SaveFolderLabel}"
                         FontSize="16"
                         FontAttributes="Bold" />
 
                     <Picker
-                        Title="フォルダを選択"
+                        Title="{x:Static strings:AppResources.Common_SelectFolderPickerTitle}"
                         ItemsSource="{Binding Folders}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedItem="{Binding SelectedFolder}" />
 
                     <Button
-                        Text="＋ 新しいフォルダを作成"
+                        Text="{x:Static strings:AppResources.Common_AddNewFolderButton}"
                         Command="{Binding CreateFolderCommand}"
                         BackgroundColor="Transparent"
                         TextColor="#4F46E5" />
@@ -120,7 +121,7 @@
             </Border>
 
             <Button
-                Text="このGS1-128を保存"
+                Text="{x:Static strings:AppResources.Gs1Result_SaveButton}"
                 Command="{Binding SaveCommand}"
                 Style="{StaticResource SaveButtonStyle}" />
 

@@ -3,7 +3,8 @@
     x:Class="BarcodeList.Views.Details.FolderDetailView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="フォルダ詳細"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    Title="{x:Static strings:AppResources.FolderDetail_Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
 
@@ -16,7 +17,7 @@
                 FontAttributes="Bold" />
 
             <Label
-                Text="作成・フォルダバーコード一覧"
+                Text="{x:Static strings:AppResources.FolderDetail_Description}"
                 FontSize="13"
                 TextColor="Gray" />
         </VerticalStackLayout>
@@ -25,7 +26,7 @@
             Grid.Row="1"
             ItemsSource="{Binding Barcodes}"
             SelectionMode="None"
-            EmptyView="バーコードがありません">
+            EmptyView="{x:Static strings:AppResources.FolderDetail_EmptyView}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -35,7 +36,7 @@
                         <SwipeView.RightItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItem
-                        Text="削除"
+                        Text="{x:Static strings:AppResources.Common_Delete}"
                         BackgroundColor="#E53935"
                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteBarcodeCommand}"
                         CommandParameter="{Binding .}" />

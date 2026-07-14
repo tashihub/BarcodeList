@@ -3,17 +3,18 @@
     x:Class="BarcodeList.Views.HistoryView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
     Padding="20"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="全削除" IconImageSource="trash.png" Command="{Binding DeleteAllCommand}" />
+        <ToolbarItem Text="{x:Static strings:AppResources.History_DeleteAllToolbar}" IconImageSource="trash.png" Command="{Binding DeleteAllCommand}" />
     </ContentPage.ToolbarItems>
 
     <CollectionView
         ItemsSource="{Binding Histories}"
         SelectionMode="None"
-        EmptyView="履歴がありません">
+        EmptyView="{x:Static strings:AppResources.History_EmptyView}">
 
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
@@ -22,7 +23,7 @@
         <CollectionView.Header>
             <Label
                 FontAttributes="Bold"
-                Text="作成・スキャンしたバーコード一覧"
+                Text="{x:Static strings:AppResources.History_Description}"
                 FontSize="Medium"
                 TextColor="Gray"
                 Margin="0,0,0,18" />
@@ -35,7 +36,7 @@
                     <SwipeView.RightItems>
                         <SwipeItems Mode="Reveal">
                             <SwipeItem
-                                Text="削除"
+                                Text="{x:Static strings:AppResources.Common_Delete}"
                                 BackgroundColor="#E53935"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
                                 CommandParameter="{Binding .}" />

@@ -1,4 +1,5 @@
 using BarcodeList.Models;
+using BarcodeList.Resources.Strings;
 using BarcodeList.Services;
 using BarcodeList.Services.CreateServices;
 using BarcodeList.Views.Result;
@@ -48,7 +49,7 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
     public string FormatHint => SelectedFormat?.FormatHint ?? "";
     public Keyboard Keyboard => SelectedFormat?.NumericKeyboard == true ? Keyboard.Numeric : Keyboard.Default;
     public int EntryMaxLength => SelectedFormat?.MaxLength > 0 ? SelectedFormat.MaxLength : int.MaxValue;
-    public string Title => SelectedFormat != null ? $"{SelectedFormat.DisplayName}作成" : "バーコード作成";
+    public string Title => SelectedFormat != null ? string.Format(AppResources.Create_TitleFormat, SelectedFormat.DisplayName) : AppResources.Create_DefaultTitle;
 
     private readonly DatabaseService _databaseService;
 
@@ -84,13 +85,13 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
     {
         if (SelectedFormat == null)
         {
-            ErrorMessage = "フォーマットを選択してください";
+            ErrorMessage = AppResources.Create_SelectFormatError;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(InputValue))
         {
-            ErrorMessage = "値を入力してください";
+            ErrorMessage = AppResources.Create_EnterValueError;
             return;
         }
 

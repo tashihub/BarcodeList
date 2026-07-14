@@ -1,3 +1,4 @@
+using BarcodeList.Resources.Strings;
 using BarcodeList.Services.CreateServices;
 using BarcodeList.Tool;
 using BarcodeList.Views.Result;
@@ -118,7 +119,7 @@ public partial class Gs1128CreateViewModel : ObservableObject
     {
         if (Elements.Count == 0)
         {
-            ErrorMessage = "AI要素を1つ以上追加してください";
+            ErrorMessage = AppResources.Gs1Create_NoElementsError;
             return;
         }
 

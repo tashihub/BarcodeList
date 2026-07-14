@@ -4,19 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:tool="clr-namespace:BarcodeList.Tool"
-    Title="GS1-128作成"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    Title="{x:Static strings:AppResources.Gs1Create_Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">
 
             <Label
-                Text="GS1-128作成"
+                Text="{x:Static strings:AppResources.Gs1Create_Title}"
                 FontSize="28"
                 FontAttributes="Bold" />
 
             <Label
-                Text="AIコード(2〜4桁)と値を1つずつ追加してください。どのAIコードでも追加できます。"
+                Text="{x:Static strings:AppResources.Gs1Create_Description}"
                 FontSize="13"
                 TextColor="Gray" />
 
@@ -24,17 +25,17 @@
                 <VerticalStackLayout Spacing="12">
 
                     <Label
-                        Text="AI要素を追加"
+                        Text="{x:Static strings:AppResources.Gs1Create_AddSectionTitle}"
                         FontSize="16"
                         FontAttributes="Bold" />
 
                     <Label
-                        Text="AIコード"
+                        Text="{x:Static strings:AppResources.Gs1Create_AiCodeLabel}"
                         FontSize="13"
                         TextColor="Gray" />
 
                     <Entry
-                        Placeholder="例：01"
+                        Placeholder="{x:Static strings:AppResources.Gs1Create_AiCodePlaceholder}"
                         Keyboard="Numeric"
                         MaxLength="4"
                         Text="{Binding NewAiCode}" />
@@ -45,12 +46,12 @@
                         TextColor="#4F46E5" />
 
                     <Label
-                        Text="値"
+                        Text="{x:Static strings:AppResources.Create_ValueLabel}"
                         FontSize="13"
                         TextColor="Gray" />
 
                     <Entry
-                        Placeholder="例：14971032310685"
+                        Placeholder="{x:Static strings:AppResources.Gs1Create_ValuePlaceholder}"
                         Keyboard="{Binding NewAiValueKeyboard}"
                         MaxLength="{Binding NewAiValueMaxLength}"
                         Text="{Binding NewAiValue}" />
@@ -62,7 +63,7 @@
                         IsVisible="{Binding HasError}" />
 
                     <Button
-                        Text="＋ リストに追加"
+                        Text="{x:Static strings:AppResources.Gs1Create_AddButton}"
                         Command="{Binding AddElementCommand}"
                         BackgroundColor="Transparent"
                         TextColor="#4F46E5" />
@@ -74,7 +75,7 @@
                 <VerticalStackLayout Spacing="10">
 
                     <Label
-                        Text="追加したAI要素"
+                        Text="{x:Static strings:AppResources.Gs1Create_ElementsListTitle}"
                         FontSize="16"
                         FontAttributes="Bold" />
 
@@ -99,7 +100,7 @@
 
                                     <Button
                                         Grid.Column="2"
-                                        Text="削除"
+                                        Text="{x:Static strings:AppResources.Common_Delete}"
                                         FontSize="12"
                                         Padding="10,4"
                                         BackgroundColor="Transparent"
@@ -123,12 +124,12 @@
                 <VerticalStackLayout Spacing="8">
 
                     <Label
-                        Text="対応AIコード一覧"
+                        Text="{x:Static strings:AppResources.Gs1Create_ReferenceTitle}"
                         FontSize="16"
                         FontAttributes="Bold" />
 
                     <Label
-                        Text="下記以外のAIコードも作成はできますが、このアプリで読み返したときの内訳表示は保証されません。"
+                        Text="{x:Static strings:AppResources.Gs1Create_ReferenceDescription}"
                         FontSize="12"
                         TextColor="Gray" />
 

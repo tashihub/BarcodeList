@@ -1,4 +1,5 @@
 using BarcodeList.Models;
+using BarcodeList.Resources.Strings;
 using BarcodeList.Tool;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,10 @@ namespace BarcodeList.Services.CreateServices
         public string ValidateAiCode(string aiCode)
         {
             if (string.IsNullOrWhiteSpace(aiCode))
-                return "AIコードを入力してください";
+                return AppResources.AiCode_EnterCode;
 
             if (aiCode.Length < 2 || aiCode.Length > 4 || !aiCode.All(char.IsDigit))
-                return "AIコードは2〜4桁の数字で入力してください";
+                return AppResources.AiCode_InvalidFormat;
 
             return "";
         }

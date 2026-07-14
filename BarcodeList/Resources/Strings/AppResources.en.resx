@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!--
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format
+		that is mostly human readable. The generation and parsing of the
+		various data types are done through the TypeConverter classes
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a
+		type or mimetype. Type corresponds to a .NET class that support
+		text/value conversion through the TypeConverter architecture.
+		Classes that don't support this are serialized and stored with the
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the
+		ResXResourceReader how to depersist the object. This is currently not
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format
+		that the ResXResourceWriter will generate, however the reader can
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!-- Common -->
+	<data name="Common_OK" xml:space="preserve"><value>OK</value></data>
+	<data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+	<data name="Common_Delete" xml:space="preserve"><value>Delete</value></data>
+	<data name="Common_CreateButton" xml:space="preserve"><value>Create</value></data>
+	<data name="Common_FolderNotSelectedTitle" xml:space="preserve"><value>No Folder Selected</value></data>
+	<data name="Common_FolderNotSelectedMessage" xml:space="preserve"><value>Please select a folder to save to.</value></data>
+	<data name="Common_SaveSuccessTitle" xml:space="preserve"><value>Saved</value></data>
+	<data name="Common_SaveSuccessMessage" xml:space="preserve"><value>Saved the barcode to the folder "{0}".</value></data>
+	<data name="Common_SaveFailureTitle" xml:space="preserve"><value>Save Failed</value></data>
+	<data name="Common_SaveFailureMessage" xml:space="preserve"><value>Failed to save the barcode.</value></data>
+	<data name="Common_SelectFolderPickerTitle" xml:space="preserve"><value>Select Folder</value></data>
+	<data name="Common_AddNewFolderButton" xml:space="preserve"><value>+ Create New Folder</value></data>
+	<data name="Common_FolderCreatePromptTitle" xml:space="preserve"><value>Create Folder</value></data>
+	<data name="Common_FolderCreatePromptMessage" xml:space="preserve"><value>Please enter a folder name</value></data>
+
+	<!-- Tabs -->
+	<data name="Tab_Create" xml:space="preserve"><value>Create</value></data>
+	<data name="Tab_Scan" xml:space="preserve"><value>Scan</value></data>
+	<data name="Tab_Folder" xml:space="preserve"><value>Folder</value></data>
+	<data name="Tab_History" xml:space="preserve"><value>History</value></data>
+
+	<!-- Folder -->
+	<data name="Folder_Description" xml:space="preserve"><value>Shows saved barcodes grouped by folder</value></data>
+	<data name="Folder_NewFolderToolbar" xml:space="preserve"><value>New Folder</value></data>
+	<data name="Folder_EmptyView" xml:space="preserve"><value>No folders</value></data>
+
+	<!-- FolderDetail -->
+	<data name="FolderDetail_Title" xml:space="preserve"><value>Folder Details</value></data>
+	<data name="FolderDetail_Description" xml:space="preserve"><value>Barcodes in this folder</value></data>
+	<data name="FolderDetail_EmptyView" xml:space="preserve"><value>No barcodes</value></data>
+
+	<!-- History -->
+	<data name="History_Description" xml:space="preserve"><value>List of created and scanned barcodes</value></data>
+	<data name="History_DeleteAllToolbar" xml:space="preserve"><value>Delete All</value></data>
+	<data name="History_EmptyView" xml:space="preserve"><value>No history</value></data>
+	<data name="History_DeleteAllConfirmTitle" xml:space="preserve"><value>Delete All History</value></data>
+	<data name="History_DeleteAllConfirmMessage" xml:space="preserve"><value>This will delete all history. Are you sure? (Barcodes saved to folders will not be deleted)</value></data>
+
+	<!-- CreateMenu -->
+	<data name="CreateMenu_Description" xml:space="preserve"><value>Select the type of barcode you want to create</value></data>
+	<data name="CreateMenu_Gs1Title" xml:space="preserve"><value>GS1-128</value></data>
+	<data name="CreateMenu_Gs1Subtitle" xml:space="preserve"><value>For AI codes such as GTIN, lot number, and expiration date</value></data>
+
+	<!-- Scan -->
+	<data name="Scan_HeaderTitle" xml:space="preserve"><value>Barcode Scan</value></data>
+	<data name="Scan_ResultTitle" xml:space="preserve"><value>Scan Result</value></data>
+	<data name="Scan_RawDataLabel" xml:space="preserve"><value>Raw Data</value></data>
+	<data name="Scan_BarcodeTypeLabel" xml:space="preserve"><value>Barcode Type</value></data>
+	<data name="Scan_KindGs1" xml:space="preserve"><value>GS1 Barcode</value></data>
+	<data name="Scan_KindNormal" xml:space="preserve"><value>Standard Barcode</value></data>
+	<data name="Scan_Gs1ReliabilityText" xml:space="preserve"><value>Simplified parsing: may not be fully accurate.</value></data>
+	<data name="Scan_AiAnalysisTitle" xml:space="preserve"><value>AI Code Analysis</value></data>
+	<data name="Scan_SaveButton" xml:space="preserve"><value>Save This Scan Result</value></data>
+
+	<!-- Create (generic) -->
+	<data name="Create_TypeLabel" xml:space="preserve"><value>Type</value></data>
+	<data name="Create_ValueLabel" xml:space="preserve"><value>Value</value></data>
+	<data name="Create_SelectFormatError" xml:space="preserve"><value>Please select a format</value></data>
+	<data name="Create_EnterValueError" xml:space="preserve"><value>Please enter a value</value></data>
+	<data name="Create_DefaultTitle" xml:space="preserve"><value>Create Barcode</value></data>
+	<data name="Create_TitleFormat" xml:space="preserve"><value>Create {0}</value></data>
+
+	<!-- Result (generic) -->
+	<data name="Result_DefaultTitle" xml:space="preserve"><value>Barcode Result</value></data>
+	<data name="Result_TitleFormat" xml:space="preserve"><value>{0} Result</value></data>
+	<data name="Result_Preview" xml:space="preserve"><value>Preview</value></data>
+	<data name="Result_RawData" xml:space="preserve"><value>Raw Data</value></data>
+	<data name="Result_FormatLabelFormat" xml:space="preserve"><value>Format: {0}</value></data>
+	<data name="Result_SaveFolderLabel" xml:space="preserve"><value>Save to Folder</value></data>
+	<data name="Result_SaveButton" xml:space="preserve"><value>Save This Barcode</value></data>
+
+	<!-- Gs1Create -->
+	<data name="Gs1Create_Title" xml:space="preserve"><value>Create GS1-128</value></data>
+	<data name="Gs1Create_Description" xml:space="preserve"><value>Add an AI code (2-4 digits) and value one at a time. Any AI code can be added.</value></data>
+	<data name="Gs1Create_AddSectionTitle" xml:space="preserve"><value>Add AI Element</value></data>
+	<data name="Gs1Create_AiCodeLabel" xml:space="preserve"><value>AI Code</value></data>
+	<data name="Gs1Create_AiCodePlaceholder" xml:space="preserve"><value>e.g. 01</value></data>
+	<data name="Gs1Create_ValuePlaceholder" xml:space="preserve"><value>e.g. 14971032310685</value></data>
+	<data name="Gs1Create_AddButton" xml:space="preserve"><value>+ Add to List</value></data>
+	<data name="Gs1Create_ElementsListTitle" xml:space="preserve"><value>Added AI Elements</value></data>
+	<data name="Gs1Create_ReferenceTitle" xml:space="preserve"><value>Supported AI Codes</value></data>
+	<data name="Gs1Create_ReferenceDescription" xml:space="preserve"><value>AI codes other than those below can still be created, but this app cannot guarantee it can break them down again when read back.</value></data>
+	<data name="Gs1Create_NoElementsError" xml:space="preserve"><value>Please add at least one AI element</value></data>
+
+	<!-- Gs1Result -->
+	<data name="Gs1Result_Title" xml:space="preserve"><value>GS1-128 Result</value></data>
+	<data name="Gs1Result_AiCodeTitle" xml:space="preserve"><value>AI Code</value></data>
+	<data name="Gs1Result_FormatLabel" xml:space="preserve"><value>Format: GS1-128 / Code128</value></data>
+	<data name="Gs1Result_SaveButton" xml:space="preserve"><value>Save This GS1-128</value></data>
+
+	<!-- Gs1 AI table: names -->
+	<data name="AiName_01" xml:space="preserve"><value>GTIN</value></data>
+	<data name="AiName_10" xml:space="preserve"><value>Lot Number</value></data>
+	<data name="AiName_11" xml:space="preserve"><value>Production Date</value></data>
+	<data name="AiName_15" xml:space="preserve"><value>Best Before Date</value></data>
+	<data name="AiName_17" xml:space="preserve"><value>Expiration Date</value></data>
+	<data name="AiName_21" xml:space="preserve"><value>Serial Number</value></data>
+	<data name="AiName_30" xml:space="preserve"><value>Quantity</value></data>
+	<data name="AiName_3100" xml:space="preserve"><value>Weight kg (0 decimals)</value></data>
+	<data name="AiName_3101" xml:space="preserve"><value>Weight kg (1 decimal)</value></data>
+	<data name="AiName_3102" xml:space="preserve"><value>Weight kg (2 decimals)</value></data>
+	<data name="AiName_3103" xml:space="preserve"><value>Weight kg (3 decimals)</value></data>
+	<data name="AiName_Unknown" xml:space="preserve"><value>Unknown AI</value></data>
+
+	<!-- Gs1 AI table: hints -->
+	<data name="AiHint_01" xml:space="preserve"><value>14-digit number (GTIN)</value></data>
+	<data name="AiHint_TextMax20" xml:space="preserve"><value>Up to 20 characters</value></data>
+	<data name="AiHint_Date" xml:space="preserve"><value>6-digit number in YYMMDD format</value></data>
+	<data name="AiHint_30" xml:space="preserve"><value>8-digit number</value></data>
+	<data name="AiHint_Weight" xml:space="preserve"><value>6-digit number</value></data>
+
+	<!-- Gs1 AI table: validation -->
+	<data name="AiValidate_EnterValue" xml:space="preserve"><value>Please enter a value</value></data>
+	<data name="AiValidate_01" xml:space="preserve"><value>GTIN (AI:01) must be a 14-digit number</value></data>
+	<data name="AiValidate_DateFormat" xml:space="preserve"><value>{0} (AI:{1}) must be a 6-digit number in YYMMDD format</value></data>
+	<data name="AiValidate_30" xml:space="preserve"><value>Quantity (AI:30) must be an 8-digit number</value></data>
+	<data name="AiValidate_Weight" xml:space="preserve"><value>{0} (AI:{1}) must be a 6-digit number</value></data>
+	<data name="AiValidate_MaxLength20" xml:space="preserve"><value>{0} (AI:{1}) must be 20 characters or fewer</value></data>
+	<data name="AiCode_EnterCode" xml:space="preserve"><value>Please enter an AI code</value></data>
+	<data name="AiCode_InvalidFormat" xml:space="preserve"><value>AI code must be a 2-4 digit number</value></data>
+
+	<!-- BarcodeFormatCatalog: names / placeholders / hints -->
+	<data name="Format_QrCode_Name" xml:space="preserve"><value>QR Code</value></data>
+	<data name="Format_QrCode_Placeholder" xml:space="preserve"><value>e.g. https://example.com</value></data>
+	<data name="Format_FreeText_Hint" xml:space="preserve"><value>Any text</value></data>
+	<data name="Format_Code128_Name" xml:space="preserve"><value>Code128</value></data>
+	<data name="Format_AlphaNumPlaceholder" xml:space="preserve"><value>e.g. ABC123</value></data>
+	<data name="Format_AsciiOnly_Hint" xml:space="preserve"><value>ASCII characters (no Japanese)</value></data>
+	<data name="Format_Code39_Name" xml:space="preserve"><value>Code39</value></data>
+	<data name="Format_Code39_Placeholder" xml:space="preserve"><value>e.g. ABC-123</value></data>
+	<data name="Format_Code39_Hint" xml:space="preserve"><value>Uppercase letters/numbers and - . space $ / + %</value></data>
+	<data name="Format_Ean13_Name" xml:space="preserve"><value>EAN-13 (JAN)</value></data>
+	<data name="Format_Ean13_Placeholder" xml:space="preserve"><value>e.g. 490123456789</value></data>
+	<data name="Format_Ean13_Hint" xml:space="preserve"><value>12-digit number (check digit calculated automatically)</value></data>
+	<data name="Format_Ean8_Name" xml:space="preserve"><value>EAN-8</value></data>
+	<data name="Format_Ean8_Placeholder" xml:space="preserve"><value>e.g. 4901234</value></data>
+	<data name="Format_Ean8_Hint" xml:space="preserve"><value>7-digit number (check digit calculated automatically)</value></data>
+	<data name="Format_UpcA_Name" xml:space="preserve"><value>UPC-A</value></data>
+	<data name="Format_UpcA_Placeholder" xml:space="preserve"><value>e.g. 03600029145</value></data>
+	<data name="Format_UpcA_Hint" xml:space="preserve"><value>11-digit number (check digit calculated automatically)</value></data>
+	<data name="Format_Itf_Name" xml:space="preserve"><value>ITF</value></data>
+	<data name="Format_Itf_Placeholder" xml:space="preserve"><value>e.g. 12345678</value></data>
+	<data name="Format_Itf_Hint" xml:space="preserve"><value>Even number of digits</value></data>
+	<data name="Format_Codabar_Name" xml:space="preserve"><value>Codabar</value></data>
+	<data name="Format_Codabar_Placeholder" xml:space="preserve"><value>e.g. A123456A</value></data>
+	<data name="Format_Codabar_Hint" xml:space="preserve"><value>Digits and - $ : / . +, with optional A-D start/stop characters</value></data>
+	<data name="Format_Code93_Name" xml:space="preserve"><value>Code93</value></data>
+	<data name="Format_DataMatrix_Name" xml:space="preserve"><value>Data Matrix</value></data>
+	<data name="Format_DataMatrix_Placeholder" xml:space="preserve"><value>e.g. any text</value></data>
+	<data name="Format_Pdf417_Name" xml:space="preserve"><value>PDF417</value></data>
+	<data name="Format_Aztec_Name" xml:space="preserve"><value>Aztec</value></data>
+
+	<!-- BarcodeFormatCatalog: validation -->
+	<data name="FormatValidate_NonAscii" xml:space="preserve"><value>Japanese characters cannot be used. Please use a QR code.</value></data>
+	<data name="FormatValidate_Code39" xml:space="preserve"><value>Code39 only supports uppercase letters, numbers, and - . space $ / + %.</value></data>
+	<data name="FormatValidate_Codabar" xml:space="preserve"><value>Codabar only supports digits, - $ : / . +, and A-D.</value></data>
+	<data name="FormatValidate_ItfDigitsOnly" xml:space="preserve"><value>ITF only supports digits.</value></data>
+	<data name="FormatValidate_ItfEvenLength" xml:space="preserve"><value>ITF must have an even number of digits.</value></data>
+	<data name="FormatValidate_NumericOnly" xml:space="preserve"><value>{0} only supports digits.</value></data>
+	<data name="FormatValidate_LengthMismatch" xml:space="preserve"><value>{0} must be {1} digits (excluding the check digit).</value></data>
+</root>

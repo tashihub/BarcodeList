@@ -2,7 +2,8 @@
     x:Class="BarcodeList.Views.ScannedDataView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="スキャン結果"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    Title="{x:Static strings:AppResources.Scan_ResultTitle}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ScrollView>
@@ -10,7 +11,7 @@
 
             <!-- ヘッダー -->
             <Label
-                Text="スキャン結果"
+                Text="{x:Static strings:AppResources.Scan_ResultTitle}"
                 FontSize="28"
                 FontAttributes="Bold"
                 TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
@@ -40,7 +41,7 @@
                     <!-- 生データ -->
                     <VerticalStackLayout Spacing="6">
                         <Label
-                            Text="生データ"
+                            Text="{x:Static strings:AppResources.Scan_RawDataLabel}"
                             FontSize="13"
                             TextColor="Gray" />
 
@@ -72,7 +73,7 @@
                     <!-- BarcodeType -->
                     <VerticalStackLayout Spacing="6">
                         <Label
-                            Text="BarcodeType"
+                            Text="{x:Static strings:AppResources.Scan_BarcodeTypeLabel}"
                             FontSize="13"
                             TextColor="Gray" />
 
@@ -152,7 +153,7 @@
                 <VerticalStackLayout Spacing="14">
 
                     <Label
-                        Text="AIコード解析"
+                        Text="{x:Static strings:AppResources.Scan_AiAnalysisTitle}"
                         FontSize="22"
                         FontAttributes="Bold"
                         TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
@@ -213,18 +214,18 @@
             <Border Style="{StaticResource CardResultBorderStyle}">
                 <VerticalStackLayout Spacing="12">
                     <Label
-                             Text="保存先フォルダ"
+                             Text="{x:Static strings:AppResources.Result_SaveFolderLabel}"
                              FontSize="16"
                              FontAttributes="Bold" />
 
                     <Picker
-                            Title="フォルダを選択"
+                            Title="{x:Static strings:AppResources.Common_SelectFolderPickerTitle}"
                             ItemsSource="{Binding Folders}"
                             ItemDisplayBinding="{Binding Name}"
                             SelectedItem="{Binding SelectedFolder}" />
 
                     <Button
-                            Text="＋ 新しいフォルダを作成"
+                            Text="{x:Static strings:AppResources.Common_AddNewFolderButton}"
                             Command="{Binding CreateFolderCommand}"
                             BackgroundColor="Transparent"
                             TextColor="#4F46E5" />
@@ -232,7 +233,7 @@
             </Border>
 
             <Button
-                    Text="このスキャン結果を保存"
+                    Text="{x:Static strings:AppResources.Scan_SaveButton}"
                     Command="{Binding SaveCommand}"
                     Style="{StaticResource SaveButtonStyle}" />
         </VerticalStackLayout>

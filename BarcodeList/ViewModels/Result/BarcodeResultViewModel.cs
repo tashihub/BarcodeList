@@ -1,4 +1,5 @@
 using BarcodeList.Models;
+using BarcodeList.Resources.Strings;
 using BarcodeList.Services;
 using BarcodeList.Services.CreateServices;
 using BarcodeList.Tool;
@@ -103,18 +104,18 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
     {
         if (SelectedFolder == null)
         {
-            await Shell.Current.DisplayAlertAsync("フォルダ未選択", "保存するフォルダを選択してください。", "OK");
+            await Shell.Current.DisplayAlertAsync(AppResources.Common_FolderNotSelectedTitle, AppResources.Common_FolderNotSelectedMessage, AppResources.Common_OK);
             return;
         }
 
         bool success = await _folderService.SaveToFolderAsync(BarcodeValue, Format, SelectedFolder);
         if (success)
         {
-            await Shell.Current.DisplayAlertAsync("保存完了", $"バーコードをフォルダ「{SelectedFolder.Name}」に保存しました。", "OK");
+            await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveSuccessTitle, string.Format(AppResources.Common_SaveSuccessMessage, SelectedFolder.Name), AppResources.Common_OK);
         }
         else
         {
-            await Shell.Current.DisplayAlertAsync("保存失敗", "バーコードの保存に失敗しました。", "OK");
+            await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveFailureTitle, AppResources.Common_SaveFailureMessage, AppResources.Common_OK);
             Console.WriteLine("Failed to save barcode.");
         }
     }

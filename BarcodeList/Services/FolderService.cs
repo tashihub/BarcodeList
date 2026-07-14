@@ -1,4 +1,5 @@
 ﻿using BarcodeList.Models;
+using BarcodeList.Resources.Strings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,8 +21,8 @@ namespace BarcodeList.Services
         {
             // フォルダ名を入力するためのプロンプトを表示
             var folderName = await Shell.Current.DisplayPromptAsync(
-                "フォルダ作成",
-                "フォルダ名を入力してください");
+                AppResources.Common_FolderCreatePromptTitle,
+                AppResources.Common_FolderCreatePromptMessage);
 
             if (string.IsNullOrWhiteSpace(folderName)) 
             {
