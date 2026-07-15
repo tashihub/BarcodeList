@@ -11,4 +11,13 @@ public partial class BarcodeCreateView : ContentPage
         _viewModel = viewModel;
         BindingContext = _viewModel;
     }
+
+    /// <summary>
+    /// 入力欄にフォーカス(ソフトキーボード表示)が残ったまま作成コマンドで画面遷移すると、
+    /// 端末によってはクラッシュするため、遷移前に明示的にフォーカスを外す。
+    /// </summary>
+    private void OnCreateClicked(object sender, EventArgs e)
+    {
+        valueEntry.Unfocus();
+    }
 }

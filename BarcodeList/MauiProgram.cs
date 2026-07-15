@@ -1,5 +1,6 @@
 ﻿using BarcodeList.Services;
 using BarcodeList.Services.CreateServices;
+using BarcodeList.Tool;
 using BarcodeList.ViewModels;
 using BarcodeList.ViewModels.Create;
 using BarcodeList.ViewModels.Details;
@@ -16,6 +17,13 @@ namespace BarcodeList
     {
         public static MauiApp CreateMauiApp()
         {
+            RegisterGlobalExceptionLogging();
+
+            // ZXingのQRエンコーダーが漢字モードでShift_JISを使用するため、
+            // .NET標準では未登録のレガシーエンコーディングを利用可能にする。
+            // 未登録だと該当パターンの文字列でQRコード生成時にクラッシュする。
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -57,6 +65,30 @@ namespace BarcodeList
             builder.Services.AddSingleton<FolderService>();
             builder.Services.AddSingleton<Gs1128CreateService>();
             return builder.Build();
+        }
+
+        private static bool _globalExceptionLoggingRegistered;
+
+        /// <summary>
+        /// 未処理例外(クラッシュ)発生時に原因調査ができるよう、端末内のログファイルに記録する。
+        /// try/catchで拾えていない例外(ネイティブ由来のものを除く)を捕捉するための最終防衛ライン。
+        /// </summary>
+        private static void RegisterGlobalExceptionLogging()
+        {
+            if (_globalExceptionLoggingRegistered)
+                return;
+            _globalExceptionLoggingRegistered = true;
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                AppLogger.LogError("UnhandledException (IsTerminating=" + e.IsTerminating + ")", e.ExceptionObject as Exception);
+            };
+
+            TaskScheduler.UnobservedTaskException += (sender, e) =>
+            {
+                AppLogger.LogError("UnobservedTaskException", e.Exception);
+                e.SetObserved();
+            };
         }
     }
 }

@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:tool="clr-namespace:BarcodeList.Tool"
-    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings;assembly=BarcodeList.Core"
     Title="{x:Static strings:AppResources.Gs1Create_Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
@@ -35,6 +35,7 @@
                         TextColor="Gray" />
 
                     <Entry
+                        x:Name="aiCodeEntry"
                         Placeholder="{x:Static strings:AppResources.Gs1Create_AiCodePlaceholder}"
                         Keyboard="Numeric"
                         MaxLength="4"
@@ -51,6 +52,7 @@
                         TextColor="Gray" />
 
                     <Entry
+                        x:Name="aiValueEntry"
                         Placeholder="{x:Static strings:AppResources.Gs1Create_ValuePlaceholder}"
                         Keyboard="{Binding NewAiValueKeyboard}"
                         MaxLength="{Binding NewAiValueMaxLength}"
@@ -118,6 +120,7 @@
 
             <Button
                 Style="{StaticResource CreateButtonStyle}"
+                Clicked="OnCreateClicked"
                 Command="{Binding CreateCommand}" />
 
             <Border Style="{StaticResource CardBorderStyle}">

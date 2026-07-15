@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cs="clr-namespace:BarcodeList.Services.CreateServices"
-    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings;assembly=BarcodeList.Core"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ScrollView>

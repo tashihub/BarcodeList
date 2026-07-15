@@ -82,7 +82,7 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error occurred while initializing: {ex.Message}");
+            AppLogger.LogError("BarcodeResultViewModel.InitializeAsync failed", ex);
         }
     }
 
@@ -116,7 +116,7 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
         else
         {
             await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveFailureTitle, AppResources.Common_SaveFailureMessage, AppResources.Common_OK);
-            Console.WriteLine("Failed to save barcode.");
+            AppLogger.LogWarning("BarcodeResultViewModel.Save: SaveToFolderAsync returned false");
         }
     }
 }

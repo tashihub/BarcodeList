@@ -70,29 +70,22 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.0" />
 		<PackageReference Include="ZXing.Net.Maui" Version="0.8.2" />
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.8.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>AppResources.resx</DependentUpon>
-	  </Compile>
+		<ProjectReference Include="..\BarcodeList.Core\BarcodeList.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Views\BarcodeCreateMenuView.xaml.cs">
 	    <DependentUpon>BarcodeCreateMenuView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Create\Gs1128CreateView.xaml.cs">
 	    <DependentUpon>Gs1128CreateView.xaml</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Update="Resources\Strings\AppResources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>

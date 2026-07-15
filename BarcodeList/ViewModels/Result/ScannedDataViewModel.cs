@@ -96,7 +96,7 @@ namespace BarcodeList.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error occurred while initializing: {ex.Message}");
+                AppLogger.LogError("ScannedDataViewModel.InitializeAsync failed", ex);
             }
         }
 
@@ -135,7 +135,7 @@ namespace BarcodeList.ViewModels
             else
             {
                 await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveFailureTitle, AppResources.Common_SaveFailureMessage, AppResources.Common_OK);
-                Console.WriteLine("Failed to save barcode.");
+                AppLogger.LogWarning("ScannedDataViewModel.Save: SaveToFolderAsync returned false");
             }
         }
     }

@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:BarcodeList.Views"
-    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings;assembly=BarcodeList.Core"
     Title="BarcodeList">
 
     <TabBar>

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BarcodeList.Tool
 {
-    internal static class Common
+    public static class Common
     {
         /// <summary>
         /// Checks if the given string contains only ASCII characters (characters with code points from 0 to 127).

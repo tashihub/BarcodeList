@@ -3,7 +3,7 @@
     x:Class="BarcodeList.Views.Create.BarcodeCreateView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings;assembly=BarcodeList.Core"
     Title="{Binding Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
@@ -40,6 +40,7 @@
                         TextColor="Gray" />
 
                     <Entry
+                        x:Name="valueEntry"
                         Placeholder="{Binding Placeholder}"
                         Keyboard="{Binding Keyboard}"
                         MaxLength="{Binding EntryMaxLength}"
@@ -61,6 +62,7 @@
 
             <Button
                 Style="{StaticResource CreateButtonStyle}"
+                Clicked="OnCreateClicked"
                 Command="{Binding CreateCommand}" />
 
         </VerticalStackLayout>

@@ -1,4 +1,5 @@
 ﻿using BarcodeList.Models;
+using BarcodeList.Tool;
 using SQLite;
 
 namespace BarcodeList.Services;
@@ -96,7 +97,7 @@ public class DatabaseService
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            AppLogger.LogError("DatabaseService.GetFoldersAsync failed", ex);
         }
         return new List<BarcodeFolder>();
     }

@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:tool="clr-namespace:BarcodeList.Tool"
-    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings;assembly=BarcodeList.Core"
     Title="{x:Static strings:AppResources.Gs1Result_Title}"
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 

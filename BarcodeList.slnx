@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="BarcodeList/BarcodeList.csproj" />
+  <Project Path="BarcodeList.Core/BarcodeList.Core.csproj" />
+  <Project Path="BarcodeList.Tests/BarcodeList.Tests.csproj" />
 </Solution>

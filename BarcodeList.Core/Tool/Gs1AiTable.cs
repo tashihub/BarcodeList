@@ -187,6 +187,20 @@ namespace BarcodeList.Tool
             return "";
         }
 
+        /// <summary>
+        /// AIコード自体(2〜4桁の数字であるべき)の形式を検証する。値の検証はValidateValueが担当する。
+        /// </summary>
+        public static string ValidateAiCodeFormat(string aiCode)
+        {
+            if (string.IsNullOrWhiteSpace(aiCode))
+                return AppResources.AiCode_EnterCode;
+
+            if (aiCode.Length < 2 || aiCode.Length > 4 || !aiCode.All(char.IsDigit))
+                return AppResources.AiCode_InvalidFormat;
+
+            return "";
+        }
+
         private static bool IsValidYyMmDd(string value)
         {
             if (!int.TryParse(value.Substring(2, 2), out var month) || month < 1 || month > 12)

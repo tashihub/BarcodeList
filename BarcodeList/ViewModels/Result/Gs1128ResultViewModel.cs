@@ -55,7 +55,7 @@ public partial class Gs1128ResultViewModel : ObservableObject, IQueryAttributabl
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error occurred while initializing: {ex.Message}");
+            AppLogger.LogError("Gs1128ResultViewModel.InitializeAsync failed", ex);
         }
     }
 
@@ -89,7 +89,7 @@ public partial class Gs1128ResultViewModel : ObservableObject, IQueryAttributabl
         else
         {
             await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveFailureTitle, AppResources.Common_SaveFailureMessage, AppResources.Common_OK);
-            Console.WriteLine("Failed to save barcode.");
+            AppLogger.LogWarning("Gs1128ResultViewModel.Save: SaveToFolderAsync returned false");
         }
     }
 }
