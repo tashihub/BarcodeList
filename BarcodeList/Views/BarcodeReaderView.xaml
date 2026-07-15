@@ -12,11 +12,47 @@
             FontSize="20"
             TextColor="White"/>
 
-        <zxing:CameraBarcodeReaderView
-                    x:Name="cameraBarcodeReaderView"
-                    IsDetecting="True"
-                    BarcodesDetected="BarcodesDetected" 
-                    Grid.Row="1"/>
+        <Grid Grid.Row="1">
+            <zxing:CameraBarcodeReaderView
+                        x:Name="cameraBarcodeReaderView"
+                        IsDetecting="True"
+                        BarcodesDetected="BarcodesDetected">
+                <zxing:CameraBarcodeReaderView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CameraView_Tapped" />
+                </zxing:CameraBarcodeReaderView.GestureRecognizers>
+            </zxing:CameraBarcodeReaderView>
+
+            <Button
+                x:Name="torchButton"
+                Text="&#x1F526;"
+                FontSize="22"
+                WidthRequest="48"
+                HeightRequest="48"
+                CornerRadius="24"
+                Padding="0"
+                BackgroundColor="#66000000"
+                TextColor="White"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,16,16"
+                Clicked="TorchButton_Clicked" />
+
+            <Border
+                x:Name="focusIndicator"
+                WidthRequest="110"
+                HeightRequest="60"
+                Stroke="Yellow"
+                StrokeThickness="2"
+                BackgroundColor="Transparent"
+                InputTransparent="True"
+                IsVisible="False"
+                HorizontalOptions="Start"
+                VerticalOptions="Start">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+            </Border>
+        </Grid>
 
     </Grid>
 </ContentPage>
