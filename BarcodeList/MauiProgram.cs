@@ -10,6 +10,7 @@ using BarcodeList.Views.Create;
 using BarcodeList.Views.Details;
 using BarcodeList.Views.Result;
 using Microsoft.Extensions.Logging;
+using Plugin.MauiMtAdmob;
 using ZXing.Net.Maui.Controls;
 namespace BarcodeList
 {
@@ -28,6 +29,7 @@ namespace BarcodeList
             builder
                 .UseMauiApp<App>()
                 .UseBarcodeReader()
+                .UseMauiMTAdmob()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -64,6 +66,8 @@ namespace BarcodeList
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<FolderService>();
             builder.Services.AddSingleton<Gs1128CreateService>();
+            builder.Services.AddSingleton<AdFrequencyService>();
+            builder.Services.AddSingleton<InterstitialAdService>();
             return builder.Build();
         }
 

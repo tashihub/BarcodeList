@@ -16,16 +16,31 @@ namespace BarcodeList.ViewModels
 
         private readonly DatabaseService _databaseService;
         private readonly FolderService _folderService;
-        public HistoryViewModel(DatabaseService databaseService, FolderService folderService)
+        private readonly AdFrequencyService _adFrequencyService;
+        private readonly InterstitialAdService _interstitialAdService;
+
+        public HistoryViewModel(
+            DatabaseService databaseService,
+            FolderService folderService,
+            AdFrequencyService adFrequencyService,
+            InterstitialAdService interstitialAdService)
         {
             _databaseService = databaseService;
             _folderService = folderService;
+            _adFrequencyService = adFrequencyService;
+            _interstitialAdService = interstitialAdService;
         }
 
         public async Task LoadHistoriesAsync()
         {
             var histories = await _databaseService.GetBarcodesForHistoryAsync();
             Histories = new ObservableCollection<SavedBarcode>(histories);
+
+            // 履歴タブを5回表示するごとに1回、インタースティシャル広告を表示する
+            if (_adFrequencyService.ShouldShowAd("history_view", every: 3))
+            {
+                _interstitialAdService.LoadAndShow();
+            }
         }
 
         [RelayCommand]

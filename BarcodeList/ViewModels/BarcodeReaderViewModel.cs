@@ -18,9 +18,17 @@ namespace BarcodeList.ViewModels
         private bool isDetecting = true;
 
         private readonly DatabaseService _databaseService;
-        public BarcodeReaderViewModel(DatabaseService databaseService)
+        private readonly AdFrequencyService _adFrequencyService;
+        private readonly InterstitialAdService _interstitialAdService;
+
+        public BarcodeReaderViewModel(
+            DatabaseService databaseService,
+            AdFrequencyService adFrequencyService,
+            InterstitialAdService interstitialAdService)
         {
             _databaseService = databaseService;
+            _adFrequencyService = adFrequencyService;
+            _interstitialAdService = interstitialAdService;
         }
 
         [RelayCommand]
@@ -35,6 +43,12 @@ namespace BarcodeList.ViewModels
 
 
             IsDetecting = false;
+
+            // バーコードを3回読み込むごとに1回、インタースティシャル広告を表示する
+            if (_adFrequencyService.ShouldShowAd("barcode_scanned", every: 3))
+            {
+                _interstitialAdService.LoadAndShow();
+            }
 
             //MetaData内で"]C1"となっているのでGS1-128と判定はできているのでAIコードの認識ができる。
             //var metaData = result.Metadata;

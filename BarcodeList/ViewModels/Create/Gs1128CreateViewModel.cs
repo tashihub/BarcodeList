@@ -1,4 +1,5 @@
 using BarcodeList.Resources.Strings;
+using BarcodeList.Services;
 using BarcodeList.Services.CreateServices;
 using BarcodeList.Tool;
 using BarcodeList.Views.Result;
@@ -63,9 +64,17 @@ public partial class Gs1128CreateViewModel : ObservableObject
     }
 
     private readonly Gs1128CreateService _gs1128Service;
-    public Gs1128CreateViewModel(Gs1128CreateService gs1128Service)
+    private readonly AdFrequencyService _adFrequencyService;
+    private readonly InterstitialAdService _interstitialAdService;
+
+    public Gs1128CreateViewModel(
+        Gs1128CreateService gs1128Service,
+        AdFrequencyService adFrequencyService,
+        InterstitialAdService interstitialAdService)
     {
         _gs1128Service = gs1128Service;
+        _adFrequencyService = adFrequencyService;
+        _interstitialAdService = interstitialAdService;
         Elements.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasElements));
     }
 
@@ -126,6 +135,12 @@ public partial class Gs1128CreateViewModel : ObservableObject
         var gs1Value = Gs1128CreateService.BuildGs1Value(Elements);
 
         await _gs1128Service.SaveBarcodeToHistory(gs1Value, 0);
+
+        // バーコードを3回作成するごとに1回、インタースティシャル広告を表示する
+        if (_adFrequencyService.ShouldShowAd("barcode_created", every: 3))
+        {
+            _interstitialAdService.LoadAndShow();
+        }
 
         await Shell.Current.GoToAsync(
             nameof(Gs1128ResultView),

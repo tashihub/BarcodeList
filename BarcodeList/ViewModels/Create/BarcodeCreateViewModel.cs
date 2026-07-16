@@ -52,10 +52,17 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
     public string Title => SelectedFormat != null ? string.Format(AppResources.Create_TitleFormat, SelectedFormat.DisplayName) : AppResources.Create_DefaultTitle;
 
     private readonly DatabaseService _databaseService;
+    private readonly AdFrequencyService _adFrequencyService;
+    private readonly InterstitialAdService _interstitialAdService;
 
-    public BarcodeCreateViewModel(DatabaseService databaseService)
+    public BarcodeCreateViewModel(
+        DatabaseService databaseService,
+        AdFrequencyService adFrequencyService,
+        InterstitialAdService interstitialAdService)
     {
         _databaseService = databaseService;
+        _adFrequencyService = adFrequencyService;
+        _interstitialAdService = interstitialAdService;
         selectedFormat = Formats[0];
     }
 
@@ -119,6 +126,12 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
 
         InputValue = "";
         ErrorMessage = "";
+
+        // バーコードを3回作成するごとに1回、インタースティシャル広告を表示する
+        if (_adFrequencyService.ShouldShowAd("barcode_created", every: 3))
+        {
+            _interstitialAdService.LoadAndShow();
+        }
 
         await Shell.Current.GoToAsync(
             nameof(BarcodeResultView),

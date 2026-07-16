@@ -24,10 +24,19 @@ namespace BarcodeList.ViewModels.Details
         }
         private readonly DatabaseService _databaseService;
         private readonly FolderService _folderService;
-        public FolderDetailViewModel(DatabaseService databaseService, FolderService folderService)
+        private readonly AdFrequencyService _adFrequencyService;
+        private readonly InterstitialAdService _interstitialAdService;
+
+        public FolderDetailViewModel(
+            DatabaseService databaseService,
+            FolderService folderService,
+            AdFrequencyService adFrequencyService,
+            InterstitialAdService interstitialAdService)
         {
             _databaseService = databaseService;
             _folderService = folderService;
+            _adFrequencyService = adFrequencyService;
+            _interstitialAdService = interstitialAdService;
         }
 
         public async Task InitializeAsync()
@@ -36,6 +45,12 @@ namespace BarcodeList.ViewModels.Details
             {
                 var barcodes = await _databaseService.GetBarcodesAsync(Folder.Id);
                 Barcodes = new ObservableCollection<SavedBarcode>(barcodes);
+            }
+
+            // フォルダ詳細(フォルダ内のバーコード一覧)を3回開くごとに1回、インタースティシャル広告を表示する
+            if (_adFrequencyService.ShouldShowAd("folder_detail_view", every: 3))
+            {
+                _interstitialAdService.LoadAndShow();
             }
         }
 

@@ -35,9 +35,17 @@ namespace BarcodeList.ViewModels
         public string Gs1ReliabilityText => AppResources.Scan_Gs1ReliabilityText;
 
         private readonly FolderService _folderService;
-        public ScannedDataViewModel(FolderService folderService)
+        private readonly AdFrequencyService _adFrequencyService;
+        private readonly InterstitialAdService _interstitialAdService;
+
+        public ScannedDataViewModel(
+            FolderService folderService,
+            AdFrequencyService adFrequencyService,
+            InterstitialAdService interstitialAdService)
         {
             _folderService = folderService;
+            _adFrequencyService = adFrequencyService;
+            _interstitialAdService = interstitialAdService;
         }
 
         // --- GS1読み取り検証用の一時的なデバッグ表示。確認後に削除する ---
@@ -131,6 +139,12 @@ namespace BarcodeList.ViewModels
             if (success)
             {
                 await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveSuccessTitle, string.Format(AppResources.Common_SaveSuccessMessage, SelectedFolder.Name), AppResources.Common_OK);
+
+                // バーコードを3回保存するごとに1回、インタースティシャル広告を表示する
+                if (_adFrequencyService.ShouldShowAd("barcode_saved", every: 3))
+                {
+                    _interstitialAdService.LoadAndShow();
+                }
             }
             else
             {

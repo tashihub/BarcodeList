@@ -36,10 +36,17 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
     public bool IsWebUrl => Common.IsWebUrl(BarcodeValue);
 
     private readonly FolderService _folderService;
+    private readonly AdFrequencyService _adFrequencyService;
+    private readonly InterstitialAdService _interstitialAdService;
 
-    public BarcodeResultViewModel(FolderService folderService)
+    public BarcodeResultViewModel(
+        FolderService folderService,
+        AdFrequencyService adFrequencyService,
+        InterstitialAdService interstitialAdService)
     {
         _folderService = folderService;
+        _adFrequencyService = adFrequencyService;
+        _interstitialAdService = interstitialAdService;
     }
 
     partial void OnBarcodeValueChanged(string value)
@@ -112,6 +119,12 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
         if (success)
         {
             await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveSuccessTitle, string.Format(AppResources.Common_SaveSuccessMessage, SelectedFolder.Name), AppResources.Common_OK);
+
+            // バーコードを3回保存するごとに1回、インタースティシャル広告を表示する
+            if (_adFrequencyService.ShouldShowAd("barcode_saved", every: 3))
+            {
+                _interstitialAdService.LoadAndShow();
+            }
         }
         else
         {
