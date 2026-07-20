@@ -35,6 +35,12 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
 
     public bool IsWebUrl => Common.IsWebUrl(BarcodeValue);
 
+    /// <summary>
+    /// QR/Data Matrix/Aztecのような正方形系の2Dバーコードかどうか。
+    /// これらは横長のプレビュー枠だと見切れてしまうため、プレビューを正方形にするかの判定に使う。
+    /// </summary>
+    public bool IsMatrixFormat => Format is BarcodeFormat.QrCode or BarcodeFormat.DataMatrix or BarcodeFormat.Aztec;
+
     private readonly FolderService _folderService;
     private readonly AdFrequencyService _adFrequencyService;
     private readonly InterstitialAdService _interstitialAdService;
@@ -65,6 +71,7 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
         {
             Format = formatValue;
             OnPropertyChanged(nameof(DisplayName));
+            OnPropertyChanged(nameof(IsMatrixFormat));
         }
     }
 

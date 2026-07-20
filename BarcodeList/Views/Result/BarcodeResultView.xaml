@@ -29,7 +29,21 @@
                         Value="{Binding BarcodeValue}"
                         Format="{Binding Format}"
                         HeightRequest="140"
-                        HorizontalOptions="Fill" />
+                        HorizontalOptions="Fill">
+
+                        <zxing:BarcodeGeneratorView.Triggers>
+                            <DataTrigger
+                                TargetType="zxing:BarcodeGeneratorView"
+                                Binding="{Binding IsMatrixFormat}"
+                                Value="True">
+
+                                <Setter Property="HeightRequest" Value="260" />
+                                <Setter Property="WidthRequest" Value="260" />
+                                <Setter Property="HorizontalOptions" Value="Center" />
+
+                            </DataTrigger>
+                        </zxing:BarcodeGeneratorView.Triggers>
+                    </zxing:BarcodeGeneratorView>
                 </VerticalStackLayout>
             </Border>
 
