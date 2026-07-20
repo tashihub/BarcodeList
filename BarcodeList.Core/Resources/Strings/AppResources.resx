@@ -119,6 +119,60 @@
 	<data name="Tab_Scan" xml:space="preserve"><value>スキャン</value></data>
 	<data name="Tab_Folder" xml:space="preserve"><value>フォルダ</value></data>
 	<data name="Tab_History" xml:space="preserve"><value>履歴</value></data>
+	<data name="Tab_Settings" xml:space="preserve"><value>設定</value></data>
+
+	<!-- Settings -->
+	<data name="Settings_Description" xml:space="preserve"><value>アプリの設定を管理します</value></data>
+	<data name="Settings_RemoveAdsTitle" xml:space="preserve"><value>広告を削除</value></data>
+	<data name="Settings_RemoveAdsDescription" xml:space="preserve"><value>購入すると広告が表示されなくなります</value></data>
+	<data name="Settings_RemoveAdsButton" xml:space="preserve"><value>広告を削除する</value></data>
+	<data name="Settings_RestorePurchasesButton" xml:space="preserve"><value>購入を復元</value></data>
+	<data name="Settings_AppInfoTitle" xml:space="preserve"><value>アプリ情報</value></data>
+	<data name="Settings_AppVersionFormat" xml:space="preserve"><value>バージョン {0}</value></data>
+	<data name="Settings_ComingSoonTitle" xml:space="preserve"><value>準備中</value></data>
+	<data name="Settings_ComingSoonMessage" xml:space="preserve"><value>この機能は現在準備中です。今しばらくお待ちください。</value></data>
+	<data name="Settings_AdsRemovedStatus" xml:space="preserve"><value>広告は削除されています。ご購入ありがとうございます。</value></data>
+	<data name="Settings_PurchaseSuccessTitle" xml:space="preserve"><value>購入完了</value></data>
+	<data name="Settings_PurchaseSuccessMessage" xml:space="preserve"><value>広告を削除しました。ご購入ありがとうございます。</value></data>
+	<data name="Settings_PurchaseFailedTitle" xml:space="preserve"><value>購入失敗</value></data>
+	<data name="Settings_PurchaseFailedMessage" xml:space="preserve"><value>購入処理に失敗しました。時間をおいて再度お試しください。</value></data>
+	<data name="Settings_RestoreSuccessTitle" xml:space="preserve"><value>復元完了</value></data>
+	<data name="Settings_RestoreSuccessMessage" xml:space="preserve"><value>購入情報を復元しました。</value></data>
+	<data name="Settings_RestoreNothingTitle" xml:space="preserve"><value>購入情報なし</value></data>
+	<data name="Settings_RestoreNothingMessage" xml:space="preserve"><value>復元できる購入情報が見つかりませんでした。</value></data>
+	<data name="Settings_PurchaseNotSupportedMessage" xml:space="preserve"><value>この環境では課金機能を利用できません。</value></data>
+
+	<data name="Settings_LanguageTitle" xml:space="preserve"><value>言語</value></data>
+	<data name="Settings_LanguageDescription" xml:space="preserve"><value>表示言語を選択します。変更はアプリを再起動すると反映されます。</value></data>
+	<data name="Settings_LanguageSystemDefault" xml:space="preserve"><value>端末の設定に従う</value></data>
+	<data name="Settings_LanguageJapanese" xml:space="preserve"><value>日本語</value></data>
+	<data name="Settings_LanguageEnglish" xml:space="preserve"><value>English</value></data>
+	<data name="Settings_LanguageRestartTitle" xml:space="preserve"><value>再起動が必要です</value></data>
+	<data name="Settings_LanguageRestartMessage" xml:space="preserve"><value>表示言語の変更はアプリを再起動すると反映されます。</value></data>
+
+	<data name="Settings_PrivacyPolicyButton" xml:space="preserve"><value>プライバシーポリシー</value></data>
+	<data name="PrivacyPolicy_Title" xml:space="preserve"><value>プライバシーポリシー</value></data>
+	<data name="PrivacyPolicy_Body" xml:space="preserve"><value>本アプリ「BarcodeList」(以下「本アプリ」)における情報の取り扱いについて、以下のとおりプライバシーポリシー(以下「本ポリシー」)を定めます。
+
+1. カメラの利用
+本アプリはバーコード・QRコードの読み取りのためにカメラを使用します。カメラの映像は端末内でのバーコード解析にのみ使用され、外部へ送信・保存されることはありません。
+
+2. 保存データについて
+作成・読み取ったバーコードやフォルダの情報は、お使いの端末内にのみ保存されます。開発者を含む第三者がこれらのデータを取得することはありません。
+
+3. 広告について
+本アプリはGoogle AdMobを利用して広告を配信します。広告配信にあたり、Google及び広告配信事業者が広告識別子等の情報を収集する場合があります。詳細はGoogleの広告ポリシーをご確認ください。
+
+4. アプリ内課金について
+広告削除機能の購入処理はGoogle Playの課金システムを通じて行われます。本アプリがクレジットカード情報等の決済情報を取得・保存することはありません。
+
+5. お問い合わせ
+本ポリシーに関するお問い合わせは、Google Playのアプリ詳細ページに記載の連絡先までお願いいたします。
+
+6. 改定
+本ポリシーの内容は、必要に応じて予告なく変更される場合があります。
+
+制定日: 2026年7月20日</value></data>
 
 	<!-- Folder -->
 	<data name="Folder_Description" xml:space="preserve"><value>保存したバーコードをフォルダ別に表示します</value></data>

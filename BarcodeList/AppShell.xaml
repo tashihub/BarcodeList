@@ -28,5 +28,9 @@
             ContentTemplate="{DataTemplate local:HistoryView}"
             Icon="history.png"
             Route="HistoryPage" />
+        <ShellContent
+            Title="{x:Static strings:AppResources.Tab_Settings}"
+            ContentTemplate="{DataTemplate local:SettingsView}"
+            Route="SettingsPage" />
     </TabBar>
 </Shell>

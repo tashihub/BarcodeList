@@ -119,6 +119,60 @@
 	<data name="Tab_Scan" xml:space="preserve"><value>Scan</value></data>
 	<data name="Tab_Folder" xml:space="preserve"><value>Folder</value></data>
 	<data name="Tab_History" xml:space="preserve"><value>History</value></data>
+	<data name="Tab_Settings" xml:space="preserve"><value>Settings</value></data>
+
+	<!-- Settings -->
+	<data name="Settings_Description" xml:space="preserve"><value>Manage app settings</value></data>
+	<data name="Settings_RemoveAdsTitle" xml:space="preserve"><value>Remove Ads</value></data>
+	<data name="Settings_RemoveAdsDescription" xml:space="preserve"><value>Purchase to remove all ads</value></data>
+	<data name="Settings_RemoveAdsButton" xml:space="preserve"><value>Remove Ads</value></data>
+	<data name="Settings_RestorePurchasesButton" xml:space="preserve"><value>Restore Purchases</value></data>
+	<data name="Settings_AppInfoTitle" xml:space="preserve"><value>App Info</value></data>
+	<data name="Settings_AppVersionFormat" xml:space="preserve"><value>Version {0}</value></data>
+	<data name="Settings_ComingSoonTitle" xml:space="preserve"><value>Coming Soon</value></data>
+	<data name="Settings_ComingSoonMessage" xml:space="preserve"><value>This feature is coming soon. Please check back later.</value></data>
+	<data name="Settings_AdsRemovedStatus" xml:space="preserve"><value>Ads are removed. Thank you for your purchase.</value></data>
+	<data name="Settings_PurchaseSuccessTitle" xml:space="preserve"><value>Purchase Complete</value></data>
+	<data name="Settings_PurchaseSuccessMessage" xml:space="preserve"><value>Ads removed. Thank you for your purchase.</value></data>
+	<data name="Settings_PurchaseFailedTitle" xml:space="preserve"><value>Purchase Failed</value></data>
+	<data name="Settings_PurchaseFailedMessage" xml:space="preserve"><value>The purchase could not be completed. Please try again later.</value></data>
+	<data name="Settings_RestoreSuccessTitle" xml:space="preserve"><value>Restore Complete</value></data>
+	<data name="Settings_RestoreSuccessMessage" xml:space="preserve"><value>Your purchase has been restored.</value></data>
+	<data name="Settings_RestoreNothingTitle" xml:space="preserve"><value>No Purchases Found</value></data>
+	<data name="Settings_RestoreNothingMessage" xml:space="preserve"><value>No purchases were found to restore.</value></data>
+	<data name="Settings_PurchaseNotSupportedMessage" xml:space="preserve"><value>In-app purchases are not available on this platform.</value></data>
+
+	<data name="Settings_LanguageTitle" xml:space="preserve"><value>Language</value></data>
+	<data name="Settings_LanguageDescription" xml:space="preserve"><value>Choose the app's display language. Changes take effect after restarting the app.</value></data>
+	<data name="Settings_LanguageSystemDefault" xml:space="preserve"><value>System Default</value></data>
+	<data name="Settings_LanguageJapanese" xml:space="preserve"><value>日本語</value></data>
+	<data name="Settings_LanguageEnglish" xml:space="preserve"><value>English</value></data>
+	<data name="Settings_LanguageRestartTitle" xml:space="preserve"><value>Restart Required</value></data>
+	<data name="Settings_LanguageRestartMessage" xml:space="preserve"><value>Restart the app for the language change to take effect.</value></data>
+
+	<data name="Settings_PrivacyPolicyButton" xml:space="preserve"><value>Privacy Policy</value></data>
+	<data name="PrivacyPolicy_Title" xml:space="preserve"><value>Privacy Policy</value></data>
+	<data name="PrivacyPolicy_Body" xml:space="preserve"><value>This Privacy Policy explains how "BarcodeList" (the "App") handles information.
+
+1. Camera Access
+The App uses the camera to scan barcodes and QR codes. Camera images are processed on-device only for barcode recognition and are never transmitted or stored externally.
+
+2. Saved Data
+Barcodes and folders you create or scan are stored only on your device. No third party, including the developer, has access to this data.
+
+3. Advertising
+The App uses Google AdMob to display ads. Google and its advertising partners may collect information such as advertising identifiers as part of ad delivery. See Google's advertising policies for details.
+
+4. In-App Purchases
+Purchases for the ad-removal feature are processed through Google Play's billing system. The App does not collect or store payment information such as credit card numbers.
+
+5. Contact
+For questions about this policy, please use the contact information listed on the App's Google Play listing.
+
+6. Changes
+This policy may be updated from time to time without prior notice.
+
+Effective date: July 20, 2026</value></data>
 
 	<!-- Folder -->
 	<data name="Folder_Description" xml:space="preserve"><value>Shows saved barcodes grouped by folder</value></data>

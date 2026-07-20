@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BarcodeList.Views.PrivacyPolicyView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings;assembly=BarcodeList.Core"
+    Title="{x:Static strings:AppResources.PrivacyPolicy_Title}"
+    Padding="20"
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
+
+    <ScrollView>
+        <Label
+            Text="{x:Static strings:AppResources.PrivacyPolicy_Body}"
+            FontSize="14"
+            LineHeight="1.4" />
+    </ScrollView>
+</ContentPage>

@@ -12,11 +12,22 @@ public class InterstitialAdService
 {
     private const string TestInterstitialAdUnitId = "ca-app-pub-3940256099942544/1033173712";
 
+    private readonly PurchaseService _purchaseService;
+
+    public InterstitialAdService(PurchaseService purchaseService)
+    {
+        _purchaseService = purchaseService;
+    }
+
     /// <summary>
     /// 広告を読み込み、読み込み完了次第すぐに表示する。読み込みに失敗した場合は何もしない(ユーザー操作をブロックしない)。
+    /// 広告削除を購入済みの場合は何もしない。
     /// </summary>
     public void LoadAndShow()
     {
+        if (_purchaseService.IsAdsRemoved)
+            return;
+
         void OnLoaded(object? sender, EventArgs e)
         {
             CrossMauiMTAdmob.Current.OnInterstitialLoaded -= OnLoaded;

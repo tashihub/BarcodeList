@@ -3,6 +3,7 @@
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true">
 		<!-- Google公式のテスト用AdMobアプリID。本番配信前に実際のアプリIDに差し替えること -->
 		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" />
+		<!-- com.google.android.play.billingclient.versionはPlugin.InAppBillingのAARが自動的に付与するため、ここでは指定しない -->
 		<activity android:name="com.google.android.gms.ads.AdActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
 			android:theme="@android:style/Theme.Translucent" />

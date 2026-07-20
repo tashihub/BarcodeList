@@ -79,6 +79,39 @@ namespace BarcodeList.Resources.Strings {
         internal static string Tab_Scan => ResourceManager.GetString("Tab_Scan", resourceCulture);
         internal static string Tab_Folder => ResourceManager.GetString("Tab_Folder", resourceCulture);
         internal static string Tab_History => ResourceManager.GetString("Tab_History", resourceCulture);
+        internal static string Tab_Settings => ResourceManager.GetString("Tab_Settings", resourceCulture);
+
+        internal static string Settings_Description => ResourceManager.GetString("Settings_Description", resourceCulture);
+        internal static string Settings_RemoveAdsTitle => ResourceManager.GetString("Settings_RemoveAdsTitle", resourceCulture);
+        internal static string Settings_RemoveAdsDescription => ResourceManager.GetString("Settings_RemoveAdsDescription", resourceCulture);
+        internal static string Settings_RemoveAdsButton => ResourceManager.GetString("Settings_RemoveAdsButton", resourceCulture);
+        internal static string Settings_RestorePurchasesButton => ResourceManager.GetString("Settings_RestorePurchasesButton", resourceCulture);
+        internal static string Settings_AppInfoTitle => ResourceManager.GetString("Settings_AppInfoTitle", resourceCulture);
+        internal static string Settings_AppVersionFormat => ResourceManager.GetString("Settings_AppVersionFormat", resourceCulture);
+        internal static string Settings_ComingSoonTitle => ResourceManager.GetString("Settings_ComingSoonTitle", resourceCulture);
+        internal static string Settings_ComingSoonMessage => ResourceManager.GetString("Settings_ComingSoonMessage", resourceCulture);
+        internal static string Settings_AdsRemovedStatus => ResourceManager.GetString("Settings_AdsRemovedStatus", resourceCulture);
+        internal static string Settings_PurchaseSuccessTitle => ResourceManager.GetString("Settings_PurchaseSuccessTitle", resourceCulture);
+        internal static string Settings_PurchaseSuccessMessage => ResourceManager.GetString("Settings_PurchaseSuccessMessage", resourceCulture);
+        internal static string Settings_PurchaseFailedTitle => ResourceManager.GetString("Settings_PurchaseFailedTitle", resourceCulture);
+        internal static string Settings_PurchaseFailedMessage => ResourceManager.GetString("Settings_PurchaseFailedMessage", resourceCulture);
+        internal static string Settings_RestoreSuccessTitle => ResourceManager.GetString("Settings_RestoreSuccessTitle", resourceCulture);
+        internal static string Settings_RestoreSuccessMessage => ResourceManager.GetString("Settings_RestoreSuccessMessage", resourceCulture);
+        internal static string Settings_RestoreNothingTitle => ResourceManager.GetString("Settings_RestoreNothingTitle", resourceCulture);
+        internal static string Settings_RestoreNothingMessage => ResourceManager.GetString("Settings_RestoreNothingMessage", resourceCulture);
+        internal static string Settings_PurchaseNotSupportedMessage => ResourceManager.GetString("Settings_PurchaseNotSupportedMessage", resourceCulture);
+
+        internal static string Settings_LanguageTitle => ResourceManager.GetString("Settings_LanguageTitle", resourceCulture);
+        internal static string Settings_LanguageDescription => ResourceManager.GetString("Settings_LanguageDescription", resourceCulture);
+        internal static string Settings_LanguageSystemDefault => ResourceManager.GetString("Settings_LanguageSystemDefault", resourceCulture);
+        internal static string Settings_LanguageJapanese => ResourceManager.GetString("Settings_LanguageJapanese", resourceCulture);
+        internal static string Settings_LanguageEnglish => ResourceManager.GetString("Settings_LanguageEnglish", resourceCulture);
+        internal static string Settings_LanguageRestartTitle => ResourceManager.GetString("Settings_LanguageRestartTitle", resourceCulture);
+        internal static string Settings_LanguageRestartMessage => ResourceManager.GetString("Settings_LanguageRestartMessage", resourceCulture);
+
+        internal static string Settings_PrivacyPolicyButton => ResourceManager.GetString("Settings_PrivacyPolicyButton", resourceCulture);
+        internal static string PrivacyPolicy_Title => ResourceManager.GetString("PrivacyPolicy_Title", resourceCulture);
+        internal static string PrivacyPolicy_Body => ResourceManager.GetString("PrivacyPolicy_Body", resourceCulture);
 
         internal static string Folder_Description => ResourceManager.GetString("Folder_Description", resourceCulture);
         internal static string Folder_NewFolderToolbar => ResourceManager.GetString("Folder_NewFolderToolbar", resourceCulture);

@@ -25,6 +25,8 @@ namespace BarcodeList
             // 未登録だと該当パターンの文字列でQRコード生成時にクラッシュする。
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
+            ApplySavedLanguagePreference();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -53,6 +55,9 @@ namespace BarcodeList
             builder.Services.AddTransient<HistoryViewModel>();
             builder.Services.AddTransient<FolderDetailView>();
             builder.Services.AddTransient<FolderDetailViewModel>();
+            builder.Services.AddTransient<SettingsView>();
+            builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<PrivacyPolicyView>();
 
             builder.Services.AddTransient<BarcodeCreateView>();
             builder.Services.AddTransient<BarcodeCreateViewModel>();
@@ -67,8 +72,34 @@ namespace BarcodeList
             builder.Services.AddSingleton<FolderService>();
             builder.Services.AddSingleton<Gs1128CreateService>();
             builder.Services.AddSingleton<AdFrequencyService>();
+            builder.Services.AddSingleton<PurchaseService>();
             builder.Services.AddSingleton<InterstitialAdService>();
             return builder.Build();
+        }
+
+        private const string LanguagePreferenceKey = "app_language";
+
+        /// <summary>
+        /// 設定画面で選択した表示言語(空文字は端末既定)を、UI構築前に反映する。
+        /// x:Staticでの文字列参照はページ生成時に一度だけ評価されるため、
+        /// 実行中の切り替えではなく次回起動時に反映される。
+        /// </summary>
+        private static void ApplySavedLanguagePreference()
+        {
+            var languageCode = Preferences.Default.Get(LanguagePreferenceKey, string.Empty);
+            if (string.IsNullOrEmpty(languageCode))
+                return;
+
+            try
+            {
+                var culture = new System.Globalization.CultureInfo(languageCode);
+                BarcodeList.Resources.Strings.AppResources.Culture = culture;
+                System.Globalization.CultureInfo.CurrentUICulture = culture;
+            }
+            catch (Exception ex)
+            {
+                AppLogger.LogWarning($"ApplySavedLanguagePreference failed for '{languageCode}': {ex.Message}");
+            }
         }
 
         private static bool _globalExceptionLoggingRegistered;

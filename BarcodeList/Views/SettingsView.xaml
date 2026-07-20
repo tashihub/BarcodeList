@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BarcodeList.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:BarcodeList.Resources.Strings;assembly=BarcodeList.Core"
+    xmlns:tool="clr-namespace:BarcodeList.Tool"
+    Padding="20"
+    BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
+
+    <ContentPage.Resources>
+        <tool:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="18">
+
+            <Label
+                Text="{x:Static strings:AppResources.Settings_Description}"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                TextColor="Gray" />
+
+            <!-- 広告削除 -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        Text="{x:Static strings:AppResources.Settings_RemoveAdsTitle}"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <Label
+                        Text="{x:Static strings:AppResources.Settings_RemoveAdsDescription}"
+                        FontSize="13"
+                        TextColor="Gray"
+                        IsVisible="{Binding IsAdsRemoved, Converter={StaticResource InvertedBoolConverter}}" />
+
+                    <Button
+                        Text="{x:Static strings:AppResources.Settings_RemoveAdsButton}"
+                        Command="{Binding RemoveAdsCommand}"
+                        Style="{StaticResource CreateButtonStyle}"
+                        IsVisible="{Binding IsAdsRemoved, Converter={StaticResource InvertedBoolConverter}}" />
+
+                    <Button
+                        Text="{x:Static strings:AppResources.Settings_RestorePurchasesButton}"
+                        Command="{Binding RestorePurchasesCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="#4F46E5"
+                        IsVisible="{Binding IsAdsRemoved, Converter={StaticResource InvertedBoolConverter}}" />
+
+                    <Label
+                        Text="{x:Static strings:AppResources.Settings_AdsRemovedStatus}"
+                        FontSize="13"
+                        TextColor="#22C55E"
+                        IsVisible="{Binding IsAdsRemoved}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 言語 -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        Text="{x:Static strings:AppResources.Settings_LanguageTitle}"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <Label
+                        Text="{x:Static strings:AppResources.Settings_LanguageDescription}"
+                        FontSize="13"
+                        TextColor="Gray" />
+
+                    <Picker SelectedIndex="{Binding SelectedLanguageIndex}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:Static Member="strings:AppResources.Settings_LanguageSystemDefault" />
+                                <x:Static Member="strings:AppResources.Settings_LanguageJapanese" />
+                                <x:Static Member="strings:AppResources.Settings_LanguageEnglish" />
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- プライバシーポリシー -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <Button
+                    Text="{x:Static strings:AppResources.Settings_PrivacyPolicyButton}"
+                    Command="{Binding ShowPrivacyPolicyCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="#4F46E5"
+                    HorizontalOptions="Start" />
+            </Border>
+
+            <!-- アプリ情報 -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="6">
+                    <Label
+                        Text="{x:Static strings:AppResources.Settings_AppInfoTitle}"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <Label
+                        Text="{Binding AppVersionText}"
+                        FontSize="13"
+                        TextColor="Gray" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
