@@ -31,6 +31,7 @@
         <ShellContent
             Title="{x:Static strings:AppResources.Tab_Settings}"
             ContentTemplate="{DataTemplate local:SettingsView}"
+            Icon="setting.png"
             Route="SettingsPage" />
     </TabBar>
 </Shell>

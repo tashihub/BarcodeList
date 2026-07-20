@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# リリース署名用keystoreとパスワード(絶対にコミットしない)
+signing/
+
 # User-specific files
 *.rsuser
 *.suo

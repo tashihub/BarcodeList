@@ -48,24 +48,6 @@ namespace BarcodeList.ViewModels
             _interstitialAdService = interstitialAdService;
         }
 
-        // --- GS1読み取り検証用の一時的なデバッグ表示。確認後に削除する ---
-        public string RawValueDebugText => (Gs1ParseResult?.RawValue ?? "").Replace((char)29, '␟');
-
-        public string MetadataDebugText => BarcodeResult?.Metadata == null || BarcodeResult.Metadata.Count == 0
-            ? "(メタデータなし)"
-            : string.Join("\n", BarcodeResult.Metadata.Select(kv => $"{kv.Key}: {kv.Value}"));
-
-        partial void OnBarcodeResultChanged(BarcodeResult value)
-        {
-            OnPropertyChanged(nameof(MetadataDebugText));
-        }
-
-        partial void OnGs1ParseResultChanged(Gs1ParseResult value)
-        {
-            OnPropertyChanged(nameof(RawValueDebugText));
-        }
-        // --- ここまで ---
-
         /// <summary>
         /// スキャンしたデータが受け渡される
         /// </summary>

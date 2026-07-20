@@ -86,65 +86,6 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- デバッグ情報(GS1読み取り検証用・一時的。確認後に削除する) -->
-            <Border
-                Padding="14"
-                BackgroundColor="#FFF3CD"
-                Stroke="#FFC107">
-
-                <VerticalStackLayout Spacing="6">
-                    <Label
-                        Text="デバッグ情報(検証用)"
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        TextColor="#856404" />
-
-                    <Label FontSize="12" TextColor="#856404">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="シンボロジ識別子: " FontAttributes="Bold" />
-                                <Span Text="{Binding Gs1ParseResult.SymbologyIdentifier}" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-
-                    <Label FontSize="12" TextColor="#856404">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="IsGs1 / HasGroupSeparator / IsReliable: " FontAttributes="Bold" />
-                                <Span Text="{Binding Gs1ParseResult.IsGs1}" />
-                                <Span Text=" / " />
-                                <Span Text="{Binding Gs1ParseResult.HasGroupSeparator}" />
-                                <Span Text=" / " />
-                                <Span Text="{Binding Gs1ParseResult.IsReliable}" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-
-                    <Label
-                        Text="生データ(GS区切りは␟表示):"
-                        FontSize="12"
-                        FontAttributes="Bold"
-                        TextColor="#856404" />
-                    <Label
-                        Text="{Binding RawValueDebugText}"
-                        FontSize="12"
-                        TextColor="#856404"
-                        LineBreakMode="CharacterWrap" />
-
-                    <Label
-                        Text="Metadata:"
-                        FontSize="12"
-                        FontAttributes="Bold"
-                        TextColor="#856404" />
-                    <Label
-                        Text="{Binding MetadataDebugText}"
-                        FontSize="12"
-                        TextColor="#856404"
-                        LineBreakMode="CharacterWrap" />
-                </VerticalStackLayout>
-            </Border>
-
             <!-- GS1 AIコードカード -->
             <Border
                 IsVisible="{Binding Gs1ParseResult.IsGs1}"

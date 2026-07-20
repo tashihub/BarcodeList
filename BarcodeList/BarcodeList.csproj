@@ -31,7 +31,7 @@
 		<ApplicationTitle>BarcodeList</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.barcodelist</ApplicationId>
+		<ApplicationId>com.tashihub.barcodelist</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -127,5 +127,8 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<!-- リリース署名設定(パスワード含む)はgit管理外の signing/AndroidSigning.local.props に分離。存在しない環境ではRelease署名なしでビルドされる -->
+	<Import Project="..\signing\AndroidSigning.local.props" Condition="Exists('..\signing\AndroidSigning.local.props')" />
 
 </Project>
