@@ -232,6 +232,7 @@ namespace BarcodeList.Resources.Strings {
         internal static string Format_Pdf417_Name => ResourceManager.GetString("Format_Pdf417_Name", resourceCulture);
         internal static string Format_Pdf417_Hint => ResourceManager.GetString("Format_Pdf417_Hint", resourceCulture);
         internal static string Format_Aztec_Name => ResourceManager.GetString("Format_Aztec_Name", resourceCulture);
+        internal static string Format_Gs1128_Name => ResourceManager.GetString("Format_Gs1128_Name", resourceCulture);
 
         internal static string FormatValidate_NonAscii => ResourceManager.GetString("FormatValidate_NonAscii", resourceCulture);
         internal static string FormatValidate_Code39 => ResourceManager.GetString("FormatValidate_Code39", resourceCulture);

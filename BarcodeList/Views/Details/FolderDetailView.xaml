@@ -78,7 +78,7 @@
                                 <VerticalStackLayout Grid.Column="1" Spacing="5">
 
                                     <Label
-                            Text="{Binding BarcodeType}"
+                            Text="{Binding DisplayTypeName}"
                             FontSize="16"
                             FontAttributes="Bold" />
 

@@ -306,6 +306,7 @@ Effective date: July 20, 2026</value></data>
 	<data name="Format_Pdf417_Name" xml:space="preserve"><value>PDF417</value></data>
 	<data name="Format_Pdf417_Hint" xml:space="preserve"><value>Any text (very long input may not scan reliably)</value></data>
 	<data name="Format_Aztec_Name" xml:space="preserve"><value>Aztec</value></data>
+	<data name="Format_Gs1128_Name" xml:space="preserve"><value>GS1-128</value></data>
 
 	<!-- BarcodeFormatCatalog: validation -->
 	<data name="FormatValidate_NonAscii" xml:space="preserve"><value>Japanese characters cannot be used. Please use a QR code.</value></data>

@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using BarcodeList.Resources.Strings;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,6 +45,13 @@ namespace BarcodeList.Models
         public string CreatedAtText => CreatedAt.ToString("yyyy/MM/dd HH:mm:ss");
         [Ignore]
         public ZXing.Net.Maui.BarcodeFormat BarcodeFormat => (ZXing.Net.Maui.BarcodeFormat)Enum.Parse(typeof(ZXing.Net.Maui.BarcodeFormat), BarcodeType);
+
+        /// <summary>
+        /// 一覧表示用の形式名。GS1-128は物理的にはCode128として保存されているため、
+        /// BarcodeTypeをそのまま表示すると常に「Code128」と表示されてしまう。IsGs1の場合はここで補正する。
+        /// </summary>
+        [Ignore]
+        public string DisplayTypeName => IsGs1 ? AppResources.Format_Gs1128_Name : BarcodeType;
 
         /// <summary>
         /// 履歴・フォルダ一覧のアイコン枠に表示する、バーコード形式ごとの画像ファイル名(Resources/Images配下)。
