@@ -20,7 +20,7 @@ namespace BarcodeList
             // GDPR同意(UMP)は無料版では自動対応されないため、initialiseConsentAtStartupはfalseにして未対応のままにしている。
             CrossMauiMTAdmob.Current.Init(
                 activity: this,
-                appId: "ca-app-pub-1283307746031730~6619915051",
+                appId: "ca-app-pub-3940256099942544/1033173712", //ca-app-pub-1283307746031730~6619915051 本番用
                 license: "",
                 openAdsId: "",
                 nativeAdsId: "",

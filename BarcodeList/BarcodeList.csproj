@@ -58,6 +58,20 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- 履歴/フォルダ一覧のアイコンに使うバーコード形式画像。元画像が大きいため128x128にリサイズする -->
+		<MauiImage Update="Resources\Images\aztec.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\codabar.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\code128.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\code39.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\code93.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\datamatrix.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\ean13.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\ean8.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\itf.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\pdf417.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\qrcode.png" Resize="True" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\upca.png" Resize="True" BaseSize="128,128" />
 		
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />

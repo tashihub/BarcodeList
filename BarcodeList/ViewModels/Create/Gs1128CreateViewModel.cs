@@ -137,10 +137,7 @@ public partial class Gs1128CreateViewModel : ObservableObject
         await _gs1128Service.SaveBarcodeToHistory(gs1Value, 0);
 
         // バーコードを3回作成するごとに1回、インタースティシャル広告を表示する
-        if (_adFrequencyService.ShouldShowAd("barcode_created", every: 3))
-        {
-            _interstitialAdService.LoadAndShow();
-        }
+        var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_created", every: 3);
 
         await Shell.Current.GoToAsync(
             nameof(Gs1128ResultView),
@@ -148,5 +145,11 @@ public partial class Gs1128CreateViewModel : ObservableObject
             {
                 ["Gs1Value"] = gs1Value
             });
+
+        // 結果画面への遷移が完了してから広告を表示する(遷移中に表示すると画面遷移と広告表示が競合してクラッシュするため)
+        if (shouldShowAd)
+        {
+            _interstitialAdService.LoadAndShow();
+        }
     }
 }

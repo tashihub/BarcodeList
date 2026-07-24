@@ -65,11 +65,13 @@
                                         <RoundRectangle CornerRadius="16" />
                                     </Border.StrokeShape>
 
-                                    <!--<Label
-                            Text="{Binding BarcodeTypeIcon}"
-                            FontSize="24"
+                                    <Image
+                            Source="{Binding BarcodeTypeIconImage}"
+                            WidthRequest="34"
+                            HeightRequest="34"
+                            Aspect="AspectFit"
                             HorizontalOptions="Center"
-                            VerticalOptions="Center" />-->
+                            VerticalOptions="Center" />
 
                                 </Border>
 
