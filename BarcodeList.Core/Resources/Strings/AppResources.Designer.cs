@@ -193,6 +193,7 @@ namespace BarcodeList.Resources.Strings {
         internal static string AiHint_Weight => ResourceManager.GetString("AiHint_Weight", resourceCulture);
 
         internal static string AiValidate_EnterValue => ResourceManager.GetString("AiValidate_EnterValue", resourceCulture);
+        internal static string AiValidate_NonAscii => ResourceManager.GetString("AiValidate_NonAscii", resourceCulture);
         internal static string AiValidate_01 => ResourceManager.GetString("AiValidate_01", resourceCulture);
         internal static string AiValidate_DateFormat => ResourceManager.GetString("AiValidate_DateFormat", resourceCulture);
         internal static string AiValidate_30 => ResourceManager.GetString("AiValidate_30", resourceCulture);
@@ -229,6 +230,7 @@ namespace BarcodeList.Resources.Strings {
         internal static string Format_DataMatrix_Name => ResourceManager.GetString("Format_DataMatrix_Name", resourceCulture);
         internal static string Format_DataMatrix_Placeholder => ResourceManager.GetString("Format_DataMatrix_Placeholder", resourceCulture);
         internal static string Format_Pdf417_Name => ResourceManager.GetString("Format_Pdf417_Name", resourceCulture);
+        internal static string Format_Pdf417_Hint => ResourceManager.GetString("Format_Pdf417_Hint", resourceCulture);
         internal static string Format_Aztec_Name => ResourceManager.GetString("Format_Aztec_Name", resourceCulture);
 
         internal static string FormatValidate_NonAscii => ResourceManager.GetString("FormatValidate_NonAscii", resourceCulture);

@@ -266,6 +266,7 @@
 
 	<!-- Gs1 AI table: validation -->
 	<data name="AiValidate_EnterValue" xml:space="preserve"><value>値を入力してください</value></data>
+	<data name="AiValidate_NonAscii" xml:space="preserve"><value>日本語などASCII以外の文字は使用できません</value></data>
 	<data name="AiValidate_01" xml:space="preserve"><value>GTIN(AI:01)は14桁の数字で入力してください</value></data>
 	<data name="AiValidate_DateFormat" xml:space="preserve"><value>{0}(AI:{1})はYYMMDD形式の6桁の数字で入力してください</value></data>
 	<data name="AiValidate_30" xml:space="preserve"><value>数量(AI:30)は8桁の数字で入力してください</value></data>
@@ -280,10 +281,10 @@
 	<data name="Format_FreeText_Hint" xml:space="preserve"><value>任意の文字列</value></data>
 	<data name="Format_Code128_Name" xml:space="preserve"><value>Code128</value></data>
 	<data name="Format_AlphaNumPlaceholder" xml:space="preserve"><value>例：ABC123</value></data>
-	<data name="Format_AsciiOnly_Hint" xml:space="preserve"><value>ASCII文字(日本語不可)</value></data>
+	<data name="Format_AsciiOnly_Hint" xml:space="preserve"><value>ASCII文字(日本語不可)(長すぎるとスキャンできないことがあります)</value></data>
 	<data name="Format_Code39_Name" xml:space="preserve"><value>Code39</value></data>
 	<data name="Format_Code39_Placeholder" xml:space="preserve"><value>例：ABC-123</value></data>
-	<data name="Format_Code39_Hint" xml:space="preserve"><value>英数字(大文字)と - . スペース $ / + %</value></data>
+	<data name="Format_Code39_Hint" xml:space="preserve"><value>英数字(大文字)と - . スペース $ / + %(長すぎるとスキャンできないことがあります)</value></data>
 	<data name="Format_Ean13_Name" xml:space="preserve"><value>EAN-13(JAN)</value></data>
 	<data name="Format_Ean13_Placeholder" xml:space="preserve"><value>例：490123456789</value></data>
 	<data name="Format_Ean13_Hint" xml:space="preserve"><value>12桁の数字(チェックデジットは自動計算)</value></data>
@@ -295,14 +296,15 @@
 	<data name="Format_UpcA_Hint" xml:space="preserve"><value>11桁の数字(チェックデジットは自動計算)</value></data>
 	<data name="Format_Itf_Name" xml:space="preserve"><value>ITF</value></data>
 	<data name="Format_Itf_Placeholder" xml:space="preserve"><value>例：12345678</value></data>
-	<data name="Format_Itf_Hint" xml:space="preserve"><value>偶数桁の数字</value></data>
+	<data name="Format_Itf_Hint" xml:space="preserve"><value>偶数桁の数字(長すぎるとスキャンできないことがあります)</value></data>
 	<data name="Format_Codabar_Name" xml:space="preserve"><value>Codabar</value></data>
 	<data name="Format_Codabar_Placeholder" xml:space="preserve"><value>例：A123456A</value></data>
-	<data name="Format_Codabar_Hint" xml:space="preserve"><value>数字と - $ : / . + 、前後にA〜Dのスタート/ストップ文字(省略可)</value></data>
+	<data name="Format_Codabar_Hint" xml:space="preserve"><value>数字と - $ : / . + 、前後にA〜Dのスタート/ストップ文字(省略可)(長すぎるとスキャンできないことがあります)</value></data>
 	<data name="Format_Code93_Name" xml:space="preserve"><value>Code93</value></data>
 	<data name="Format_DataMatrix_Name" xml:space="preserve"><value>Data Matrix</value></data>
 	<data name="Format_DataMatrix_Placeholder" xml:space="preserve"><value>例：任意のテキスト</value></data>
 	<data name="Format_Pdf417_Name" xml:space="preserve"><value>PDF417</value></data>
+	<data name="Format_Pdf417_Hint" xml:space="preserve"><value>任意の文字列（長すぎるとスキャンできないことがあります）</value></data>
 	<data name="Format_Aztec_Name" xml:space="preserve"><value>Aztec</value></data>
 
 	<!-- BarcodeFormatCatalog: validation -->

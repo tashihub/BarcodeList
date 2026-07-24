@@ -123,7 +123,7 @@ namespace BarcodeList.Services.CreateServices
                 Format: BarcodeFormat.Pdf417,
                 DisplayName: AppResources.Format_Pdf417_Name,
                 Placeholder: AppResources.Format_DataMatrix_Placeholder,
-                FormatHint: AppResources.Format_FreeText_Hint,
+                FormatHint: AppResources.Format_Pdf417_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,

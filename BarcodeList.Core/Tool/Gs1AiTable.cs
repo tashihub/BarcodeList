@@ -150,6 +150,11 @@ namespace BarcodeList.Tool
             if (string.IsNullOrWhiteSpace(value))
                 return AppResources.AiValidate_EnterValue;
 
+            // GS1-128はCode128としてエンコードするため、ASCII以外の文字(日本語など)が
+            // 入るとバーコード生成時にクラッシュする。AIの種類によらず共通で弾く。
+            if (!Common.IsAsciiOnly(value))
+                return AppResources.AiValidate_NonAscii;
+
             switch (ai)
             {
                 case "01":

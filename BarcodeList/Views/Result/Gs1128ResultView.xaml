@@ -27,8 +27,7 @@
 
                     <GraphicsView
                         x:Name="gs1GraphicsView"
-                        HeightRequest="140"
-                        HorizontalOptions="Fill"
+                        HorizontalOptions="Center"
                         BackgroundColor="White" />
 
                 </VerticalStackLayout>

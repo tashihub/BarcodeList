@@ -266,6 +266,7 @@ Effective date: July 20, 2026</value></data>
 
 	<!-- Gs1 AI table: validation -->
 	<data name="AiValidate_EnterValue" xml:space="preserve"><value>Please enter a value</value></data>
+	<data name="AiValidate_NonAscii" xml:space="preserve"><value>Non-ASCII characters (e.g. Japanese) cannot be used</value></data>
 	<data name="AiValidate_01" xml:space="preserve"><value>GTIN (AI:01) must be a 14-digit number</value></data>
 	<data name="AiValidate_DateFormat" xml:space="preserve"><value>{0} (AI:{1}) must be a 6-digit number in YYMMDD format</value></data>
 	<data name="AiValidate_30" xml:space="preserve"><value>Quantity (AI:30) must be an 8-digit number</value></data>
@@ -280,10 +281,10 @@ Effective date: July 20, 2026</value></data>
 	<data name="Format_FreeText_Hint" xml:space="preserve"><value>Any text</value></data>
 	<data name="Format_Code128_Name" xml:space="preserve"><value>Code128</value></data>
 	<data name="Format_AlphaNumPlaceholder" xml:space="preserve"><value>e.g. ABC123</value></data>
-	<data name="Format_AsciiOnly_Hint" xml:space="preserve"><value>ASCII characters (no Japanese)</value></data>
+	<data name="Format_AsciiOnly_Hint" xml:space="preserve"><value>ASCII characters (no Japanese) (very long input may not scan reliably)</value></data>
 	<data name="Format_Code39_Name" xml:space="preserve"><value>Code39</value></data>
 	<data name="Format_Code39_Placeholder" xml:space="preserve"><value>e.g. ABC-123</value></data>
-	<data name="Format_Code39_Hint" xml:space="preserve"><value>Uppercase letters/numbers and - . space $ / + %</value></data>
+	<data name="Format_Code39_Hint" xml:space="preserve"><value>Uppercase letters/numbers and - . space $ / + % (very long input may not scan reliably)</value></data>
 	<data name="Format_Ean13_Name" xml:space="preserve"><value>EAN-13 (JAN)</value></data>
 	<data name="Format_Ean13_Placeholder" xml:space="preserve"><value>e.g. 490123456789</value></data>
 	<data name="Format_Ean13_Hint" xml:space="preserve"><value>12-digit number (check digit calculated automatically)</value></data>
@@ -295,14 +296,15 @@ Effective date: July 20, 2026</value></data>
 	<data name="Format_UpcA_Hint" xml:space="preserve"><value>11-digit number (check digit calculated automatically)</value></data>
 	<data name="Format_Itf_Name" xml:space="preserve"><value>ITF</value></data>
 	<data name="Format_Itf_Placeholder" xml:space="preserve"><value>e.g. 12345678</value></data>
-	<data name="Format_Itf_Hint" xml:space="preserve"><value>Even number of digits</value></data>
+	<data name="Format_Itf_Hint" xml:space="preserve"><value>Even number of digits (very long input may not scan reliably)</value></data>
 	<data name="Format_Codabar_Name" xml:space="preserve"><value>Codabar</value></data>
 	<data name="Format_Codabar_Placeholder" xml:space="preserve"><value>e.g. A123456A</value></data>
-	<data name="Format_Codabar_Hint" xml:space="preserve"><value>Digits and - $ : / . +, with optional A-D start/stop characters</value></data>
+	<data name="Format_Codabar_Hint" xml:space="preserve"><value>Digits and - $ : / . +, with optional A-D start/stop characters (very long input may not scan reliably)</value></data>
 	<data name="Format_Code93_Name" xml:space="preserve"><value>Code93</value></data>
 	<data name="Format_DataMatrix_Name" xml:space="preserve"><value>Data Matrix</value></data>
 	<data name="Format_DataMatrix_Placeholder" xml:space="preserve"><value>e.g. any text</value></data>
 	<data name="Format_Pdf417_Name" xml:space="preserve"><value>PDF417</value></data>
+	<data name="Format_Pdf417_Hint" xml:space="preserve"><value>Any text (very long input may not scan reliably)</value></data>
 	<data name="Format_Aztec_Name" xml:space="preserve"><value>Aztec</value></data>
 
 	<!-- BarcodeFormatCatalog: validation -->
