@@ -145,6 +145,7 @@ namespace BarcodeList.Resources.Strings {
         internal static string Create_ValueLabel => ResourceManager.GetString("Create_ValueLabel", resourceCulture);
         internal static string Create_SelectFormatError => ResourceManager.GetString("Create_SelectFormatError", resourceCulture);
         internal static string Create_EnterValueError => ResourceManager.GetString("Create_EnterValueError", resourceCulture);
+        internal static string Create_EncodeError => ResourceManager.GetString("Create_EncodeError", resourceCulture);
         internal static string Create_DefaultTitle => ResourceManager.GetString("Create_DefaultTitle", resourceCulture);
         internal static string Create_TitleFormat => ResourceManager.GetString("Create_TitleFormat", resourceCulture);
 
@@ -229,6 +230,7 @@ namespace BarcodeList.Resources.Strings {
         internal static string Format_Code93_Name => ResourceManager.GetString("Format_Code93_Name", resourceCulture);
         internal static string Format_DataMatrix_Name => ResourceManager.GetString("Format_DataMatrix_Name", resourceCulture);
         internal static string Format_DataMatrix_Placeholder => ResourceManager.GetString("Format_DataMatrix_Placeholder", resourceCulture);
+        internal static string Format_DataMatrix_Hint => ResourceManager.GetString("Format_DataMatrix_Hint", resourceCulture);
         internal static string Format_Pdf417_Name => ResourceManager.GetString("Format_Pdf417_Name", resourceCulture);
         internal static string Format_Pdf417_Hint => ResourceManager.GetString("Format_Pdf417_Hint", resourceCulture);
         internal static string Format_Aztec_Name => ResourceManager.GetString("Format_Aztec_Name", resourceCulture);
@@ -237,6 +239,7 @@ namespace BarcodeList.Resources.Strings {
         internal static string FormatValidate_NonAscii => ResourceManager.GetString("FormatValidate_NonAscii", resourceCulture);
         internal static string FormatValidate_Code39 => ResourceManager.GetString("FormatValidate_Code39", resourceCulture);
         internal static string FormatValidate_Codabar => ResourceManager.GetString("FormatValidate_Codabar", resourceCulture);
+        internal static string FormatValidate_CodabarStartStop => ResourceManager.GetString("FormatValidate_CodabarStartStop", resourceCulture);
         internal static string FormatValidate_ItfDigitsOnly => ResourceManager.GetString("FormatValidate_ItfDigitsOnly", resourceCulture);
         internal static string FormatValidate_ItfEvenLength => ResourceManager.GetString("FormatValidate_ItfEvenLength", resourceCulture);
         internal static string FormatValidate_NumericOnly => ResourceManager.GetString("FormatValidate_NumericOnly", resourceCulture);

@@ -122,8 +122,8 @@ namespace BarcodeList.ViewModels
             {
                 await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveSuccessTitle, string.Format(AppResources.Common_SaveSuccessMessage, SelectedFolder.Name), AppResources.Common_OK);
 
-                // バーコードを3回保存するごとに1回、インタースティシャル広告を表示する
-                if (_adFrequencyService.ShouldShowAd("barcode_saved", every: 3))
+                // バーコードを5回保存するごとに1回、インタースティシャル広告を表示する
+                if (_adFrequencyService.ShouldShowAd("barcode_saved", every: 5))
                 {
                     _interstitialAdService.LoadAndShow();
                 }

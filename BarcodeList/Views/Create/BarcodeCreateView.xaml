@@ -13,7 +13,8 @@
             <Label
                 Text="{Binding Title}"
                 FontSize="28"
-                FontAttributes="Bold" />
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
 
             <Border Style="{StaticResource CardBorderStyle}" IsVisible="{Binding ShowFormatPicker}">
                 <VerticalStackLayout Spacing="12">

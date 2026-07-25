@@ -2,11 +2,14 @@ using BarcodeList.Models;
 using BarcodeList.Resources.Strings;
 using BarcodeList.Services;
 using BarcodeList.Services.CreateServices;
+using BarcodeList.Tool;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui;
+using System;
 using System.Collections.Generic;
+using ZXing.Common;
 using ZXing.Net.Maui;
 
 namespace BarcodeList.ViewModels.Create;
@@ -115,6 +118,25 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
             ? SelectedFormat.AppendCheckDigit(normalized)
             : normalized;
 
+        // 実際にバーコードとしてエンコードできるかをここで確認してから履歴に保存する。
+        // 先に保存してしまうと、結果画面でのエンコード時にクラッシュした場合、
+        // 同じ壊れたデータが履歴に残り、履歴から開こうとするたびに再クラッシュしてしまうため。
+        try
+        {
+            var writer = new global::ZXing.BarcodeWriterGeneric
+            {
+                Format = ToZXingBarcodeFormat(SelectedFormat.Format),
+                Options = new EncodingOptions { Margin = 10 }
+            };
+            writer.Encode(finalValue);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = AppResources.Create_EncodeError;
+            AppLogger.LogError("BarcodeCreateViewModel.Create: encode check failed", ex);
+            return;
+        }
+
         var savedBarcode = new SavedBarcode
         {
             BarcodeValue = finalValue,
@@ -127,8 +149,8 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
         InputValue = "";
         ErrorMessage = "";
 
-        // バーコードを3回作成するごとに1回、インタースティシャル広告を表示する
-        var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_created", every: 3);
+        // バーコードを5回作成するごとに1回、インタースティシャル広告を表示する
+        var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_created", every: 5);
 
         await Shell.Current.GoToAsync(
             nameof(BarcodeResultView),
@@ -144,4 +166,25 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
             _interstitialAdService.LoadAndShow();
         }
     }
+
+    /// <summary>
+    /// 結果画面のzxing:BarcodeGeneratorViewが内部で使うのと同じZXing.BarcodeFormatへ変換する。
+    /// BarcodeFormatCatalog.Allに登録されている形式のみ対応。
+    /// </summary>
+    private static global::ZXing.BarcodeFormat ToZXingBarcodeFormat(BarcodeFormat format) => format switch
+    {
+        BarcodeFormat.QrCode => global::ZXing.BarcodeFormat.QR_CODE,
+        BarcodeFormat.Code128 => global::ZXing.BarcodeFormat.CODE_128,
+        BarcodeFormat.Code39 => global::ZXing.BarcodeFormat.CODE_39,
+        BarcodeFormat.Ean13 => global::ZXing.BarcodeFormat.EAN_13,
+        BarcodeFormat.Ean8 => global::ZXing.BarcodeFormat.EAN_8,
+        BarcodeFormat.UpcA => global::ZXing.BarcodeFormat.UPC_A,
+        BarcodeFormat.Itf => global::ZXing.BarcodeFormat.ITF,
+        BarcodeFormat.Codabar => global::ZXing.BarcodeFormat.CODABAR,
+        BarcodeFormat.Code93 => global::ZXing.BarcodeFormat.CODE_93,
+        BarcodeFormat.DataMatrix => global::ZXing.BarcodeFormat.DATA_MATRIX,
+        BarcodeFormat.Pdf417 => global::ZXing.BarcodeFormat.PDF_417,
+        BarcodeFormat.Aztec => global::ZXing.BarcodeFormat.AZTEC,
+        _ => global::ZXing.BarcodeFormat.CODE_128,
+    };
 }

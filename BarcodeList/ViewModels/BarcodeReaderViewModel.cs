@@ -44,8 +44,8 @@ namespace BarcodeList.ViewModels
 
             IsDetecting = false;
 
-            // バーコードを3回読み込むごとに1回、インタースティシャル広告を表示する
-            var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_scanned", every: 3);
+            // バーコードを5回読み込むごとに1回、インタースティシャル広告を表示する
+            var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_scanned", every: 5);
 
             //MetaData内で"]C1"となっているのでGS1-128と判定はできているのでAIコードの認識ができる。
             //var metaData = result.Metadata;

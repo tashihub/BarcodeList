@@ -212,6 +212,7 @@
 	<data name="Create_ValueLabel" xml:space="preserve"><value>値</value></data>
 	<data name="Create_SelectFormatError" xml:space="preserve"><value>フォーマットを選択してください</value></data>
 	<data name="Create_EnterValueError" xml:space="preserve"><value>値を入力してください</value></data>
+	<data name="Create_EncodeError" xml:space="preserve"><value>このバーコードは作成できませんでした。入力内容を見直してください。</value></data>
 	<data name="Create_DefaultTitle" xml:space="preserve"><value>バーコード作成</value></data>
 	<data name="Create_TitleFormat" xml:space="preserve"><value>{0}作成</value></data>
 
@@ -303,8 +304,9 @@
 	<data name="Format_Code93_Name" xml:space="preserve"><value>Code93</value></data>
 	<data name="Format_DataMatrix_Name" xml:space="preserve"><value>Data Matrix</value></data>
 	<data name="Format_DataMatrix_Placeholder" xml:space="preserve"><value>例：任意のテキスト</value></data>
+	<data name="Format_DataMatrix_Hint" xml:space="preserve"><value>ASCII文字(日本語不可)</value></data>
 	<data name="Format_Pdf417_Name" xml:space="preserve"><value>PDF417</value></data>
-	<data name="Format_Pdf417_Hint" xml:space="preserve"><value>任意の文字列（長すぎるとスキャンできないことがあります）</value></data>
+	<data name="Format_Pdf417_Hint" xml:space="preserve"><value>ASCII文字(日本語不可)（長すぎるとスキャンできないことがあります）</value></data>
 	<data name="Format_Aztec_Name" xml:space="preserve"><value>Aztec</value></data>
 	<data name="Format_Gs1128_Name" xml:space="preserve"><value>GS1-128</value></data>
 
@@ -312,6 +314,7 @@
 	<data name="FormatValidate_NonAscii" xml:space="preserve"><value>日本語は使用できません。QRコードを使用してください。</value></data>
 	<data name="FormatValidate_Code39" xml:space="preserve"><value>Code39では大文字英数字と - . スペース $ / + % のみ使用できます。</value></data>
 	<data name="FormatValidate_Codabar" xml:space="preserve"><value>Codabarでは数字と - $ : / . + 、A〜Dのみ使用できます。</value></data>
+	<data name="FormatValidate_CodabarStartStop" xml:space="preserve"><value>スタート/ストップ文字(A〜D)は先頭と末尾に1文字ずつ、両方セットで指定してください(片方だけは不可)。</value></data>
 	<data name="FormatValidate_ItfDigitsOnly" xml:space="preserve"><value>ITFでは数字のみ使用できます。</value></data>
 	<data name="FormatValidate_ItfEvenLength" xml:space="preserve"><value>ITFは偶数桁で入力してください。</value></data>
 	<data name="FormatValidate_NumericOnly" xml:space="preserve"><value>{0}は数字のみ使用できます。</value></data>

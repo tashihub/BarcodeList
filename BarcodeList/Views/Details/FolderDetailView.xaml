@@ -14,7 +14,8 @@
             <Label
                 Text="{Binding Folder.Name}"
                 FontSize="28"
-                FontAttributes="Bold" />
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
 
             <Label
                 Text="{x:Static strings:AppResources.FolderDetail_Description}"
@@ -34,7 +35,7 @@
                     <SwipeView>
 
                         <SwipeView.RightItems>
-                            <SwipeItems Mode="Execute">
+                            <SwipeItems Mode="Reveal">
                                 <SwipeItem
                         Text="{x:Static strings:AppResources.Common_Delete}"
                         BackgroundColor="#E53935"

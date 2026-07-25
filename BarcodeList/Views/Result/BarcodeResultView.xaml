@@ -14,7 +14,8 @@
             <Label
                 Text="{Binding DisplayName, StringFormat={x:Static strings:AppResources.Result_TitleFormat}}"
                 FontSize="28"
-                FontAttributes="Bold" />
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
 
             <!-- プレビュー -->
             <Border Style="{StaticResource CardResultBorderStyle}">

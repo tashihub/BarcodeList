@@ -37,7 +37,7 @@ namespace BarcodeList.ViewModels
             Histories = new ObservableCollection<SavedBarcode>(histories);
 
             // 履歴タブを5回表示するごとに1回、インタースティシャル広告を表示する
-            if (_adFrequencyService.ShouldShowAd("history_view", every: 3))
+            if (_adFrequencyService.ShouldShowAd("history_view", every: 5))
             {
                 _interstitialAdService.LoadAndShow();
             }

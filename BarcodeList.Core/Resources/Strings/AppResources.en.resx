@@ -212,6 +212,7 @@ Effective date: July 20, 2026</value></data>
 	<data name="Create_ValueLabel" xml:space="preserve"><value>Value</value></data>
 	<data name="Create_SelectFormatError" xml:space="preserve"><value>Please select a format</value></data>
 	<data name="Create_EnterValueError" xml:space="preserve"><value>Please enter a value</value></data>
+	<data name="Create_EncodeError" xml:space="preserve"><value>This barcode could not be created. Please review your input.</value></data>
 	<data name="Create_DefaultTitle" xml:space="preserve"><value>Create Barcode</value></data>
 	<data name="Create_TitleFormat" xml:space="preserve"><value>Create {0}</value></data>
 
@@ -303,8 +304,9 @@ Effective date: July 20, 2026</value></data>
 	<data name="Format_Code93_Name" xml:space="preserve"><value>Code93</value></data>
 	<data name="Format_DataMatrix_Name" xml:space="preserve"><value>Data Matrix</value></data>
 	<data name="Format_DataMatrix_Placeholder" xml:space="preserve"><value>e.g. any text</value></data>
+	<data name="Format_DataMatrix_Hint" xml:space="preserve"><value>ASCII characters (no Japanese)</value></data>
 	<data name="Format_Pdf417_Name" xml:space="preserve"><value>PDF417</value></data>
-	<data name="Format_Pdf417_Hint" xml:space="preserve"><value>Any text (very long input may not scan reliably)</value></data>
+	<data name="Format_Pdf417_Hint" xml:space="preserve"><value>ASCII characters (no Japanese) (very long input may not scan reliably)</value></data>
 	<data name="Format_Aztec_Name" xml:space="preserve"><value>Aztec</value></data>
 	<data name="Format_Gs1128_Name" xml:space="preserve"><value>GS1-128</value></data>
 
@@ -312,6 +314,7 @@ Effective date: July 20, 2026</value></data>
 	<data name="FormatValidate_NonAscii" xml:space="preserve"><value>Japanese characters cannot be used. Please use a QR code.</value></data>
 	<data name="FormatValidate_Code39" xml:space="preserve"><value>Code39 only supports uppercase letters, numbers, and - . space $ / + %.</value></data>
 	<data name="FormatValidate_Codabar" xml:space="preserve"><value>Codabar only supports digits, - $ : / . +, and A-D.</value></data>
+	<data name="FormatValidate_CodabarStartStop" xml:space="preserve"><value>Start/stop characters (A-D) must be used as a pair, one at the start and one at the end (not just one side).</value></data>
 	<data name="FormatValidate_ItfDigitsOnly" xml:space="preserve"><value>ITF only supports digits.</value></data>
 	<data name="FormatValidate_ItfEvenLength" xml:space="preserve"><value>ITF must have an even number of digits.</value></data>
 	<data name="FormatValidate_NumericOnly" xml:space="preserve"><value>{0} only supports digits.</value></data>

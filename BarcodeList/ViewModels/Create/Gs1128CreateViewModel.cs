@@ -6,7 +6,10 @@ using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui;
+using System;
 using System.Collections.ObjectModel;
+using ZXing;
+using ZXing.Common;
 
 namespace BarcodeList.ViewModels.Create;
 
@@ -134,10 +137,29 @@ public partial class Gs1128CreateViewModel : ObservableObject
 
         var gs1Value = Gs1128CreateService.BuildGs1Value(Elements);
 
+        // 実際にバーコードとしてエンコードできるかをここで確認してから履歴に保存する。
+        // 先に保存してしまうと、結果画面でのエンコード時にクラッシュした場合、
+        // 同じ壊れたデータが履歴に残り、履歴から開こうとするたびに再クラッシュしてしまうため。
+        try
+        {
+            var writer = new BarcodeWriterGeneric
+            {
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions { GS1Format = true, Margin = 10 }
+            };
+            writer.Encode(gs1Value);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = AppResources.Create_EncodeError;
+            AppLogger.LogError("Gs1128CreateViewModel.Create: encode check failed", ex);
+            return;
+        }
+
         await _gs1128Service.SaveBarcodeToHistory(gs1Value, 0);
 
-        // バーコードを3回作成するごとに1回、インタースティシャル広告を表示する
-        var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_created", every: 3);
+        // バーコードを5回作成するごとに1回、インタースティシャル広告を表示する
+        var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_created", every: 5);
 
         await Shell.Current.GoToAsync(
             nameof(Gs1128ResultView),

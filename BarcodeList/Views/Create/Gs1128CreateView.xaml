@@ -14,7 +14,8 @@
             <Label
                 Text="{x:Static strings:AppResources.Gs1Create_Title}"
                 FontSize="28"
-                FontAttributes="Bold" />
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#222222, Dark=#FFFFFF}" />
 
             <Label
                 Text="{x:Static strings:AppResources.Gs1Create_Description}"

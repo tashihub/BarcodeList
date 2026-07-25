@@ -113,11 +113,11 @@ namespace BarcodeList.Services.CreateServices
                 Format: BarcodeFormat.DataMatrix,
                 DisplayName: AppResources.Format_DataMatrix_Name,
                 Placeholder: AppResources.Format_DataMatrix_Placeholder,
-                FormatHint: AppResources.Format_FreeText_Hint,
+                FormatHint: AppResources.Format_DataMatrix_Hint,
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
-                Validate: v => ""),
+                Validate: ValidateAsciiOnly),
 
             new(
                 Format: BarcodeFormat.Pdf417,
@@ -127,7 +127,7 @@ namespace BarcodeList.Services.CreateServices
                 NumericKeyboard: false,
                 MaxLength: 0,
                 Normalize: v => v,
-                Validate: v => ""),
+                Validate: ValidateAsciiOnly),
 
             new(
                 Format: BarcodeFormat.Aztec,
@@ -167,9 +167,20 @@ namespace BarcodeList.Services.CreateServices
 
         private static string ValidateCodabar(string value)
         {
-            return value.All(c => CodabarAllowedChars.Contains(c))
-                ? ""
-                : AppResources.FormatValidate_Codabar;
+            if (!value.All(c => CodabarAllowedChars.Contains(c)))
+                return AppResources.FormatValidate_Codabar;
+
+            // A~D(スタート/ストップ文字)はデータ部には使えず、使うなら先頭と末尾に1文字ずつの
+            // ペアでなければならない。片方だけ(例:先頭にAだけ付けて末尾に付け忘れ)だと
+            // エンコード時に例外が発生してクラッシュするため、ここで弾く。
+            var startStopIndexes = Enumerable.Range(0, value.Length)
+                .Where(i => "ABCD".Contains(value[i]))
+                .ToList();
+
+            var isValidStartStop = startStopIndexes.Count == 0
+                || (startStopIndexes.Count == 2 && startStopIndexes[0] == 0 && startStopIndexes[1] == value.Length - 1);
+
+            return isValidStartStop ? "" : AppResources.FormatValidate_CodabarStartStop;
         }
 
         private static string ValidateItf(string value)

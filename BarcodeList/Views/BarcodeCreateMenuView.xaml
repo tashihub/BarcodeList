@@ -11,6 +11,7 @@
             <Label
                 Text="{x:Static strings:AppResources.CreateMenu_Description}"
                 FontSize="Medium"
+                FontAttributes="Bold"
                 TextColor="Gray" />
 
             <VerticalStackLayout Spacing="10">

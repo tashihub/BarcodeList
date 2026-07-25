@@ -47,8 +47,8 @@ namespace BarcodeList.ViewModels.Details
                 Barcodes = new ObservableCollection<SavedBarcode>(barcodes);
             }
 
-            // フォルダ詳細(フォルダ内のバーコード一覧)を3回開くごとに1回、インタースティシャル広告を表示する
-            if (_adFrequencyService.ShouldShowAd("folder_detail_view", every: 3))
+            // フォルダ詳細(フォルダ内のバーコード一覧)を5回開くごとに1回、インタースティシャル広告を表示する
+            if (_adFrequencyService.ShouldShowAd("folder_detail_view", every: 5))
             {
                 _interstitialAdService.LoadAndShow();
             }
