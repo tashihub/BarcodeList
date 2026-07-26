@@ -149,8 +149,8 @@ public partial class BarcodeCreateViewModel : ObservableObject, IQueryAttributab
         InputValue = "";
         ErrorMessage = "";
 
-        // バーコードを5回作成するごとに1回、インタースティシャル広告を表示する
-        var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_created", every: 5);
+        // バーコードを3回作成するごとに1回、インタースティシャル広告を表示する
+        var shouldShowAd = _adFrequencyService.ShouldShowAd("barcode_created", every: 3);
 
         await Shell.Current.GoToAsync(
             nameof(BarcodeResultView),

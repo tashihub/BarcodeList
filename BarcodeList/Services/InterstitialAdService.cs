@@ -11,7 +11,7 @@ namespace BarcodeList.Services;
 /// </summary>
 public class InterstitialAdService
 {
-    private const string InterstitialAdUnitId = "ca-app-pub-3940256099942544/1033173712";//"ca-app-pub-1283307746031730/3498927696";
+    private const string InterstitialAdUnitId = "ca-app-pub-1283307746031730/3498927696";//"ca-app-pub-3940256099942544/1033173712"テスト用;//"ca-app-pub-1283307746031730/3498927696";
 
     private readonly PurchaseService _purchaseService;
 
