@@ -35,7 +35,7 @@
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>6</ApplicationVersion>
+		<ApplicationVersion>8</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -52,6 +52,11 @@
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<!-- Google PlayがAABから生成するAPKのnative libraryを16 KB境界に配置する -->
+		<AndroidBundleConfigurationFile>$(MSBuildProjectDirectory)\Platforms\Android\BundleConfig.json</AndroidBundleConfigurationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -92,6 +97,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 		<PackageReference Include="Plugin.MauiMTAdmob" Version="2.4.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<!-- Android 16 KB page size対応のe_sqlite3を使用する（sqlite-net-pcl 1.9.172既定の2.1.2を更新） -->
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.0" />
 		<PackageReference Include="ZXing.Net.Maui" Version="0.8.2" />
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.8.2" />
