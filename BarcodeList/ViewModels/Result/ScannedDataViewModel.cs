@@ -24,6 +24,9 @@ namespace BarcodeList.ViewModels
         [ObservableProperty]
         private BarcodeFolder? selectedFolder;
 
+        /// <summary>
+        /// ユーザーが任意で入力するバーコードの名前。空でもよい。
+        /// </summary>
         [ObservableProperty]
         private string name = "";
 
@@ -82,7 +85,6 @@ namespace BarcodeList.ViewModels
             try
             {
                 Folders = await _folderService.LoadFoldersAsync();
-                Name = Folders.Count > 0 ? Folders[0].Name : "";
             }
             catch (Exception ex)
             {
@@ -116,7 +118,8 @@ namespace BarcodeList.ViewModels
                 BarcodeResult.Value,
                 BarcodeResult.Format,
                 SelectedFolder,
-                isGs1: Gs1ParseResult?.IsGs1 ?? false);
+                isGs1: Gs1ParseResult?.IsGs1 ?? false,
+                name: Name);
 
             if (success)
             {

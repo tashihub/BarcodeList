@@ -36,6 +36,11 @@
                     <SwipeView.RightItems>
                         <SwipeItems Mode="Reveal">
                             <SwipeItem
+                                Text="{x:Static strings:AppResources.Common_RenameSwipeAction}"
+                                BackgroundColor="#4F46E5"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RenameCommand}"
+                                CommandParameter="{Binding .}" />
+                            <SwipeItem
                                 Text="{x:Static strings:AppResources.Common_Delete}"
                                 BackgroundColor="#E53935"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
@@ -75,9 +80,15 @@
 
                             <VerticalStackLayout Grid.Column="1" Spacing="5">
                                 <Label
-                                    Text="{Binding DisplayTypeName}"
+                                    Text="{Binding DisplayTitle}"
                                     FontSize="16"
                                     FontAttributes="Bold" />
+
+                                <Label
+                                    Text="{Binding DisplayTypeName}"
+                                    FontSize="12"
+                                    TextColor="Gray"
+                                    IsVisible="{Binding HasName}" />
 
                                 <Label
                                     Text="{Binding BarcodeValue}"

@@ -1,4 +1,5 @@
 ﻿using BarcodeList.Models;
+using BarcodeList.Resources.Strings;
 using BarcodeList.Services;
 using BarcodeList.Views.Result;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -85,6 +86,35 @@ namespace BarcodeList.ViewModels.Details
                 ["Value"] = barcode.BarcodeValue,
                 ["Format"] = barcode.BarcodeFormat
             });
+        }
+
+        [RelayCommand]
+        private async Task RenameBarcode(SavedBarcode barcode)
+        {
+            if (barcode == null)
+            {
+                return;
+            }
+
+            string? newName = await Shell.Current.DisplayPromptAsync(
+                AppResources.Common_RenamePromptTitle,
+                AppResources.Common_RenamePromptMessage,
+                initialValue: barcode.Name ?? "");
+
+            if (newName == null)
+            {
+                return;
+            }
+
+            barcode.Name = string.IsNullOrWhiteSpace(newName) ? null : newName.Trim();
+            await _databaseService.UpdateBarcodeAsync(barcode);
+
+            var index = Barcodes.IndexOf(barcode);
+            if (index >= 0)
+            {
+                Barcodes.RemoveAt(index);
+                Barcodes.Insert(index, barcode);
+            }
         }
 
         [RelayCommand]

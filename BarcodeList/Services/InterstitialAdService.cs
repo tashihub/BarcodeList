@@ -5,13 +5,12 @@ namespace BarcodeList.Services;
 
 /// <summary>
 /// インタースティシャル(全画面)広告の読み込み・表示をラップする。
-/// 広告ユニットIDは実際のAdMobアカウントのものに差し替え済み。
-/// MainActivity.OnCreateでforceTesting:trueのまま初期化しているため、
-/// このIDを使っていても実際にはテスト広告が表示される(本番リリース前にforceTestingをfalseへ変更すること)。
+/// デバッグ作業のため一時的にGoogle公式テストIDに戻している。本番に戻す際はInterstitialAdUnitIdを本番用に戻すこと。
 /// </summary>
 public class InterstitialAdService
 {
-    private const string InterstitialAdUnitId = "ca-app-pub-1283307746031730/3498927696";//"ca-app-pub-3940256099942544/1033173712"テスト用;//"ca-app-pub-1283307746031730/3498927696";
+    // private const string InterstitialAdUnitId = "ca-app-pub-1283307746031730/3498927696"; // 本番用
+    private const string InterstitialAdUnitId = "ca-app-pub-3940256099942544/1033173712"; // テスト用(Google公式テスト広告ユニットID)
 
     private readonly PurchaseService _purchaseService;
 

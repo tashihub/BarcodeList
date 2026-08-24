@@ -102,6 +102,9 @@
 	<data name="Common_OK" xml:space="preserve"><value>OK</value></data>
 	<data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
 	<data name="Common_Delete" xml:space="preserve"><value>Delete</value></data>
+	<data name="Common_RenameSwipeAction" xml:space="preserve"><value>Edit Name</value></data>
+	<data name="Common_RenamePromptTitle" xml:space="preserve"><value>Edit Name</value></data>
+	<data name="Common_RenamePromptMessage" xml:space="preserve"><value>Enter a name for this barcode (leave empty to remove the name)</value></data>
 	<data name="Common_CreateButton" xml:space="preserve"><value>Create</value></data>
 	<data name="Common_FolderNotSelectedTitle" xml:space="preserve"><value>No Folder Selected</value></data>
 	<data name="Common_FolderNotSelectedMessage" xml:space="preserve"><value>Please select a folder to save to.</value></data>
@@ -222,6 +225,8 @@ Effective date: July 20, 2026</value></data>
 	<data name="Result_Preview" xml:space="preserve"><value>Preview</value></data>
 	<data name="Result_RawData" xml:space="preserve"><value>Raw Data</value></data>
 	<data name="Result_FormatLabelFormat" xml:space="preserve"><value>Format: {0}</value></data>
+	<data name="Result_NameLabel" xml:space="preserve"><value>Name (optional)</value></data>
+	<data name="Result_NamePlaceholder" xml:space="preserve"><value>e.g. Office Wi-Fi</value></data>
 	<data name="Result_SaveFolderLabel" xml:space="preserve"><value>Save to Folder</value></data>
 	<data name="Result_SaveButton" xml:space="preserve"><value>Save This Barcode</value></data>
 

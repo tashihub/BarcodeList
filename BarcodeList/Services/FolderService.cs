@@ -51,7 +51,8 @@ namespace BarcodeList.Services
             string barcodeValue,
             BarcodeFormat barcodeType,
             BarcodeFolder selectedFolder,
-            bool isGs1 = false)
+            bool isGs1 = false,
+            string? name = null)
         {
             if (selectedFolder == null)
             {
@@ -64,6 +65,7 @@ namespace BarcodeList.Services
                 BarcodeType = barcodeType.ToString(),
                 IsGs1 = isGs1,
                 FolderId = selectedFolder.Id,
+                Name = string.IsNullOrWhiteSpace(name) ? null : name.Trim(),
                 CreatedAt = DateTime.Now,
             };
             Console.WriteLine($"Saving barcode: {savedBarcode.BarcodeValue} to folder: {selectedFolder.Name} BarcodeType: {savedBarcode.BarcodeType} CreatedAt: {savedBarcode.CreatedAt}");

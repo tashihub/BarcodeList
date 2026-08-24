@@ -97,6 +97,20 @@
                 </VerticalStackLayout>
             </Border>
 
+            <!-- 名前 -->
+            <Border Style="{StaticResource CardResultBorderStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="{x:Static strings:AppResources.Result_NameLabel}"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <Entry
+                        Text="{Binding Name}"
+                        Placeholder="{x:Static strings:AppResources.Result_NamePlaceholder}" />
+                </VerticalStackLayout>
+            </Border>
+
             <!-- 保存先フォルダ -->
             <Border Style="{StaticResource CardResultBorderStyle}">
 

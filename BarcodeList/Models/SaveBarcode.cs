@@ -38,6 +38,11 @@ namespace BarcodeList.Models
 
         public bool IsGs1 { get; set; }
 
+        /// <summary>
+        /// ユーザーが任意で付けるバーコードの名前。付けなくてもよい(null/空文字)。
+        /// </summary>
+        public string? Name { get; set; }
+
         [Indexed(Name = "IX_SavedBarcode_FolderId_CreatedAt", Order = 2)]
         public DateTime CreatedAt { get; set; }
 
@@ -52,6 +57,18 @@ namespace BarcodeList.Models
         /// </summary>
         [Ignore]
         public string DisplayTypeName => IsGs1 ? AppResources.Format_Gs1128_Name : BarcodeType;
+
+        /// <summary>
+        /// 一覧表示のタイトルに使う文字列。名前が付いていればそれを、なければ形式名(DisplayTypeName)を表示する。
+        /// </summary>
+        [Ignore]
+        public string DisplayTitle => string.IsNullOrWhiteSpace(Name) ? DisplayTypeName : Name!;
+
+        /// <summary>
+        /// 名前が付いているかどうか。付いている場合、一覧では形式名(DisplayTypeName)を補助的に併記する。
+        /// </summary>
+        [Ignore]
+        public bool HasName => !string.IsNullOrWhiteSpace(Name);
 
         /// <summary>
         /// 履歴・フォルダ一覧のアイコン枠に表示する、バーコード形式ごとの画像ファイル名(Resources/Images配下)。

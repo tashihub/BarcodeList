@@ -20,6 +20,9 @@ public partial class Gs1128ResultViewModel : ObservableObject, IQueryAttributabl
     [ObservableProperty]
     private BarcodeFolder? selectedFolder;
 
+    /// <summary>
+    /// ユーザーが任意で入力するバーコードの名前。空でもよい。
+    /// </summary>
     [ObservableProperty]
     private string name = "";
 
@@ -58,7 +61,6 @@ public partial class Gs1128ResultViewModel : ObservableObject, IQueryAttributabl
         try
         {
             Folders = await _folderService.LoadFoldersAsync();
-            Name = Folders.Count > 0 ? Folders[0].Name : "";
         }
         catch (Exception ex)
         {
@@ -88,7 +90,7 @@ public partial class Gs1128ResultViewModel : ObservableObject, IQueryAttributabl
             return;
         }
 
-        bool success = await _folderService.SaveToFolderAsync(Gs1Value, BarcodeFormat.Code128, SelectedFolder, isGs1: true);
+        bool success = await _folderService.SaveToFolderAsync(Gs1Value, BarcodeFormat.Code128, SelectedFolder, isGs1: true, name: Name);
         if (success)
         {
             await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveSuccessTitle, string.Format(AppResources.Common_SaveSuccessMessage, SelectedFolder.Name), AppResources.Common_OK);

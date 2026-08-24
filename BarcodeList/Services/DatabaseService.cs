@@ -62,6 +62,12 @@ public class DatabaseService
         await InitAsync();
         return await _database.DeleteAsync(barcode);
     }
+
+    public async Task<int> UpdateBarcodeAsync(SavedBarcode barcode)
+    {
+        await InitAsync();
+        return await _database.UpdateAsync(barcode);
+    }
     /// <summary>
     /// 履歴を削除する。フォルダに入れたバーコードは削除されない。
     /// </summary>

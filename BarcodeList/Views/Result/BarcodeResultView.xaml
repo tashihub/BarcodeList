@@ -19,6 +19,18 @@
 
             <!-- プレビュー -->
             <Border Style="{StaticResource CardResultBorderStyle}">
+
+                <Border.Triggers>
+                    <DataTrigger
+                        TargetType="Border"
+                        Binding="{Binding IsFixedLengthFormat}"
+                        Value="True">
+
+                        <Setter Property="Padding" Value="8,22" />
+
+                    </DataTrigger>
+                </Border.Triggers>
+
                 <VerticalStackLayout Spacing="16">
                     <Label
                         Text="{x:Static strings:AppResources.Result_Preview}"
@@ -84,6 +96,20 @@
                         Text="{Binding DisplayName, StringFormat={x:Static strings:AppResources.Result_FormatLabelFormat}}"
                         FontSize="12"
                         TextColor="Gray" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 名前 -->
+            <Border Style="{StaticResource CardResultBorderStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="{x:Static strings:AppResources.Result_NameLabel}"
+                        FontSize="16"
+                        FontAttributes="Bold" />
+
+                    <Entry
+                        Text="{Binding Name}"
+                        Placeholder="{x:Static strings:AppResources.Result_NamePlaceholder}" />
                 </VerticalStackLayout>
             </Border>
 

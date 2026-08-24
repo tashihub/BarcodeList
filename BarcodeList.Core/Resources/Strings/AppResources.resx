@@ -102,6 +102,9 @@
 	<data name="Common_OK" xml:space="preserve"><value>OK</value></data>
 	<data name="Common_Cancel" xml:space="preserve"><value>キャンセル</value></data>
 	<data name="Common_Delete" xml:space="preserve"><value>削除</value></data>
+	<data name="Common_RenameSwipeAction" xml:space="preserve"><value>名前を編集</value></data>
+	<data name="Common_RenamePromptTitle" xml:space="preserve"><value>名前を編集</value></data>
+	<data name="Common_RenamePromptMessage" xml:space="preserve"><value>バーコードの名前を入力してください(空にすると名前なしになります)</value></data>
 	<data name="Common_CreateButton" xml:space="preserve"><value>作成</value></data>
 	<data name="Common_FolderNotSelectedTitle" xml:space="preserve"><value>フォルダ未選択</value></data>
 	<data name="Common_FolderNotSelectedMessage" xml:space="preserve"><value>保存するフォルダを選択してください。</value></data>
@@ -222,6 +225,8 @@
 	<data name="Result_Preview" xml:space="preserve"><value>プレビュー</value></data>
 	<data name="Result_RawData" xml:space="preserve"><value>生データ</value></data>
 	<data name="Result_FormatLabelFormat" xml:space="preserve"><value>形式：{0}</value></data>
+	<data name="Result_NameLabel" xml:space="preserve"><value>名前(任意)</value></data>
+	<data name="Result_NamePlaceholder" xml:space="preserve"><value>例: 会社のWi-Fi</value></data>
 	<data name="Result_SaveFolderLabel" xml:space="preserve"><value>保存先フォルダ</value></data>
 	<data name="Result_SaveButton" xml:space="preserve"><value>このバーコードを保存</value></data>
 

@@ -57,6 +57,35 @@ namespace BarcodeList.ViewModels
         }
 
         [RelayCommand]
+        private async Task Rename(SavedBarcode barcode)
+        {
+            if (barcode == null)
+            {
+                return;
+            }
+
+            string? newName = await Shell.Current.DisplayPromptAsync(
+                AppResources.Common_RenamePromptTitle,
+                AppResources.Common_RenamePromptMessage,
+                initialValue: barcode.Name ?? "");
+
+            if (newName == null)
+            {
+                return;
+            }
+
+            barcode.Name = string.IsNullOrWhiteSpace(newName) ? null : newName.Trim();
+            await _databaseService.UpdateBarcodeAsync(barcode);
+
+            var index = Histories.IndexOf(barcode);
+            if (index >= 0)
+            {
+                Histories.RemoveAt(index);
+                Histories.Insert(index, barcode);
+            }
+        }
+
+        [RelayCommand]
         private async Task DeleteAll()
         {
             bool confirmed = await Shell.Current.DisplayAlertAsync(

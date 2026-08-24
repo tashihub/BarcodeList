@@ -25,6 +25,9 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
     [ObservableProperty]
     private BarcodeFolder? selectedFolder;
 
+    /// <summary>
+    /// ユーザーが任意で入力するバーコードの名前。空でもよい。
+    /// </summary>
     [ObservableProperty]
     private string name = "";
 
@@ -40,6 +43,12 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
     /// これらは横長のプレビュー枠だと見切れてしまうため、プレビューを正方形にするかの判定に使う。
     /// </summary>
     public bool IsMatrixFormat => Format is BarcodeFormat.QrCode or BarcodeFormat.DataMatrix or BarcodeFormat.Aztec;
+
+    /// <summary>
+    /// EAN-13/EAN-8/UPC-Aのような桁数固定の1次元バーコードかどうか。
+    /// 桁数が短く固定なのでプレビュー枠の余白を減らして表示幅を広げ、読み取りやすくする。
+    /// </summary>
+    public bool IsFixedLengthFormat => Format is BarcodeFormat.Ean13 or BarcodeFormat.Ean8 or BarcodeFormat.UpcA;
 
     private readonly FolderService _folderService;
     private readonly AdFrequencyService _adFrequencyService;
@@ -72,6 +81,7 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
             Format = formatValue;
             OnPropertyChanged(nameof(DisplayName));
             OnPropertyChanged(nameof(IsMatrixFormat));
+            OnPropertyChanged(nameof(IsFixedLengthFormat));
         }
     }
 
@@ -92,7 +102,6 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
         try
         {
             Folders = await _folderService.LoadFoldersAsync();
-            Name = Folders.Count > 0 ? Folders[0].Name : "";
         }
         catch (Exception ex)
         {
@@ -122,7 +131,7 @@ public partial class BarcodeResultViewModel : ObservableObject, IQueryAttributab
             return;
         }
 
-        bool success = await _folderService.SaveToFolderAsync(BarcodeValue, Format, SelectedFolder);
+        bool success = await _folderService.SaveToFolderAsync(BarcodeValue, Format, SelectedFolder, name: Name);
         if (success)
         {
             await Shell.Current.DisplayAlertAsync(AppResources.Common_SaveSuccessTitle, string.Format(AppResources.Common_SaveSuccessMessage, SelectedFolder.Name), AppResources.Common_OK);

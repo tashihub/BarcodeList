@@ -63,6 +63,9 @@ namespace BarcodeList.Resources.Strings {
         internal static string Common_OK => ResourceManager.GetString("Common_OK", resourceCulture);
         internal static string Common_Cancel => ResourceManager.GetString("Common_Cancel", resourceCulture);
         internal static string Common_Delete => ResourceManager.GetString("Common_Delete", resourceCulture);
+        internal static string Common_RenameSwipeAction => ResourceManager.GetString("Common_RenameSwipeAction", resourceCulture);
+        internal static string Common_RenamePromptTitle => ResourceManager.GetString("Common_RenamePromptTitle", resourceCulture);
+        internal static string Common_RenamePromptMessage => ResourceManager.GetString("Common_RenamePromptMessage", resourceCulture);
         internal static string Common_CreateButton => ResourceManager.GetString("Common_CreateButton", resourceCulture);
         internal static string Common_FolderNotSelectedTitle => ResourceManager.GetString("Common_FolderNotSelectedTitle", resourceCulture);
         internal static string Common_FolderNotSelectedMessage => ResourceManager.GetString("Common_FolderNotSelectedMessage", resourceCulture);
@@ -154,6 +157,8 @@ namespace BarcodeList.Resources.Strings {
         internal static string Result_Preview => ResourceManager.GetString("Result_Preview", resourceCulture);
         internal static string Result_RawData => ResourceManager.GetString("Result_RawData", resourceCulture);
         internal static string Result_FormatLabelFormat => ResourceManager.GetString("Result_FormatLabelFormat", resourceCulture);
+        internal static string Result_NameLabel => ResourceManager.GetString("Result_NameLabel", resourceCulture);
+        internal static string Result_NamePlaceholder => ResourceManager.GetString("Result_NamePlaceholder", resourceCulture);
         internal static string Result_SaveFolderLabel => ResourceManager.GetString("Result_SaveFolderLabel", resourceCulture);
         internal static string Result_SaveButton => ResourceManager.GetString("Result_SaveButton", resourceCulture);
 

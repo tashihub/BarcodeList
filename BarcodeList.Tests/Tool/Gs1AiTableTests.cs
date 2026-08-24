@@ -110,10 +110,11 @@ public class Gs1AiTableTests
     }
 
     [Fact]
-    public void ValidateValue_OnlyChecksNonEmpty_ForUnknownAi()
+    public void ValidateValue_OnlyChecksNonEmptyAndAscii_ForUnknownAi()
     {
-        Assert.Equal("", Gs1AiTable.ValidateValue("9999", "任意の値"));
+        Assert.Equal("", Gs1AiTable.ValidateValue("9999", "ANY_VALUE"));
         Assert.NotEqual("", Gs1AiTable.ValidateValue("9999", ""));
+        Assert.NotEqual("", Gs1AiTable.ValidateValue("9999", "任意の値"));
     }
 
     [Theory]
