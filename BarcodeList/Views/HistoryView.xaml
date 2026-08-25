@@ -8,7 +8,7 @@
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static strings:AppResources.History_DeleteAllToolbar}" IconImageSource="trash.png" Command="{Binding DeleteAllCommand}" />
+        <ToolbarItem Text="{x:Static strings:AppResources.History_DeleteAllToolbar}" IconImageSource="trash2.png" Command="{Binding DeleteAllCommand}" />
     </ContentPage.ToolbarItems>
 
     <CollectionView

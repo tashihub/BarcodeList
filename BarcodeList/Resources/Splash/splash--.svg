@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1024"
+     height="1024"
+     viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="none"/>
+  <g fill="#FFFFFF"
+     font-family="Arial, Helvetica, sans-serif"
+     font-weight="700"
+     text-anchor="middle">
+    <text x="512" y="460" font-size="122" letter-spacing="4">SIMPLE</text>
+    <text x="512" y="590" font-size="122" letter-spacing="2">BARCODE</text>
+  </g>
+</svg>

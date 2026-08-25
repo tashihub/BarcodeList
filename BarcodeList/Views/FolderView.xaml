@@ -9,7 +9,7 @@
     BackgroundColor="{AppThemeBinding Light=#F5F6FA, Dark=#121212}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static strings:AppResources.Folder_NewFolderToolbar}" IconImageSource="folder_add.png" Command="{Binding CreateFolderCommand}" />
+        <ToolbarItem Text="{x:Static strings:AppResources.Folder_NewFolderToolbar}" IconImageSource="folder_add2.png" Command="{Binding CreateFolderCommand}" />
     </ContentPage.ToolbarItems>
 
     <CollectionView

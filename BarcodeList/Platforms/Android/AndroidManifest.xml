@@ -4,9 +4,10 @@
 		<!-- 本番用: <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-1283307746031730~6619915051" /> -->
 		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" />
 		<!-- com.google.android.play.billingclient.versionはPlugin.InAppBillingのAARが自動的に付与するため、ここでは指定しない -->
+		<!-- android:themeを付けるとGoogle Mobile Ads SDKの内部UIがMaterialComponentsテーマを要求してクラッシュするため、
+		     アプリ本体のテーマ(MaterialComponents系)をそのまま継承させる -->
 		<activity android:name="com.google.android.gms.ads.AdActivity"
-			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-			android:theme="@android:style/Theme.Translucent" />
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
