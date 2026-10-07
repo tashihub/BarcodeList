@@ -53,7 +53,7 @@
                                         Text="{Binding Ai}"
                                         FontSize="22"
                                         FontAttributes="Bold"
-                                        TextColor="#4F46E5" />
+                                        TextColor="{StaticResource Primary}" />
 
                                     <Label
                                         Grid.Column="1"
@@ -130,7 +130,7 @@
                         Text="{x:Static strings:AppResources.Common_AddNewFolderButton}"
                         Command="{Binding CreateFolderCommand}"
                         BackgroundColor="Transparent"
-                        TextColor="#4F46E5" />
+                        TextColor="{StaticResource Primary}" />
                 </VerticalStackLayout>
             </Border>
 

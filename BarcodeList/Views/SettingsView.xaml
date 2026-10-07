@@ -45,7 +45,7 @@
                         Text="{x:Static strings:AppResources.Settings_RestorePurchasesButton}"
                         Command="{Binding RestorePurchasesCommand}"
                         BackgroundColor="Transparent"
-                        TextColor="#4F46E5"
+                        TextColor="{StaticResource Primary}"
                         IsVisible="{Binding IsAdsRemoved, Converter={StaticResource InvertedBoolConverter}}" />
 
                     <Label
@@ -87,7 +87,7 @@
                     Text="{x:Static strings:AppResources.Settings_PrivacyPolicyButton}"
                     Command="{Binding ShowPrivacyPolicyCommand}"
                     BackgroundColor="Transparent"
-                    TextColor="#4F46E5"
+                    TextColor="{StaticResource Primary}"
                     HorizontalOptions="Start" />
             </Border>
 

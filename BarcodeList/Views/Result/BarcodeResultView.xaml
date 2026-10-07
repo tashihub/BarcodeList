@@ -132,7 +132,7 @@
                         Text="{x:Static strings:AppResources.Common_AddNewFolderButton}"
                         Command="{Binding CreateFolderCommand}"
                         BackgroundColor="Transparent"
-                        TextColor="#4F46E5" />
+                        TextColor="{StaticResource Primary}" />
                 </VerticalStackLayout>
             </Border>
 
